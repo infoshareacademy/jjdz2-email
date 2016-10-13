@@ -1,51 +1,27 @@
 package com.jbd;
-import java.time.LocalDate;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-
-import java.time.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Email {
-    private String from = "From (.)*(a-zA-Z)*(\\\\\\\\.com)*";
-    private LocalDate data;
-    private String subject = "Subject: (.)*";
-    private String content;
-
-    LocalDate objectOfDate;
-
-    public Email(String from, String subject, String data, String content) {
-        this.from = from;
-        objectOfDate = LocalDate.parse(data);
-        this.data = objectOfDate;
-        this.subject = subject;
-        this.content = content;
-    }
+    String regexFrom = "From (.)*(a-zA-Z)*(com)";
+    String regexContent = "(.)";
+    String regexDate = "Date: (.)*";
+    String regexSubject = "Subject: (.)*";
+    String file = "alalala";
 
 
-    public LocalDate getData() {
-        return data;
-    }
 
-    public void setData(String data) {
-        objectOfDate = LocalDate.parse(data);
-//        try {
-//            objectOfDate = simpleDateFormat.parse(data);
-//            this.data = objectOfDate;
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-    }
+    public String reportFrom(String file) {
 
-    public String getFrom(String file) {
-        String result = "Wzorzec: \"" + from + "\"\n" +
+
+
+        String result = "Wzorzec: \"" + regexFrom + "\"\n" +
                 "Tekst: \"" + file + "\"";
 
         Pattern pattern;
         try {
-            pattern = Pattern.compile(from);
+            pattern = Pattern.compile(regexFrom);
         } catch (Exception exc) {
             return result + "\n" + exc.getMessage();
         }
@@ -65,19 +41,13 @@ public class Email {
         System.out.println();
         return result;
     }
-
-    public void setFrom(String from) {
-        this.from = from;
-    }
-
-    public String getSubject(String file) {
-
-        String result = "Wzorzec: \"" + subject + "\"\n" +
+    public String reportContent (String file) {
+        String result = "Wzorzec: \"" + regexContent + "\"\n" +
                 "Tekst: \"" + file + "\"";
 
         Pattern pattern;
         try {
-            pattern = Pattern.compile(from);
+            pattern = Pattern.compile(regexContent);
         } catch (Exception exc) {
             return result + "\n" + exc.getMessage();
         }
@@ -91,34 +61,26 @@ public class Email {
                 result += "\nfind(): Dopasowano podłańcuch \"" + matcher.group() +
                         "\" od pozycji " + matcher.start() +
                         " do pozycji " + matcher.end() + ".";
-            } while(matcher.find());
+            } while (matcher.find());
 
 
         System.out.println();
-
-
-
         return result;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
 
-    public String getContent(String file) {
+    public String reportDate (String file) {
 
-
-
-        String result = "Wzorzec: \"" + content + "\"\n" +
+        String result = "Wzorzec: \"" + regexDate + "\"\n" +
                 "Tekst: \"" + file + "\"";
 
         Pattern pattern;
         try {
-            pattern = Pattern.compile(content);
+            pattern = Pattern.compile(regexDate);
         } catch (Exception exc) {
             return result + "\n" + exc.getMessage();
         }
-        Matcher matcher = pattern.matcher(file);
+        Matcher matcher = pattern.matcher(regexDate);
         boolean found = matcher.find();
         if (!found)
             result += "\nfind(): Nie znaleziono żadnego podłańcucha " +
@@ -128,21 +90,38 @@ public class Email {
                 result += "\nfind(): Dopasowano podłańcuch \"" + matcher.group() +
                         "\" od pozycji " + matcher.start() +
                         " do pozycji " + matcher.end() + ".";
-            } while(matcher.find());
+            } while (matcher.find());
 
 
         System.out.println();
         return result;
+
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+    public String reportSubject (String file) {
 
-    @Override
-    public String toString() {
-        return from + " " + subject + " " + data.toString();
-    }
+        String result = "Wzorzec: \"" + regexSubject + "\"\n" +
+                "Tekst: \"" + file + "\"";
 
+        Pattern pattern;
+        try {
+            pattern = Pattern.compile(regexSubject);
+        } catch (Exception exc) {
+            return result + "\n" + exc.getMessage();
+        }
+        Matcher matcher = pattern.matcher(regexSubject);
+        boolean found = matcher.find();
+        if (!found)
+            result += "\nfind(): Nie znaleziono żadnego podłańcucha " +
+                    "pasującego do wzorca";
+        else
+            do {
+                result += "\nfind(): Dopasowano podłańcuch \"" + matcher.group() +
+                        "\" od pozycji " + matcher.start() +
+                        " do pozycji " + matcher.end() + ".";
+            } while (matcher.find());
+
+        return result;
+    }
 
 }
