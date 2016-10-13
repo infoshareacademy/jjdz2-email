@@ -11,8 +11,16 @@ public class Email {
     String file = "alalala";
 
 
+    public Email(String from, String content , String data, String subject) {
+        regexFrom = from;
+       regexContent = content;
+        regexDate = data;
+        regexSubject = subject;
+    }
+
 
     public String reportFrom(String file) {
+
 
 
 
