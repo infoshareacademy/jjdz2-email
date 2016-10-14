@@ -2,18 +2,13 @@ package com.jbd;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 public class GetFromDataSubjectContent {
 
     private String regexFrom = "From (.)*(a-zA-Z)*(\\\\.com)*";
     private String regexData = "Date: (.)**";
     private String regexSubject = "Subject: (.)*";
-    private String regexContent = "To (.)*(a-zA-Z)*(\\\\.com)*";
-
-
+    private String regexContent = "(.)";
     String file = "";
-
-
 
     public String reportFrom(String file) {
 
@@ -44,6 +39,7 @@ public class GetFromDataSubjectContent {
         System.out.println();
         return result;
     }
+
     public String reportContent () {
         String result = "Wzorzec: \"" + regexContent + "\"\n" +
                 "Tekst: \"" + file + "\"";
