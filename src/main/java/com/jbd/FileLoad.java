@@ -7,9 +7,6 @@ import java.io.IOException;
 
 public class FileLoad {
 
-
-
-
     public void fileload(String file){
         FileReader fr = null;
         String linia = "";
