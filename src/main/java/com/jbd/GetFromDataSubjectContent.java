@@ -204,9 +204,10 @@ public class GetFromDataSubjectContent {
             "\n" +
             "test\n";
 
-    public String test() {
 
+    public String test() {
         Pattern pattern;
+        String result = "";
         try {
             pattern = Pattern.compile(regexFrom);
         } catch (Exception exc) {
@@ -215,26 +216,15 @@ public class GetFromDataSubjectContent {
         Matcher matcher = pattern.matcher(file);
         boolean found1 = matcher.find();
         if (found1) {
-
         }
-
-
         System.out.println();
-
-
         return null;
-
-
     }
 
-
     public String reportFrom(String file) {
-
         this.file = file;
-
         String result = "Wzorzec: \"" + regexFrom + "\"\n" +
                 "Tekst: \"" + file + "\"";
-
         Pattern pattern;
         try {
             pattern = Pattern.compile(regexFrom);
@@ -252,8 +242,6 @@ public class GetFromDataSubjectContent {
                         "\" od pozycji " + matcher.start() +
                         " do pozycji " + matcher.end() + ".";
             } while (matcher.find());
-
-
         System.out.println();
         return result;
     }
@@ -261,7 +249,6 @@ public class GetFromDataSubjectContent {
     public String reportContent() {
         String result = "Wzorzec: \"" + regexContent + "\"\n" +
                 "Tekst: \"" + file + "\"";
-
         Pattern pattern;
         try {
             pattern = Pattern.compile(regexContent);
@@ -270,30 +257,22 @@ public class GetFromDataSubjectContent {
         }
         Matcher matcher = pattern.matcher(file);
         boolean found = matcher.find();
-
-
         if (!found)
             result += "\nfind(): Nie znaleziono żadnego podłańcucha " +
                     "pasującego do wzorca";
         else
             do {// tutaj ma być regex ze spacjami itd
-
-
                 result += "\nfind(): Dopasowano podłańcuch \"" + matcher.group() +
                         "\" od pozycji " + matcher.start() +
                         " do pozycji " + matcher.end() + ".";
             } while (matcher.find());
-
-
         System.out.println();
         return result;
     }
 
     public String reporData() {
-
         String result = "Wzorzec: \"" + regexData + "\"\n" +
                 "Tekst: \"" + file + "\"";
-
         Pattern pattern;
         try {
             pattern = Pattern.compile(regexData);
@@ -313,14 +292,11 @@ public class GetFromDataSubjectContent {
             } while (matcher.find());
         System.out.println();
         return result;
-
     }
 
     public String reporSubject() {
-
         String result = "Wzorzec: \"" + regexSubject + "\"\n" +
                 "Tekst: \"" + file + "\"";
-
         Pattern pattern;
         try {
             pattern = Pattern.compile(regexSubject);
@@ -338,18 +314,13 @@ public class GetFromDataSubjectContent {
                         "\" od pozycji " + matcher.start() +
                         " do pozycji " + matcher.end() + ".";
             } while (matcher.find());
-
-
         System.out.println();
         return result;
-
     }
 
     public static void main(String[] args) {
         GetFromDataSubjectContent lolo = new GetFromDataSubjectContent();
-
-
-        System.out.println(lolo. (file));
+        //System.out.println(lolo. (file));
     }
 
 }
