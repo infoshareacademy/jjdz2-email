@@ -1,6 +1,7 @@
 package com.jbd;
 
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 
 public class Email {
     private String from;
@@ -12,8 +13,11 @@ public class Email {
 
     public Email(String from, String subject, String data, String content) {
         this.from = from;
-        objectOfDate = LocalDate.parse(data);
-        this.data = objectOfDate;
+        //objectOfDate = LocalDate.parse(data);
+        DateTimeFormatter formatter = DateTimeFormatter.RFC_1123_DATE_TIME;
+        //LocalDateTime dateTime = LocalDateTime.parse(data, formatter);
+        //this.data = objectOfDate;
+        this.data = LocalDate.parse(data, formatter);
         this.subject = subject;
         this.content = content;
     }
