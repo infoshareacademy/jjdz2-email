@@ -1,16 +1,20 @@
 package com.jbd;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class GetFromDataSubjectContent {
+public class MakeEmailsFromString {
+
 
     private String regexFrom = "From (.)*(a-zA-Z)*(\\\\.com)*";
     private String regexData = "Date: (.)**";
     private String regexSubject = "Subject: (.)*";
     private String regexContent = "";
     private String regexContent1 = "(X-List-Received-Date)(.)*";
-    static String file = "helo=malcolmhardie.com)\n" +
+    static String file = "From Angus.Hardie@malcolmhardie.com Sun Apr 18 02:32:47 2004\n" +
+            "Received: from pol.malcolmhardie.com ([213.152.32.218] helo=malcolmhardie.com)" +
             "\tby marilac.malcolmhardie.com with asmtp \n" +
             "\t(Cipher TLSv1:DES-CBC3-SHA:168) (Exim 3.35 #1 (Debian))\n" +
             "\tid 1BF1At-0004oK-00\n" +
@@ -204,6 +208,45 @@ public class GetFromDataSubjectContent {
             "\n" +
             "test\n";
 
+    private List<Email> emailsFromString = new ArrayList<>();
+
+    private String EMAILREGEX = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
+    private String FROMREGEX = "(from\\s)("+EMAILREGEX+")";
+    private String SUBJECTREGEX = "(subject:\\s)(.*)";
+    private String DATEREGEX = "(\\ndate:\\s)(.*)";
+    private String CONTENTREGEX = "(x-list.*|list.*)(\n\n)(.*)";
+
+    public String tempName(){
+        Pattern pattern = Pattern.compile(FROMREGEX, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(file);
+
+        Pattern pattern2 = Pattern.compile(SUBJECTREGEX, Pattern.CASE_INSENSITIVE);
+        Matcher matcher2 = pattern2.matcher(file);
+
+        Pattern pattern3 = Pattern.compile(DATEREGEX, Pattern.CASE_INSENSITIVE);
+        Matcher matcher3 = pattern3.matcher(file);
+
+        Pattern pattern4 = Pattern.compile(CONTENTREGEX, Pattern.CASE_INSENSITIVE);
+        Matcher matcher4 = pattern4.matcher(file);
+
+        //dokonczyc pat4/mat4 zeby zbieralo cala tresc maila (wyciac kawalek dac do string -> replace)
+        //parametryzowac co sie da i podmienic flie na stringa (jako pararmte metody)
+        //usunac co niepotrzebne
+        //zrobic kolekcje arraylist emaili i zwracac w tej funkcji zamst strnga
+        //yolo
+
+
+        int count = 0;
+        while(matcher4.find()) {
+            count++;
+            System.out.println("found: " + count + " : "
+                    + matcher4.start() + " - " + matcher4.end());
+            System.out.println(matcher4.group(3));
+        }
+
+        return "end";
+    }
+
 
     public String test() {
         Pattern pattern;
@@ -220,6 +263,9 @@ public class GetFromDataSubjectContent {
         System.out.println();
         return null;
     }
+
+
+
 
     public String reportFrom(String file) {
         this.file = file;
@@ -319,7 +365,7 @@ public class GetFromDataSubjectContent {
     }
 
     public static void main(String[] args) {
-        GetFromDataSubjectContent lolo = new GetFromDataSubjectContent();
+        MakeEmailsFromString lolo = new MakeEmailsFromString();
         //System.out.println(lolo. (file));
     }
 
