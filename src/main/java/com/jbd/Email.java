@@ -67,6 +67,6 @@ public class Email {
 
     @Override
     public String toString() {
-        return from + " " + subject + " " + data.toString();
+        return "From: " + from + "\nSubject: " + subject + "\n";
     }
 }
