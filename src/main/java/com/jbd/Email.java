@@ -13,11 +13,13 @@ public class Email {
 
     public Email(String from, String subject, String data, String content) {
         this.from = from;
-        //objectOfDate = LocalDate.parse(data);
-        DateTimeFormatter formatter = DateTimeFormatter.RFC_1123_DATE_TIME;
-        //LocalDateTime dateTime = LocalDateTime.parse(data, formatter);
-        //this.data = objectOfDate;
-        this.data = LocalDate.parse(data, formatter);
+        DateTimeFormatter formatterLongVersion = DateTimeFormatter.RFC_1123_DATE_TIME;
+        DateTimeFormatter formatterShortVersion = DateTimeFormatter.ISO_LOCAL_DATE;
+        if(data.length()> 12){
+            this.data = LocalDate.parse(data, formatterLongVersion);
+        } else {
+            this.data = LocalDate.parse(data,formatterShortVersion);
+        }
         this.subject = subject;
         this.content = content;
     }
