@@ -1,4 +1,4 @@
-package com.jbd.KeywordsFinder;
+package com.jbd;
 
 import com.jbd.Email;
 
