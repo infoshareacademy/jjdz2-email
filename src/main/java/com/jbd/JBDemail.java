@@ -3,32 +3,40 @@ package com.jbd;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class JBDemail {
     private static final Logger LOGGER = LogManager.getLogger(JBDemail.class);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         List<String> filesInStrings = new ArrayList<>();
         List<Email> eMailKeeper = new ArrayList<>();
 
-        QuestionForm askQuestionsAndQuestionForm = new QuestionForm();
-        askQuestionsAndQuestionForm.askQuestionsAndSetAnswers();
+        //QuestionForm askQuestionsAndQuestionForm = new QuestionForm();
+        //askQuestionsAndQuestionForm.askQuestionsAndSetAnswers();
 
         PathGetter pG = new PathGetter();
-        pG.createFileListFromPath(pG.askUserAboutInputPath());
+        //pG.createFileListFromPath(pG.askUserAboutInputPath());
         LOGGER.info("Found: " + pG.getFileList().size() + " files.");
 
-        FileLoad fL = new FileLoad();
-        filesInStrings.addAll(pG.getFileList().stream().map(fL::fileLoad).collect(Collectors.toList()));
+        FileParser fP = new FileParser();
+        filesInStrings.add("D:\\temp\\testlist.mbox");
+        fP.parseEmails(filesInStrings);
 
-        MakeEmailsFromString makeEmails = new MakeEmailsFromString();
-        for (String s : filesInStrings) {
-            eMailKeeper.addAll(makeEmails.makeEmailList(s));
-        }
+        //FileLoad fL = new FileLoad();
+        //filesInStrings.addAll(pG.getFileList().stream().map(fL::fileLoad).collect(Collectors.toList()));
 
+        //MakeEmailsFromString makeEmails = new MakeEmailsFromString();
+        //for (String s : filesInStrings) {
+        //    eMailKeeper.addAll(makeEmails.makeEmailList(s));
+        //}
+
+
+        LOGGER.info("Emails: " + eMailKeeper.size());
+
+        /*
         ContentmentVerification cV = new ContentmentVerification();
 
         List<String> eMailToLookFor = new ArrayList<>();
@@ -77,6 +85,6 @@ public class JBDemail {
         System.out.println("\n" + eMailKeeper.size() + "\n");
         System.out.println(eMailKeeper);
         System.out.println(eMailKeeper.get(1).getData());
-
-    }
+        */
+        }
 }
