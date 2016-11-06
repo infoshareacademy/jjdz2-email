@@ -29,13 +29,15 @@ public class DisplayPhoneNumbers {
             if (foundDuplicate)
                 break;
         }
-        //String keys = mapToSearch.keySet();
+
         return foundDuplicate;
     }
 
     private String returnFormattedPhoneNumber(String phoneNumber) {
         String formatedPhoneNumber;
         formatedPhoneNumber = phoneNumber.trim().replace(" ", "");
+        //TO DO!
+        //zamienic - na nic 
         return formatedPhoneNumber;
     }
 
@@ -53,27 +55,42 @@ public class DisplayPhoneNumbers {
             Matcher matcher1 = patternWithoutPlusAndSpaces.matcher(email.getContent());
             // Matcher matcher2 = patternWithoutSpace.matcher(email.getContent());
             while (matcher.find()) {
+                System.out.println("Poczatek!-----------------------------------");
                 System.out.println("Matcher 0");
                 System.out.println(matcher.group());
-                System.out.println("----------------------");
                 String phoneNumber = returnFormattedPhoneNumber(matcher.group());
-                System.out.println("Uzyto funckji " + phoneNumber);
-                testArrayList.add("+48515417844");
-                resultMap.put("marcin@wp.pl", testArrayList);
-                isDuplicate = searchDuplicates(resultMap, phoneNumber);
-                System.out.println(isDuplicate);
-                if (!isDuplicate) {
-                    System.out.println("Brak duplikatów: dodaje numer");
-                    listContainingPhoneNumbers = resultMap.get("marcin@wp.pl");
-                    System.out.println("Lista maili: " + listContainingPhoneNumbers);
-                    resultMap.put(email.getFrom(), testArrayList);
-                }
-//
-            }
+                System.out.println("Uzyto funckji: " + phoneNumber);
+                if (resultMap.isEmpty()) {
+                    System.out.println("Mapa pusta dodaje rekord");
+                    List<String> phoneList = new ArrayList<>();
+                    phoneList.add(phoneNumber);
+                    resultMap.put(email.getFrom(), phoneList);
+                    System.out.println("Dodano : " + resultMap.get(email.getFrom()) + " od " + email.getFrom());
+                } else {
+                    if (resultMap.containsKey(email.getFrom())) {
+                        System.out.println("Mapa zawiera element " + email.getFrom());
+                        System.out.println("Szukam czy duplikat...");
+                        isDuplicate = searchDuplicates(resultMap, phoneNumber);
+                        if (!isDuplicate) {
+                            System.out.println("Brak duplikatów: dodaje numer");
+                            List<String> tempPhoneNumberList = new ArrayList<>();
+                            tempPhoneNumberList = resultMap.get(email.getFrom());
+                            tempPhoneNumberList.add(phoneNumber);
+                            testArrayList = tempPhoneNumberList;
+                            //listContainingPhoneNumbers = resultMap.get("marcin@wp.pl");
+                            System.out.println("Lista maili: " + testArrayList);
+                            resultMap.put(email.getFrom(), testArrayList);
+                        } else {
+                            System.out.println("Duplikat, nie dodaje!");
+                        }
+                    } else {
+                        List<String> phoneList = new ArrayList<>();
+                        phoneList.add(matcher.group());
+                        resultMap.put(email.getFrom(), phoneList);
+                    }
 
-            while (matcher1.find()) {
-                System.out.println("Matcher 1");
-                System.out.println(matcher1.group(0));
+                }
+
             }
 
 
