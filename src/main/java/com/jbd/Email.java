@@ -2,6 +2,7 @@ package com.jbd;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class Email {
     private String from;
@@ -30,6 +31,13 @@ public class Email {
 
     }
     public Email(String from) {
+        this.from = from;
+    }
+
+    public Email(String from, String subject, Date date, String content) {
+        this.data = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        this.subject = subject;
+        this.content = content;
         this.from = from;
     }
 
