@@ -1,5 +1,8 @@
 package com.jbd;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +11,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DisplayPhoneNumbers {
+    private static final Logger LOGGER = LogManager.getLogger(JBDemail.class);
+
     String phonePattern = "(\\s\\d{3}[\\-,\\s]?\\d{3}[\\-,\\s]?\\d{3}\\b)"; // 515417888
 
     private Pattern patternPhone;
@@ -46,30 +51,30 @@ public class DisplayPhoneNumbers {
             Matcher matcher = patternPhone.matcher(email.getContent());
             while (matcher.find()) {
                 String phoneNumber = returnFormattedPhoneNumber(matcher.group());
-                System.out.println("Uzyto funckji: " + phoneNumber);
                 if (resultMap.isEmpty()) {
-                    System.out.println("Mapa pusta dodaje rekord");
+                    LOGGER.info("Map is empty, adding record");
                     List<String> phoneList = new ArrayList<>();
                     phoneList.add(phoneNumber.trim());
                     resultMap.put(email.getFrom(), phoneList);
+                    LOGGER.info("Added record to map: " + resultMap.get(email.getFrom()) + " for user : " + email.getFrom());
                     } else {
                     if (resultMap.containsKey(email.getFrom())) {
-                        System.out.println("Mapa zawiera element " + email.getFrom());
-                        System.out.println("Szukam czy duplikat...");
+                        LOGGER.info("Found User: " + email.getFrom());
                         isDuplicate = searchDuplicates(resultMap, phoneNumber);
                         if (!isDuplicate) {
-                            System.out.println("Brak duplikatów: dodaje numer");
+                            LOGGER.info("No dupliacets, adding number: " + phoneNumber +" for: " +email.getFrom());
                             List<String> phoneNumberList;
                             phoneNumberList = resultMap.get(email.getFrom());
                             phoneNumberList.add(phoneNumber);
-                            System.out.println("Lista maili: " + phoneNumberList);
                             resultMap.put(email.getFrom(), phoneNumberList);
                         } else {
-                            System.out.println("Duplikat, nie dodaje!");
+                            LOGGER.info("Phonenumber: " + phoneNumber + " already exists, no add");
                         }
                     } else {
+                        LOGGER.info("New user: " + email.getFrom());
                         List<String> phoneList = new ArrayList<>();
                         phoneList.add(phoneNumber);
+                        LOGGER.info("Added number: " + phoneNumber + " for user: " + email.getFrom());
                         resultMap.put(email.getFrom(), phoneList);
                     }
 
@@ -80,7 +85,18 @@ public class DisplayPhoneNumbers {
 
         }
 
+        LOGGER.info("Reuslts: " + resultMap.toString());
+        System.out.println("Phone Numbers: ");
+        System.out.println("---------------");
+        for (String key : resultMap.keySet()) {
+            System.out.print(key + ": " + "[ ");
+            for (String value : resultMap.get(key)) {
+                System.out.print("-"+ value + " " );
+            }
+            System.out.print("]");
+            System.out.println();
 
+        }
         return resultMap;
     }
 }
