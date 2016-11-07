@@ -11,7 +11,9 @@ import java.util.regex.Pattern;
 
 public class DisplayPhoneNumbers {
     //String test = " 24 +48 +48 515417846 515417846 135487562314";
-    String phonePatternWithPlus = "(\\s\\+?\\d{2}?)?(\\s\\d{9}\\b)"; // +48 515417888
+//    String phonePatternWithPlus = "(\\s\\+?\\d{2}?)?(\\s\\d{9}\\b)"; // +48 515417888
+    String phonePatternWithPlus = "(\\s\\d{3}[\\-,\\s]?\\d{3}[\\-,\\s]?\\d{3}\\b)"; // +48 515417888
+
     //String phonePatternWithoutSpace = "(\\s\\+?\\d{2})(\\d{9}\\b)"; // +48515417888
     String phonePatternWithoutPlusAndSpacs = "(\\b\\d{9}\\b)"; // 515417888
     private Pattern patternWithPlus;
@@ -22,7 +24,7 @@ public class DisplayPhoneNumbers {
         boolean foundDuplicate = false;
         for (String key : mapToSearch.keySet()) {
             for (String value : mapToSearch.get(key)) {
-                if (value.equals(stringTooSearch)) {
+                if (value.trim().equals(stringTooSearch)) {
                     foundDuplicate = true;
                 }
             }
@@ -37,7 +39,11 @@ public class DisplayPhoneNumbers {
         String formatedPhoneNumber;
         formatedPhoneNumber = phoneNumber.trim().replace(" ", "");
         //TO DO!
-        //zamienic - na nic 
+        //zamienic - na nic
+        if (formatedPhoneNumber.contains("-")) {
+            formatedPhoneNumber = phoneNumber.replace("-", "");
+            formatedPhoneNumber.trim();
+        }
         return formatedPhoneNumber;
     }
 
@@ -63,7 +69,8 @@ public class DisplayPhoneNumbers {
                 if (resultMap.isEmpty()) {
                     System.out.println("Mapa pusta dodaje rekord");
                     List<String> phoneList = new ArrayList<>();
-                    phoneList.add(phoneNumber);
+                    //phoneNumber = returnFormattedPhoneNumber(phoneNumber);
+                    phoneList.add(phoneNumber.trim());
                     resultMap.put(email.getFrom(), phoneList);
                     System.out.println("Dodano : " + resultMap.get(email.getFrom()) + " od " + email.getFrom());
                 } else {
@@ -85,7 +92,7 @@ public class DisplayPhoneNumbers {
                         }
                     } else {
                         List<String> phoneList = new ArrayList<>();
-                        phoneList.add(matcher.group());
+                        phoneList.add(phoneNumber);
                         resultMap.put(email.getFrom(), phoneList);
                     }
 
