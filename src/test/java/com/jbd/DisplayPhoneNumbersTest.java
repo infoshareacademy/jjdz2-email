@@ -14,10 +14,10 @@ import static org.junit.Assert.*;
  */
 public class DisplayPhoneNumbersTest {
     List<Email> eMailKeeper = Arrays.asList(new Email("marcin@wp.pl", "subject", "2015-01-01", "test 515-417-846"),
-            new Email("marcin@wp.pl", "subject", "2015-01-01", "test 515417844"),
-            new Email("marcin@wp.pl", "subject", "2015-01-01", "test 515 417 846"),
-            new Email("wojtek@wp.pl", "subject", "2015-01-01", "test 616478366"),
-            new Email("wojtek@wp.pl", "subject", "2015-01-01", "test 616478366"));
+            new Email("marcin@wp.pl", "subject", "2015-01-01 00:00", "test 515417844"),
+            new Email("marcin@wp.pl", "subject", "2015-01-01 00:00", "test 515 417 846"),
+            new Email("wojtek@wp.pl", "subject", "2015-01-01 00:00", "test 616478366"),
+            new Email("wojtek@wp.pl", "subject", "2015-01-01 00:00", "test 616478366"));
 
     private Map<String, List<String>> resultMap;
     private List<String> resultList;
