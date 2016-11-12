@@ -62,13 +62,13 @@ public class DisplayPhoneNumbers {
                         LOGGER.info("Found User: " + email.getFrom());
                         isDuplicate = searchDuplicates(resultMap, phoneNumber);
                         if (!isDuplicate) {
-                            LOGGER.info("No dupliacets, adding number: " + phoneNumber +" for: " +email.getFrom());
+                            LOGGER.info("No duplicates found, adding number: " + phoneNumber +" for: " +email.getFrom());
                             List<String> phoneNumberList;
                             phoneNumberList = resultMap.get(email.getFrom());
                             phoneNumberList.add(phoneNumber);
                             resultMap.put(email.getFrom(), phoneNumberList);
                         } else {
-                            LOGGER.info("Phonenumber: " + phoneNumber + " already exists, no add");
+                            LOGGER.info("Phone number: " + phoneNumber + " already exists, no add");
                         }
                     } else {
                         LOGGER.info("New user: " + email.getFrom());
@@ -85,7 +85,7 @@ public class DisplayPhoneNumbers {
 
         }
 
-        LOGGER.info("Reuslts: " + resultMap.toString());
+        LOGGER.info("Results: " + resultMap.toString());
         System.out.println("Phone Numbers: ");
         System.out.println("---------------");
         for (String key : resultMap.keySet()) {
