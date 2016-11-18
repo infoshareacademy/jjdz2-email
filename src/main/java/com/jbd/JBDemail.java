@@ -26,9 +26,11 @@ public class JBDemail {
         //pG.createFileListFromPath(pG.askUserAboutInputPath());
         LOGGER.info(MAIN_MARKER, "Found: " + pG.getFileList().size() + " files.");
 
+
+        //temp lines
         FileParser fP = new FileParser();
         filesInStrings.add("D:\\temp\\sample.eml");
-        fP.parseEmails(filesInStrings);
+        eMailKeeper = fP.parseEmails(filesInStrings);
 
         //FileLoad fL = new FileLoad();
         //filesInStrings.addAll(pG.getFileList().stream().map(fL::fileLoad).collect(Collectors.toList()));
