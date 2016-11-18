@@ -13,21 +13,21 @@ public class JBDemail {
     private static final Logger LOGGER = LoggerFactory.getLogger(JBDemail.class);
     private static final Marker MAIN_MARKER = MarkerFactory.getMarker("Main");
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         List<String> filesInStrings = new ArrayList<>();
         List<Email> eMailKeeper = new ArrayList<>();
 
-        DisplayPhoneNumbers displayPhoneNumbers = new DisplayPhoneNumbers();
+        //DisplayPhoneNumbers displayPhoneNumbers = new DisplayPhoneNumbers();
 
-        QuestionForm askQuestionsAndQuestionForm = new QuestionForm();
-        askQuestionsAndQuestionForm.askQuestionsAndSetAnswers();
+        //QuestionForm askQuestionsAndQuestionForm = new QuestionForm();
+        //askQuestionsAndQuestionForm.askQuestionsAndSetAnswers();
 
         PathGetter pG = new PathGetter();
-        pG.createFileListFromPath(pG.askUserAboutInputPath());
+        //pG.createFileListFromPath(pG.askUserAboutInputPath());
         LOGGER.info(MAIN_MARKER, "Found: " + pG.getFileList().size() + " files.");
 
         FileParser fP = new FileParser();
-        filesInStrings.add("D:\\temp\\testlist.mbox");
+        filesInStrings.add("D:\\temp\\sample.eml");
         fP.parseEmails(filesInStrings);
 
         //FileLoad fL = new FileLoad();
@@ -40,6 +40,9 @@ public class JBDemail {
 
 
         LOGGER.info("Emails: " + eMailKeeper.size());
+
+        System.out.println(eMailKeeper);
+
 
         /*
         ContentmentVerification cV = new ContentmentVerification();
@@ -91,5 +94,6 @@ public class JBDemail {
         System.out.println(eMailKeeper);
         System.out.println(eMailKeeper.get(1).getData());
         */
+
         }
 }

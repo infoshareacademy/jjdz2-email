@@ -12,9 +12,12 @@ import java.util.Properties;
 public class FileParser {
     private List<Email> emailsFromFiles = new ArrayList<>();
 
-    public List<Email> parseEmails (List<String> fileList) {
+    public List<Email> parseEmails (List<String> fileList) throws Exception {
         emailsFromFiles.clear();
         for (String file : fileList) {
+            if (file.endsWith(".eml")){
+                emailsFromFiles.add(parseEML(new File(file)));
+            }
         }
         return emailsFromFiles;
     }
@@ -26,6 +29,6 @@ public class FileParser {
 
         //date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-        return new Email(message.getFrom()[0].toString(), message.getSubject(), message.getSentDate(), message.getContent().toString());
+        return new Email(message.getFrom()[0].toString(), message.getSubject(), message.getSentDate().toString(), message.getContent().toString());
     }
 }
