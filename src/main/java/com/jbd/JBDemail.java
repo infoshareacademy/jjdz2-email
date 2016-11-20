@@ -29,7 +29,7 @@ public class JBDemail {
 
         //temp lines
         FileParser fP = new FileParser();
-        filesInStrings.add("D:\\temp\\sample.eml");
+        filesInStrings.add("/home/krabczak/IdeaProjects/jjdz2-email/src/main/resources/testlist.mbox");
         eMailKeeper = fP.parseEmails(filesInStrings);
 
         //FileLoad fL = new FileLoad();
@@ -44,6 +44,11 @@ public class JBDemail {
         LOGGER.info("Emails: " + eMailKeeper.size());
 
         System.out.println(eMailKeeper);
+
+        for (Email e : eMailKeeper) {
+            System.out.println(e.getData());
+            System.out.println(e.getContent());
+        }
 
 
         /*
