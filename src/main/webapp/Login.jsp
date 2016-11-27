@@ -20,6 +20,7 @@
     <div>Password: <input type="text" name="password"> </div>
     <input type="submit" value="Log in" >
 </form>
+<a href="/jbdee/LoginServlet">Facebook</a>
 
 </body>
 </html>

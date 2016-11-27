@@ -9,25 +9,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created by Marcin on 27.11.2016.
- */
+
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
     @Inject
     SessionData sessionData;
+    private final static long CLIENT_ID = 1783631111890477L;
+    private final static String REDIRECT_URI  = "localhost:8080/jbdee/LoginServlet" ;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
 
-        sessionData.login(username,password);
 
-        if (sessionData.isLogged()){
-            RequestDispatcher dispatcher =request.getRequestDispatcher("/form.jsp");
-            dispatcher.forward(request,response);
-        }
+
+//        RequestDispatcher dispatcherFB = request.getRequestDispatcher("https://www.facebook.com/v2.8/dialog/oauth?client_id={"+CLIENT_ID+"}&redirect_uri={"+REDIRECT_URI+"}");
+//        dispatcherFB.forward(request,response);
+
+
+//        sessionData.login(username,password);
+//
+//        if (sessionData.isLogged()){
+//            RequestDispatcher dispatcher =request.getRequestDispatcher("/form.jsp");
+//            dispatcher.forward(request,response);
+//        }
 
 
 
@@ -35,7 +42,7 @@ public class LoginServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
+        response.sendRedirect("https://www.facebook.com/v2.8/dialog/oauth?client_id=1783631111890477&redirect_uri=http://localhost:8080/jbdee/form.jsp");
 
         }
 
