@@ -1,6 +1,7 @@
 package com.jbd.Authorization;
 
 import javax.inject.Inject;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,6 +23,12 @@ public class LoginServlet extends HttpServlet {
 
 
         sessionData.login(username,password);
+
+        if (sessionData.isLogged()){
+            RequestDispatcher dispatcher =request.getRequestDispatcher("/form.jsp");
+            dispatcher.forward(request,response);
+        }
+
 
 
     }
