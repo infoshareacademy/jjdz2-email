@@ -5,17 +5,14 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
-public class FileLoad {
-    private static final Logger LOGGER = LoggerFactory.getLogger(FileLoad.class);
-    private static final Marker FL_MARKER = MarkerFactory.getMarker("FileLoad");
+public class SetLinuxLineSeparatorInFile {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SetLinuxLineSeparatorInFile.class);
+    private static final Marker FL_MARKER = MarkerFactory.getMarker("SetLinuxLineSeparatorInFile");
     private StringBuilder builder;
 
-    public String fileLoad(String file){
+    public File RewriteFile(File file){
         LOGGER.info(FL_MARKER, "File loading started.");
         builder = new StringBuilder();
         FileReader fr = null;
