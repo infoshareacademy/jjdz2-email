@@ -50,7 +50,7 @@ public class MainMenu extends HttpServlet {
             System.out.println("Now work dispatcher");
             System.out.println("SessionData: " + sessionData.getUsername() );
             req.setAttribute("name", name);
-            
+
             RequestDispatcher dispatcher = req.getRequestDispatcher("/form.jsp");
             dispatcher.forward(req, res);
             System.out.println();
