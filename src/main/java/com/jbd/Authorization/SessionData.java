@@ -10,27 +10,19 @@ public class SessionData implements Serializable {
 
     private boolean isLogged = false;
     private String username;
-    private String password;
     private LocalDate loginTime;
+    private String code = null;
 
     public boolean isLogged() {
         return isLogged;
-    }
-
-    public void setLogged(boolean logged) {
-        isLogged = logged;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public LocalDate getLoginTime() {
@@ -41,17 +33,25 @@ public class SessionData implements Serializable {
         this.loginTime = loginTime;
     }
 
-    public void login(String username, String password) {
-        if ("admin".equals(username)&& "admin".equals(password)){
-            System.out.println("Succesfull!");
-            System.out.println("User " + username + "have logged in");
+    public void login(String code,String username) {
+        if(!code.equals("")){
+            System.out.println("Succesfull");
             this.isLogged = true;
             this.username = username;
-            this.loginTime = LocalDate.now();
+            this.code = code;
+            //this.loginTime = loginTime;
 
-        }else {
+        }
+        else {
             System.out.println("Login Failed");
         }
+
+    }
+
+    public void logout(){
+        this.isLogged = false;
+        this.username = "";
+        this.code = null;
     }
 
 }

@@ -18,10 +18,10 @@ public class AuthorizationFilter implements Filter {
         if(!sessionData.isLogged()){
 
             //HttpServletRequest request = (HttpServletRequest) servletRequest;
-            ((HttpServletResponse) servletResponse).sendRedirect("/jbdee/Login.jsp");//?referrer=" + request.getRequestURI());
+            ((HttpServletResponse) servletResponse).sendRedirect("/jbdee/LoginFB.jsp");//?referrer=" + request.getRequestURI());
             return;
         }
-
+        servletRequest.setAttribute("sessionData", sessionData);
         filterChain.doFilter(servletRequest,servletResponse);
 
 

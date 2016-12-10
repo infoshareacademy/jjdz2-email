@@ -78,6 +78,7 @@ public class FBConnection {
                         + accessToken);
             }
         }
+        System.out.println("Returned access token: " + accessToken);
         return accessToken;
     }
 }
