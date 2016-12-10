@@ -60,31 +60,18 @@ public class FileParser {
         LOGGER.info(FP_MARKER, "Parsing mbox file.");
         List<Email> emails = new ArrayList<>();
 
-        for(Iterator end = MboxIterator.fromFile(mboxFile).charset(ENCODER.charset()).build().iterator(); end.hasNext();) {
-            CharBufferWrapper message = (CharBufferWrapper)end.next();
+        for (CharBufferWrapper message : MboxIterator.fromFile(mboxFile).charset(ENCODER.charset()).build()) {
             DefaultMessageBuilder builder = new DefaultMessageBuilder();
             Message mess = builder.parseMessage(message.asInputStream(ENCODER.charset()));
-            String messageBody = "";
+            String messageBody;
 
-
-            // this -> http://www.mozgoweb.com/posts/how-to-parse-mime-message-using-mime4j-library/
             if (mess.isMultipart()) {
                 Multipart multipart = (Multipart) mess.getBody();
                 messageBody = parseBodyParts(multipart);
 
             } else {
-                //If it's single part message, just get text body
-                //String text = getTxtPart(mimeMsg);
-                //txtBody.append(text);
-                //TextBody body = (TextBody) mess.getBody();
-                //String messageBody = new Scanner(body.getReader()).useDelimiter("\\A").next();
                 messageBody = getTxtPart(mess);
             }
-
-
-            //TextBody body = (TextBody) mess.getBody();
-            //String messageBody = new Scanner(body.getReader()).useDelimiter("\\A").next();
-
             Email e = new Email(mess.getFrom().get(0).getAddress(),
                     mess.getSubject(),
                     mess.getDate(),
@@ -96,46 +83,31 @@ public class FileParser {
     }
 
     private String getTxtPart(Entity part) throws IOException {
-        //Get content from body
-        //TextBody tb = (TextBody) part.getBody();
-        //ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        //tb.writeTo(baos);
-        //return new String(baos.toByteArray());
         TextBody body = (TextBody) part.getBody();
-        //String messageBody =
-                //return new Scanner(body.getReader()).useDelimiter("\\A").next();
-
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        body.writeTo(baos);
-        return new String(baos.toByteArray());
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        body.writeTo(byteArrayOutputStream);
+        return new String(byteArrayOutputStream.toByteArray());
     }
 
     private String parseBodyParts(Multipart multipart) throws IOException {
-
-        StringBuffer txtBody = new StringBuffer();
-        StringBuffer htmlBody = new StringBuffer();
+        StringBuilder txtBody = new StringBuilder();
+        StringBuilder htmlBody = new StringBuilder();
         ArrayList<BodyPart> attachments = new ArrayList<>();
 
-        for (Entity part : multipart.getBodyParts() /*Entity part : multipart.getBodyParts()*/) {
-            if (part.getMimeType().equals("text/plain") /*part.isMimeType("text/plain")*/) {
+        for (Entity part : multipart.getBodyParts()) {
+            if (part.getMimeType().equals("text/plain")) {
                 String txt = getTxtPart(part);
                 txtBody.append(txt);
-            } else if (part.getMimeType().equals("text/html") /*part.isMimeType("text/html")*/) {
+            } else if (part.getMimeType().equals("text/html")) {
                 String html = getTxtPart(part);
                 htmlBody.append(html);
             } else if (part.getDispositionType() != null && !part.getDispositionType().equals("")) {
-                //If DispositionType is null or empty, it means that it's multipart, not attached file
                 attachments.add((BodyPart) part);
             }
-
-            //If current part contains other, parse it again by recursion
             if (part.isMultipart()) {
                 parseBodyParts((Multipart) part.getBody());
             }
         }
-
         return txtBody.toString();
     }
-
-
 }

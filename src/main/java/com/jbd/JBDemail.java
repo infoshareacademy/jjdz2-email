@@ -29,8 +29,7 @@ public class JBDemail {
 
         //temp lines
         FileParser fP = new FileParser();
-        //filesInStrings.add("/home/krabczak/IdeaProjects/jjdz2-email/src/main/resources/testlist.mbox");
-        filesInStrings.add("/home/krabczak/IdeaProjects/jjdz2-email/src/main/resources/Istotne.mbox");
+        filesInStrings.add("/home/krabczak/IdeaProjects/jjdz2-email/src/main/resources/testlist.mbox");
         eMailKeeper = fP.parseEmails(filesInStrings);
 
         //SetLinuxLFInFile fL = new SetLinuxLFInFile();
@@ -48,7 +47,7 @@ public class JBDemail {
 
         for (Email e : eMailKeeper) {
            // System.out.println(e.getData());
-            System.out.println("-----------------++++++++++++");
+            System.out.println("-----------------");
             System.out.println(e.getContent());
         }
 
