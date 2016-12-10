@@ -42,8 +42,8 @@ public class LoginServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        response.sendRedirect("https://www.facebook.com/v2.8/dialog/oauth?client_id=1783631111890477&redirect_uri=http://localhost:8080/jbdee/form.jsp");
-
+//        response.sendRedirect("https://www.facebook.com/v2.8/dialog/oauth?client_id=1783631111890477&redirect_uri=http://localhost:8080/jbdee/form.jsp");
+//
         }
 
 

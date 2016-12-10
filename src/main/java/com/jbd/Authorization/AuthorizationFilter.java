@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-@WebFilter(urlPatterns = "/forssm.jsp")
+@WebFilter(urlPatterns = "/form.jsp")
 public class AuthorizationFilter implements Filter {
 
     @Inject SessionData sessionData;
