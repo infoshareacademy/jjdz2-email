@@ -30,17 +30,6 @@ public class FileParser {
     public List<Email> parseEmails (List<String> fileList) throws Exception {
         LOGGER.info(FP_MARKER, "Parsing Started");
         emailsFromFiles.clear();
-        SetLinuxLineSeparatorInFile fL = new SetLinuxLineSeparatorInFile();
-        MakeEmailsFromString makeEmails = new MakeEmailsFromString();
-
-
-        //String zawartoscpliku = wczytaj caly plik
-        //zwartoscpliku.replaceALl("\\n", System.lineSeparator()
-        //zwartoscpliku.replaceALl("\\r", System.lineSeparator()
-
-
-
-
 
         for (String file : fileList) {
             if (file.endsWith(".eml")){
@@ -48,12 +37,9 @@ public class FileParser {
                 emailsFromFiles.add(parseEML(new File(file)));
                 LOGGER.info(FP_MARKER, "Parsing of single eml file finished.");
             } else if (file.endsWith(".mbox")){
-
-                //
-
                 LOGGER.info(FP_MARKER, "Found mbox file.");
-                //emailsFromFiles.addAll(makeEmails.makeEmailList(fL.RewriteFile(file)));
                 emailsFromFiles.addAll(parseMbox(new File(file)));
+                LOGGER.info(FP_MARKER, "Parsing of single mbox file finished.");
             }
         }
         LOGGER.info(FP_MARKER, "Parsing finished");
@@ -70,8 +56,8 @@ public class FileParser {
     }
 
     public List<Email> parseMbox(File mboxFile) throws IOException, MimeException {
-        SetLinuxLineSeparatorInFile s = new SetLinuxLineSeparatorInFile();
-        s.RewriteFile(mboxFile);
+        SetLinuxLFInFile s = new SetLinuxLFInFile();
+        mboxFile = s.RewriteFile(mboxFile);
 
         LOGGER.info(FP_MARKER, "Parsing mbox file.");
         List<Email> emails = new ArrayList<>();

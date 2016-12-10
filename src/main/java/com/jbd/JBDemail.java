@@ -32,7 +32,7 @@ public class JBDemail {
         filesInStrings.add("/home/krabczak/IdeaProjects/jjdz2-email/src/main/resources/testlist.mbox");
         eMailKeeper = fP.parseEmails(filesInStrings);
 
-        //SetLinuxLineSeparatorInFile fL = new SetLinuxLineSeparatorInFile();
+        //SetLinuxLFInFile fL = new SetLinuxLFInFile();
         //filesInStrings.addAll(pG.getFileList().stream().map(fL::RewriteFile).collect(Collectors.toList()));
 
         //MakeEmailsFromString makeEmails = new MakeEmailsFromString();
