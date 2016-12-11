@@ -49,9 +49,11 @@ public class SessionData implements Serializable {
     }
 
     public void logout(){
+        System.out.println("wylogowalem");
         this.isLogged = false;
         this.username = "";
         this.code = null;
+        System.out.println("Po wylogowaniu: " +this.username);
     }
 
 }

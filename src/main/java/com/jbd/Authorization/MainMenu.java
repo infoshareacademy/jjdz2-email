@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/Main")
 public class MainMenu extends HttpServlet {
@@ -51,9 +52,19 @@ public class MainMenu extends HttpServlet {
             System.out.println("SessionData: " + sessionData.getUsername() );
             req.setAttribute("name", name);
 
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/form.jsp");
-            dispatcher.forward(req, res);
-            System.out.println();
+            //req.getSession(false);
+            //HttpSession
+           // HttpServletResponse httpResponse = (HttpServletResponse) req;
+           // HttpServletRequest httpRequest =(HttpServletRequest) res;
+           // System.out.println("Session Data:" +req.getAttribute("sessionData"));
+            // req.setAttribute("sessionData", sessionData);
+
+
+//            RequestDispatcher dispatcher = req.getRequestDispatcher("/form.jsp");
+//            dispatcher.forward(req, res);
+//            System.out.println();
+
+            res.sendRedirect("/jbdee/form.jsp");
         }
         //req.setAttribute("results", results);
 

@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
 <html>
 <head>
     <title>yolo</title>
@@ -10,18 +9,11 @@
 <%--<c:if test="${sessionData.isLogged}">--%>
     <div>
 
-            ${sessionData.username} <a href="/logout">logout</a>
+            ${sessionData.username} <a href="/jbdee/logout">logout</a>
         <!-- username --> <!-- logout -->
     </div>
 <%--</c:if>--%>
 
-<c>${sessionData.isLogged}</c>
-<c:if test="${sessionData.isLogged}">
-    <div>
-            ${sessionData.username} <a href="/logout">logout</a>
-        <!-- username --> <!-- logout -->
-    </div>
-</c:if>
 <p>form:</p>
 <div>
     <form method="post" action="sendData">
