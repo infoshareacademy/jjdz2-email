@@ -58,37 +58,14 @@
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
             <version>1.5.6</version>
+            <scope>test</scope>
         </dependency>
-
         <!-- mime4j test-->
-
-        <!-- https://mvnrepository.com/artifact/org.apache.james/apache-mime4j-core -->
-        <dependency>
-            <groupId>org.apache.james</groupId>
-            <artifactId>apache-mime4j-core</artifactId>
-            <version>0.8.0</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.james/apache-mime4j -->
         <dependency>
             <groupId>org.apache.james</groupId>
             <artifactId>apache-mime4j</artifactId>
             <version>0.8.0</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.james/apache-mime4j-dom -->
-        <dependency>
-            <groupId>org.apache.james</groupId>
-            <artifactId>apache-mime4j-dom</artifactId>
-            <version>0.8.0</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.james/apache-mime4j-james-utils -->
-        <dependency>
-            <groupId>org.apache.james</groupId>
-            <artifactId>apache-mime4j-james-utils</artifactId>
-            <version>0.8.0</version>
-        </dependency>
-
-
-
 
     </dependencies>
 
