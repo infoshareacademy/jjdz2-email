@@ -7,15 +7,14 @@ import org.slf4j.MarkerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class JBDemail {
     private static final Logger LOGGER = LoggerFactory.getLogger(JBDemail.class);
     private static final Marker MAIN_MARKER = MarkerFactory.getMarker("Main");
 
     public static void main(String[] args) throws Exception {
-        List<String> filesInStrings = new ArrayList<>();
-        List<Email> eMailKeeper = new ArrayList<>();
+        List<String> filesInStrings;
+        List<Email> eMailKeeper;
 
         DisplayPhoneNumbers displayPhoneNumbers = new DisplayPhoneNumbers();
 
