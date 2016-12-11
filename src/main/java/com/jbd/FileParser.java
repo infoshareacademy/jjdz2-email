@@ -79,6 +79,7 @@ public class FileParser {
             emails.add(e);
         }
 
+        LOGGER.info(FP_MARKER, "Found " + emails.size() + " email(s).");
         return emails;
     }
 

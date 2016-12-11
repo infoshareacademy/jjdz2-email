@@ -17,42 +17,21 @@ public class JBDemail {
         List<String> filesInStrings = new ArrayList<>();
         List<Email> eMailKeeper = new ArrayList<>();
 
-        //DisplayPhoneNumbers displayPhoneNumbers = new DisplayPhoneNumbers();
+        DisplayPhoneNumbers displayPhoneNumbers = new DisplayPhoneNumbers();
 
-        //QuestionForm askQuestionsAndQuestionForm = new QuestionForm();
-        //askQuestionsAndQuestionForm.askQuestionsAndSetAnswers();
+        QuestionForm askQuestionsAndQuestionForm = new QuestionForm();
+        askQuestionsAndQuestionForm.askQuestionsAndSetAnswers();
 
         PathGetter pG = new PathGetter();
-        //pG.createFileListFromPath(pG.askUserAboutInputPath());
+        filesInStrings = pG.createFileListFromPath(pG.askUserAboutInputPath());
         LOGGER.info(MAIN_MARKER, "Found: " + pG.getFileList().size() + " files.");
 
-
-        //temp lines
         FileParser fP = new FileParser();
-        filesInStrings.add("/home/krabczak/IdeaProjects/jjdz2-email/src/main/resources/testlist.mbox");
         eMailKeeper = fP.parseEmails(filesInStrings);
 
-        //SetLinuxLFInFile fL = new SetLinuxLFInFile();
-        //filesInStrings.addAll(pG.getFileList().stream().map(fL::RewriteFile).collect(Collectors.toList()));
+        LOGGER.info("Total emails parsed: " + eMailKeeper.size());
+        System.out.println(eMailKeeper);
 
-        //MakeEmailsFromString makeEmails = new MakeEmailsFromString();
-        //for (String s : filesInStrings) {
-        //    eMailKeeper.addAll(makeEmails.makeEmailList(s));
-        //}
-
-
-        LOGGER.info("Emails: " + eMailKeeper.size());
-
-        //System.out.println(eMailKeeper);
-
-        for (Email e : eMailKeeper) {
-           // System.out.println(e.getData());
-            System.out.println("-----------------");
-            System.out.println(e.getContent());
-        }
-
-
-        /*
         ContentmentVerification cV = new ContentmentVerification();
 
         List<String> eMailToLookFor = new ArrayList<>();
@@ -101,7 +80,6 @@ public class JBDemail {
         System.out.println("\n" + eMailKeeper.size() + "\n");
         System.out.println(eMailKeeper);
         System.out.println(eMailKeeper.get(1).getData());
-        */
 
         }
 }
