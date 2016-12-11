@@ -29,7 +29,7 @@ public class MainMenu extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private String code = "";
 
-    public void service(HttpServletRequest req, HttpServletResponse res)
+    public void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
         code = req.getParameter("code");
         System.out.println("code: " + code);
