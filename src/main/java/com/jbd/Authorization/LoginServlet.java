@@ -25,19 +25,6 @@ public class LoginServlet extends HttpServlet {
 
 
 
-//        RequestDispatcher dispatcherFB = request.getRequestDispatcher("https://www.facebook.com/v2.8/dialog/oauth?client_id={"+CLIENT_ID+"}&redirect_uri={"+REDIRECT_URI+"}");
-//        dispatcherFB.forward(request,response);
-
-
-//        sessionData.login(username,password);
-//
-//        if (sessionData.isLogged()){
-//            RequestDispatcher dispatcher =request.getRequestDispatcher("/form.jsp");
-//            dispatcher.forward(request,response);
-//        }
-
-
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

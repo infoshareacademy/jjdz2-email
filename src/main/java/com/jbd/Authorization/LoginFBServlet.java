@@ -1,5 +1,9 @@
 package com.jbd.Authorization;
 
+import com.jbd.JBDemail;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
 import java.util.Map;
 
@@ -15,7 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @WebServlet("/Main")
-public class MainMenu extends HttpServlet {
+public class LoginFBServlet extends HttpServlet {
+    private static final Logger LOGGER = LogManager.getLogger(LoginFBServlet.class);
 
     @Inject
     FBConnection fbConnection;
@@ -48,25 +53,13 @@ public class MainMenu extends HttpServlet {
         String name = fbProfileData.get("first_name");
 
         if (sessionData.isLogged()) {
-            System.out.println("Now work dispatcher");
+            
             System.out.println("SessionData: " + sessionData.getUsername() );
             req.setAttribute("name", name);
 
-            //req.getSession(false);
-            //HttpSession
-           // HttpServletResponse httpResponse = (HttpServletResponse) req;
-           // HttpServletRequest httpRequest =(HttpServletRequest) res;
-           // System.out.println("Session Data:" +req.getAttribute("sessionData"));
-            // req.setAttribute("sessionData", sessionData);
-
-
-//            RequestDispatcher dispatcher = req.getRequestDispatcher("/form.jsp");
-//            dispatcher.forward(req, res);
-//            System.out.println();
-
             res.sendRedirect("/jbdee/form.jsp");
         }
-        //req.setAttribute("results", results);
+
 
     }
 

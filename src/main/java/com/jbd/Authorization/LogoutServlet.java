@@ -22,18 +22,11 @@ public class LogoutServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("Logout dziala");
-        String name = sessionData.getUsername();
         sessionData.logout();
         HttpSession session = request.getSession(false);
         if(session != null){
             session.invalidate();
         }
-        request.setAttribute("name", name);
-       //
-       // String code = request.getParameter("code");
-       // String token = fbConnection.getAccessToken(code);
-       // RequestDispatcher dispatcher = request.getRequestDispatcher("https://www.facebook.com/logout.php?next=http://localhost:8080/jbdee/loginFB.jsp&access_token="+token);
-        //dispatcher.forward(request,response);
         response.sendRedirect("/jbdee/Bye.jsp");
 
     }

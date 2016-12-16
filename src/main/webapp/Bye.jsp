@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1>
-    Żegnaj! ${name}
+    Żegnaj!
 </h1>
 <div>
     <h2>Chcesz się zalogować ?</h2>

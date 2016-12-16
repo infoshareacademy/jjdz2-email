@@ -15,7 +15,8 @@ import javax.inject.Inject;
 
 @Stateless
 public class FBGraph {
-    @Inject MainMenu mainMenu;
+    @Inject
+    LoginFBServlet loginFBServlet;
 
     public void setAccessToken(String accessToken) {
         this.accessToken = accessToken;
