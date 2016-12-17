@@ -37,26 +37,25 @@ public class LoginFBServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
         code = req.getParameter("code");
-        System.out.println("code: " + code);
         if (code == null || code.equals("")) {
             throw new RuntimeException(
                     "ERROR: Didn't get code parameter in callback.");
         }
 
         String accessToken = fbConnection.getAccessToken(code);
+        LOGGER.info("Access token: " + accessToken);
         fbGraph.setAccessToken(accessToken);
 
         String graph = fbGraph.getFBGraph();
+        LOGGER.info("Generated FBGraph");
         Map<String, String> fbProfileData = fbGraph.getGraphData(graph);
 
         sessionData.login(code, fbProfileData.get("first_name") + " " + fbProfileData.get("last_name"));
+        LOGGER.info("Looged User: " + sessionData.getUsername());
         String name = fbProfileData.get("first_name");
 
         if (sessionData.isLogged()) {
-            
-            System.out.println("SessionData: " + sessionData.getUsername() );
             req.setAttribute("name", name);
-
             res.sendRedirect("/jbdee/form.jsp");
         }
 
