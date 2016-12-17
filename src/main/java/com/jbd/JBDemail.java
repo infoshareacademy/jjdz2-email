@@ -7,15 +7,14 @@ import org.slf4j.MarkerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class JBDemail {
     private static final Logger LOGGER = LoggerFactory.getLogger(JBDemail.class);
     private static final Marker MAIN_MARKER = MarkerFactory.getMarker("Main");
 
-    public static void main(String[] args) {
-        List<String> filesInStrings = new ArrayList<>();
-        List<Email> eMailKeeper = new ArrayList<>();
+    public static void main(String[] args) throws Exception {
+        List<String> filesInStrings;
+        List<Email> eMailKeeper;
 
         DisplayPhoneNumbers displayPhoneNumbers = new DisplayPhoneNumbers();
 
@@ -23,16 +22,14 @@ public class JBDemail {
         questionForm.searchCriteriaForm();
 
         PathGetter pG = new PathGetter();
-        pG.createFileListFromPath(pG.askUserAboutInputPath());
+        filesInStrings = pG.createFileListFromPath(pG.askUserAboutInputPath());
         LOGGER.info(MAIN_MARKER, "Found: " + pG.getFileList().size() + " files.");
 
-        FileLoad fL = new FileLoad();
-        filesInStrings.addAll(pG.getFileList().stream().map(fL::fileLoad).collect(Collectors.toList()));
+        FileParser fP = new FileParser();
+        eMailKeeper = fP.parseEmails(filesInStrings);
 
-        MakeEmailsFromString makeEmails = new MakeEmailsFromString();
-        for (String s : filesInStrings) {
-            eMailKeeper.addAll(makeEmails.makeEmailList(s));
-        }
+        LOGGER.info("Total emails parsed: " + eMailKeeper.size());
+        System.out.println(eMailKeeper);
 
         ContentmentVerification cV = new ContentmentVerification();
 
@@ -83,5 +80,5 @@ public class JBDemail {
         System.out.println(eMailKeeper);
         System.out.println(eMailKeeper.get(1).getData());
 
-    }
+        }
 }
