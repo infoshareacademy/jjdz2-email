@@ -51,7 +51,7 @@ public class LoginFBServlet extends HttpServlet {
         Map<String, String> fbProfileData = fbGraph.getGraphData(graph);
 
         sessionData.login(code, fbProfileData.get("first_name") + " " + fbProfileData.get("last_name"));
-        LOGGER.info("Looged User: " + sessionData.getUsername());
+        LOGGER.info("Logged User: " + sessionData.getUsername());
         String name = fbProfileData.get("first_name");
 
         if (sessionData.isLogged()) {

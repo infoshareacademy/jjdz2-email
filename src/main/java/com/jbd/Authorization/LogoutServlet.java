@@ -1,5 +1,8 @@
 package com.jbd.Authorization;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,6 +17,7 @@ import java.io.IOException;
 
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
+    private static final Logger LOGGER = LogManager.getLogger(LogoutServlet.class);
     @Inject
     SessionData sessionData;
 
@@ -21,12 +25,15 @@ public class LogoutServlet extends HttpServlet {
     FBConnection fbConnection;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("Logout dziala");
         sessionData.logout();
         HttpSession session = request.getSession(false);
         if(session != null){
             session.invalidate();
+            LOGGER.info("User has been logout");
         }
+        else
+            LOGGER.info("No active session!");
+
         response.sendRedirect("/jbdee/Bye.jsp");
 
     }

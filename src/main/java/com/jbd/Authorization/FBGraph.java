@@ -50,7 +50,6 @@ public class FBGraph {
             }
             in.close();
             graph = b.toString();
-            System.out.println("getFBGraph: " + graph);
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("ERROR in getting FB graph data. " + e);

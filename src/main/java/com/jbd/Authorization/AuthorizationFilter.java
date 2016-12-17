@@ -1,5 +1,8 @@
 package com.jbd.Authorization;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.inject.Inject;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -11,13 +14,14 @@ import java.io.IOException;
 
 @WebFilter(urlPatterns = {"/form.jsp"})
 public class AuthorizationFilter implements Filter {
+    private static final Logger LOGGER = LogManager.getLogger(SessionData.class);
 
     @Inject SessionData sessionData;
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         if(!sessionData.isLogged()){
-
+            LOGGER.info("User is not Logged");
             //HttpServletRequest request = (HttpServletRequest) servletRequest;
             ((HttpServletResponse) servletResponse).sendRedirect("/jbdee/LoginFB.jsp");//?referrer=" + request.getRequestURI());
             return;

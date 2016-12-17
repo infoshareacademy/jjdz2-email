@@ -1,5 +1,8 @@
 package com.jbd.Authorization;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.ejb.Stateless;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,6 +16,7 @@ import java.net.URLEncoder;
 
 @Stateless
 public class FBConnection {
+    private static final Logger LOGGER = LogManager.getLogger(FBConnection.class);
     public static final String FB_APP_ID = "1783631111890477";
     public static final String FB_APP_SECRET = "3fa1e9b96990c6591c43196353bbde70";
     public static final String REDIRECT_URI = "http://localhost:8080/jbdee/Main";
@@ -80,7 +84,7 @@ public class FBConnection {
                         + accessToken);
             }
         }
-        System.out.println("Returned access token: " + accessToken);
+        //LOGGER.info("Returned access token: " + accessToken);
         return accessToken;
     }
 }
