@@ -43,7 +43,7 @@ public class SessionData implements Serializable {
             this.username = username;
             this.code = code;
             //this.loginTime = loginTime;
-            LOGGER.info("Log in successful for: " + getUsername());
+            LOGGER.info("Login successful");
         }
         else {
             LOGGER.error("Login Failed!");
@@ -55,7 +55,7 @@ public class SessionData implements Serializable {
         this.isLogged = false;
         this.username = "";
         this.code = null;
-        LOGGER.info("Logout successful");
+        LOGGER.info("Logout Successful");
 
     }
 

@@ -14,14 +14,14 @@ import java.io.IOException;
 
 @WebFilter(urlPatterns = {"/form.jsp"})
 public class AuthorizationFilter implements Filter {
-    private static final Logger LOGGER = LogManager.getLogger(SessionData.class);
+    private static final Logger LOGGER = LogManager.getLogger(AuthorizationFilter.class);
 
     @Inject SessionData sessionData;
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         if(!sessionData.isLogged()){
-            LOGGER.info("User is not Logged");
+            LOGGER.info("User is not Logged to access this page");
             //HttpServletRequest request = (HttpServletRequest) servletRequest;
             ((HttpServletResponse) servletResponse).sendRedirect("/jbdee/LoginFB.jsp");//?referrer=" + request.getRequestURI());
             return;

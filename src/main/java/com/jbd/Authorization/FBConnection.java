@@ -19,7 +19,7 @@ public class FBConnection {
     private static final Logger LOGGER = LogManager.getLogger(FBConnection.class);
     public static final String FB_APP_ID = "1783631111890477";
     public static final String FB_APP_SECRET = "3fa1e9b96990c6591c43196353bbde70";
-    public static final String REDIRECT_URI = "http://localhost:8080/jbdee/Main";
+    public static final String REDIRECT_URI = "http://localhost:8080/jbdee/LoginFBServlet";
 
     static String accessToken = "";
 
@@ -30,7 +30,7 @@ public class FBConnection {
                     + FBConnection.FB_APP_ID + "&redirect_uri="
                     + URLEncoder.encode(FBConnection.REDIRECT_URI, "UTF-8")
                     + "&scope=email";
-        } catch (UnsupportedEncodingException e) {
+            } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         return fbLoginUrl;

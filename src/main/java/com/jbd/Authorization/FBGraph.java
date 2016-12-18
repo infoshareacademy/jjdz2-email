@@ -62,7 +62,7 @@ public class FBGraph {
         Map<String, String> fbProfile = new HashMap<String, String>();
         try {
             JSONObject json = new JSONObject(fbGraph);
-            LOGGER.info("JSON created " + json.toString());
+            LOGGER.debug("JSON created " + json.toString());
             fbProfile.put("id", json.getString("id"));
             fbProfile.put("first_name", json.getString("first_name"));
             fbProfile.put("last_name", json.getString("last_name"));

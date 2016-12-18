@@ -1,6 +1,5 @@
 <%@page import="com.jbd.Authorization.FBConnection"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
     FBConnection fbConnection = new FBConnection();
 %>
@@ -11,9 +10,9 @@
     <title>Java Facebook Login</title>
 </head>
 <body style="text-align: center; margin: 0 auto;">
-<div style="margin: 0 auto; height: 12px; width: 20px;">
+<div style="height: 12px; width: 20px;">
     <a href="<%=fbConnection.getFBAuthUrl()%>"> <img
-            style="margin-top: 38px; left: 10px; height: 72px; width: 120px" src="http://www.adweek.com/socialtimes/wp-content/uploads/sites/2/2013/10/FBloginbutton.png" />
+            style="margin-top: 38px; left: 10px; height: 72px; width: 240px" src="http://www.adweek.com/socialtimes/wp-content/uploads/sites/2/2013/10/FBloginbutton.png" />
     </a>
 
 

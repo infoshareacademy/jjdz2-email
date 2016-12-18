@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/Main")
+@WebServlet("/LoginFBServlet")
 public class LoginFBServlet extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(LoginFBServlet.class);
 
@@ -36,14 +36,16 @@ public class LoginFBServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
+        LOGGER.info("Trying to log in to FB");
         code = req.getParameter("code");
         if (code == null || code.equals("")) {
             throw new RuntimeException(
                     "ERROR: Didn't get code parameter in callback.");
         }
+        LOGGER.info("Logging in FB has been successful");
 
         String accessToken = fbConnection.getAccessToken(code);
-        LOGGER.info("Access token: " + accessToken);
+        LOGGER.debug("Access token: " + accessToken);
         fbGraph.setAccessToken(accessToken);
 
         String graph = fbGraph.getFBGraph();
