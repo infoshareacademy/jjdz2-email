@@ -36,13 +36,13 @@ public class JBDemail {
 
         while (quit == 0) {
             if (answer == 0) {
-                LOGGER.info(MAIN_MARKER,"Requirements not met. Search questions not set.");
+                LOGGER.info(MAIN_MARKER,"Search questions not set.");
                 System.out.println("----------\n" +
                         "Search questions not set\n" +
                         "----------");
             }
             if (path == 0) {
-                LOGGER.info(MAIN_MARKER,"Requirements not met. Files path not set.");
+                LOGGER.info(MAIN_MARKER,"Files path not set.");
                 System.out.println("----------\n" +
                         "Files path not set - emails not parsed\n" +
                         "----------");
