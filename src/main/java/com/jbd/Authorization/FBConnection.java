@@ -84,7 +84,7 @@ public class FBConnection {
                         + accessToken);
             }
         }
-        //LOGGER.info("Returned access token: " + accessToken);
+
         return accessToken;
     }
 }

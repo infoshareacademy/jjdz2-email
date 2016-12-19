@@ -25,16 +25,8 @@ public class SessionData implements Serializable {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public LocalDate getLoginTime() {
         return loginTime;
-    }
-
-    public void setLoginTime(LocalDate loginTime) {
-        this.loginTime = loginTime;
     }
 
     public void login(String code,String username) {
@@ -42,7 +34,7 @@ public class SessionData implements Serializable {
             this.isLogged = true;
             this.username = username;
             this.code = code;
-            //this.loginTime = loginTime;
+            this.loginTime = LocalDate.now();
             LOGGER.info("Login successful");
         }
         else {

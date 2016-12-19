@@ -22,8 +22,7 @@ public class AuthorizationFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         if(!sessionData.isLogged()){
             LOGGER.info("User is not Logged to access this page");
-            //HttpServletRequest request = (HttpServletRequest) servletRequest;
-            ((HttpServletResponse) servletResponse).sendRedirect("/jbdee/LoginFB.jsp");//?referrer=" + request.getRequestURI());
+            ((HttpServletResponse) servletResponse).sendRedirect("/jbdee/LoginFB.jsp");
             return;
         }
 
