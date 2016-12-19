@@ -58,7 +58,7 @@ public class LoginFBServlet extends HttpServlet {
 
         if (sessionData.isLogged()) {
             req.setAttribute("name", name);
-            res.sendRedirect("/jbdee/form.jsp");
+            res.sendRedirect("/jbdee/App/form.jsp");
         }
 
 
