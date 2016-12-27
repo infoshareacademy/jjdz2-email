@@ -1,5 +1,6 @@
 package com.jbd.Authorization;
 
+import com.jbd.DBA.SaveUser;
 import com.jbd.JBDemail;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,6 +32,9 @@ public class LoginFBServlet extends HttpServlet {
     @Inject
     SessionData sessionData;
 
+    @Inject
+    SaveUser saveUser;
+
     private static final long serialVersionUID = 1L;
     private String code = "";
 
@@ -52,8 +56,31 @@ public class LoginFBServlet extends HttpServlet {
         LOGGER.info("Generated FBGraph");
         Map<String, String> fbProfileData = fbGraph.getGraphData(graph);
 
-        sessionData.login(code, fbProfileData.get("first_name") + " " + fbProfileData.get("last_name"));
+        sessionData.login(code, fbProfileData.get("first_name") + " " + fbProfileData.get("last_name"), fbProfileData.get("email"));
         LOGGER.info("Logged User: " + sessionData.getUsername());
+        LOGGER.debug("Session data :" + sessionData);
+        SessionData userFromDatabase = new SessionData();
+
+        SessionData user = new SessionData();
+        SessionData user2 = new SessionData();
+        user.setUsername(sessionData.getUsername());
+        user.setCode(sessionData.getCode());
+        user.setLogged(sessionData.isLogged());
+        user.setUsermail(sessionData.getUsermail());
+        user.setLoginTime(sessionData.getLoginTime());
+        user.setPrivilege(sessionData.getPrivilege());
+        saveUser.saveUser(user);
+
+        userFromDatabase = saveUser.getUser(1L);
+        if(userFromDatabase.getUsername().equals("Marcin Bartoszek")){
+            user2.setPrivilege("Admin");
+        }
+        user2.setUsername(sessionData.getUsername());
+        user2.setCode(sessionData.getCode());
+        user2.setLogged(sessionData.isLogged());
+        user2.setUsermail(sessionData.getUsermail());
+        user2.setLoginTime(sessionData.getLoginTime());
+        saveUser.saveUser(user2);
         String name = fbProfileData.get("first_name");
 
         if (sessionData.isLogged()) {
