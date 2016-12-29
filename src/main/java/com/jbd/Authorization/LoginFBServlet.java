@@ -37,7 +37,7 @@ public class LoginFBServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     private String code = "";
-
+    private SessionData userFromDatabase;
     public void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
         LOGGER.info("Trying to log in to FB");
@@ -59,27 +59,18 @@ public class LoginFBServlet extends HttpServlet {
         sessionData.login(code, fbProfileData.get("first_name") + " " + fbProfileData.get("last_name"), fbProfileData.get("email"));
         LOGGER.info("Logged User: " + sessionData.getUsername());
         LOGGER.debug("Session data :" + sessionData);
-        SessionData userFromDatabase = new SessionData();
+
+
 
         SessionData user = new SessionData();
-        SessionData user2 = new SessionData();
-        user.setUsername(sessionData.getUsername());
-        user.setCode(sessionData.getCode());
-        user.setLogged(sessionData.isLogged());
-        user.setUsermail(sessionData.getUsermail());
-        user.setLoginTime(sessionData.getLoginTime());
-        user.setPrivilege(sessionData.getPrivilege());
-        saveUser.saveUser(user);
+        user = prepareUser(sessionData,user, userFromDatabase);
 
+        saveUser.saveUser(user);
         userFromDatabase = saveUser.getUser(1L);
-        if(userFromDatabase.getUsername().equals("Marcin Bartoszek")){
-            user2.setPrivilege("Admin");
-        }
-        user2.setUsername(sessionData.getUsername());
-        user2.setCode(sessionData.getCode());
-        user2.setLogged(sessionData.isLogged());
-        user2.setUsermail(sessionData.getUsermail());
-        user2.setLoginTime(sessionData.getLoginTime());
+
+        SessionData user2 = new SessionData();
+        user2 = prepareUser(sessionData,user2, userFromDatabase);
+
         saveUser.saveUser(user2);
         String name = fbProfileData.get("first_name");
 
@@ -91,5 +82,21 @@ public class LoginFBServlet extends HttpServlet {
 
     }
 
+    public SessionData prepareUser(SessionData sessionData, SessionData user, SessionData userFromDatabase){
+        user.setUsername(sessionData.getUsername());
+        user.setCode(sessionData.getCode());
+        user.setLogged(sessionData.isLogged());
+        user.setUsermail(sessionData.getUsermail());
+        user.setLoginTime(sessionData.getLoginTime());
+        user.setPrivilege(sessionData.getPrivilege());
+        if(userFromDatabase != null) {
+            if (userFromDatabase.getUsername().equals("Marcin Bartoszek")) {
+                user.setPrivilege("Admin");
+            }
+        }
+        return user;
+    }
 }
+
+
 

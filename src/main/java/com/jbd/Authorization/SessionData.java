@@ -1,22 +1,19 @@
 package com.jbd.Authorization;
 
-import com.jbd.Privilege;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.enterprise.context.SessionScoped;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 
 
-//@Converter(autoApply = true)
+
 @SessionScoped
 @Entity
 @Table(name = "User")
+@NamedQuery(name = "SessionData.findAll", query = "select p FROM SessionData p")
 public class SessionData implements Serializable {
     private static final Logger LOGGER = LogManager.getLogger(SessionData.class);
 
