@@ -46,13 +46,10 @@ public class UpdateUsers extends HttpServlet {
             String previlige = user.getPrivilege();
             if (previlige.equals("Admin")) {
                 user.setPrivilege("local");
-                //previlige = "local";
             }
             else {
                 user.setPrivilege("Admin");
-               // previlige = "Admin";
             }
-            //previlige.equals("Admin")?previlige="local":previlige="Admin";
             saveUser.updateUser(user);
         }
 
