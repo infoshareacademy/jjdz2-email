@@ -21,11 +21,13 @@ public class SessionData implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Transient
     private boolean isLogged = false;
     private String username;
     private String usermail;
     private String privilege;
     //private Privilege privilege;
+    @Transient
     private LocalDateTime loginTime;
     @Transient
     private String code = null;
@@ -90,14 +92,22 @@ public class SessionData implements Serializable {
         this.privilege = privilege;
     }
 
-    public void login(String code, String username, String usermail) {
+    public void login(String code, String username, String usermail, String privilege) {
         if(!code.equals("")){
             this.isLogged = true;
             this.username = username;
             this.usermail = usermail;
             this.code = code;
             this.loginTime = LocalDateTime.now();
-            this.privilege = "local";
+            if(privilege.equals(null)){
+                this.privilege = "local";
+            }
+            else if(privilege.equals("local")){
+                this.privilege = privilege;
+            }
+            else
+                this.privilege = privilege;
+
             LOGGER.info("Login successful");
         }
         else {
@@ -118,12 +128,13 @@ public class SessionData implements Serializable {
     @Override
     public String toString() {
         return "SessionData{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", isLogged=" + isLogged +
                 ", username='" + username + '\'' +
                 ", usermail='" + usermail + '\'' +
+                ", privilege='" + privilege + '\'' +
+                ", loginTime=" + loginTime +
                 ", code='" + code + '\'' +
                 '}';
     }
-
 }

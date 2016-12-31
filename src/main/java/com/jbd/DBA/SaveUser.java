@@ -3,7 +3,6 @@ package com.jbd.DBA;
 
 import com.jbd.Authorization.SessionData;
 
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,7 +19,8 @@ public class SaveUser implements Serializable {
     EntityManager entityManager;
 
     @Transactional
-    public void saveUser(SessionData sessionData){
+    public void saveUser(SessionData sessionData)
+    {
         entityManager.persist(sessionData);
     }
 
@@ -35,6 +35,10 @@ public class SaveUser implements Serializable {
         userList = query.getResultList();
         System.out.println(userList);
         return userList;
+    }
+    @Transactional
+    public void updateUser(SessionData user){
+        entityManager.merge(user);
     }
 
 
