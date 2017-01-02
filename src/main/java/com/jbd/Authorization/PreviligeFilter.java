@@ -21,7 +21,7 @@ import java.io.IOException;
         import java.io.IOException;
 
 
-@WebFilter(urlPatterns = {"/App/Admin*"})
+@WebFilter(urlPatterns = {"/App/AdminConsole.jsp"})
 public class PreviligeFilter implements Filter {
     private static final Logger LOGGER = LogManager.getLogger(AuthorizationFilter.class);
 
@@ -31,8 +31,8 @@ public class PreviligeFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         if(sessionData.getPrivilege().equals("local")){
-            LOGGER.info("User is not previliged to access this page");
-            ((HttpServletResponse) servletResponse).sendRedirect("/jbdee/App/form/jsp");
+            LOGGER.info("User is not previliged to access this page - user previlige:  " + sessionData.getPrivilege());
+            ((HttpServletResponse) servletResponse).sendRedirect("/jbdee/App/form.jsp");
             return;
         }
 
