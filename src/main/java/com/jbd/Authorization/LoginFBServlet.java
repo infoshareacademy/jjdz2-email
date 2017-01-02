@@ -1,6 +1,6 @@
 package com.jbd.Authorization;
 
-import com.jbd.DBA.SaveUser;
+import com.jbd.DBA.ManageUser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,7 +29,7 @@ public class LoginFBServlet extends HttpServlet {
     SessionData sessionData;
 
     @Inject
-    SaveUser saveUser;
+    ManageUser manageUser;
 
     private static final long serialVersionUID = 1L;
     private String code = "";
@@ -59,9 +59,9 @@ public class LoginFBServlet extends HttpServlet {
         adminUser.setUsermail("marbar1812@gmail.com");
         adminUser.setUsername("Marcin Bartoszek");
         adminUser.setPrivilege("Admin");
-        saveUser.saveUser(adminUser);
+        manageUser.saveUser(adminUser);
 
-        usersFromDatabase = saveUser.searchForAll();
+        usersFromDatabase = manageUser.searchForAll();
         for (SessionData user:usersFromDatabase) {
             String userName = fbProfileData.get("first_name") + " " + fbProfileData.get("last_name");
             if (user.getUsername().equals(userName) && user.getUsermail().equals(fbProfileData.get("email"))){
@@ -84,7 +84,7 @@ public class LoginFBServlet extends HttpServlet {
             String userMail = fbProfileData.get("email");
             SessionData sessionData = new SessionData();
             sessionData = createUserToDB(userName, userMail,privilege);
-            saveUser.saveUser(sessionData);
+            manageUser.saveUser(sessionData);
         }
         LOGGER.info("Logged User: " + sessionData.getUsername());
         LOGGER.debug("Session data :" + sessionData);
@@ -98,8 +98,8 @@ public class LoginFBServlet extends HttpServlet {
         user3.setLoginTime(sessionData.getLoginTime());
         user3.setPrivilege("local");
 
-        //saveUser.saveUser(user2);
-        saveUser.saveUser(user3);
+        //manageUser.manageUser(user2);
+        manageUser.saveUser(user3);
         String name = fbProfileData.get("first_name");
 
         if (sessionData.isLogged()) {
