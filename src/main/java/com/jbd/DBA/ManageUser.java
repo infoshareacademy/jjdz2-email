@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SessionScoped
-public class SaveUser implements Serializable {
+public class ManageUser implements Serializable {
 
     @PersistenceContext
     EntityManager entityManager;
