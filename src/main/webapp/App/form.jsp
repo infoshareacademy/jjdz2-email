@@ -11,9 +11,12 @@
 <div>
 
     <p>Welcome! ${sessionData.username} </p> <button onclick="Logout()">Logout From FB</button>
-
+    <a href="/jbdee/App/logout">End Session</a>
 </div>
 <%--</c:if>--%>
+
+<c:if test="${sessionData.privilege=='Admin'}">
+<h2>Content Only for Administrators!<h2></c:if>
 
 <p>form:</p>
 <div>
