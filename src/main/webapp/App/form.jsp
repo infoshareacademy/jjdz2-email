@@ -13,11 +13,10 @@
     <p>Welcome! ${sessionData.username} </p>
     <button onclick="Logout()">Logout From FB</button>
 </div>
-<%--</c:if>--%>
+
 
 <c:if test="${sessionData.privilege=='Admin'}">
-<h2>Content Only for Administrators!
-    <h2></c:if>
+<h2>Content Only for Administrators!<\h2></c:if>
 
         <p>form:</p>
         <div>
