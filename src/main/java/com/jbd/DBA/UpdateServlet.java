@@ -1,6 +1,8 @@
 package com.jbd.DBA;
 
 import com.jbd.Authorization.SessionData;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -14,6 +16,7 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = "/App/update")
 public class UpdateServlet extends HttpServlet {
+    private static final Logger LOGGER = LogManager.getLogger(UpdateServlet.class);
 
     @Inject
     ManageUser manageUser;
@@ -26,27 +29,26 @@ public class UpdateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        String[] isPreviliged = req.getParameterValues("isPreviliged");
-        System.out.println("Previliged " + isPreviliged.toString());
-        for (String a:isPreviliged) {
-            System.out.println(a);
-        }
-        for (int i =0; i < isPreviliged.length; i++) {
-            SessionData user = manageUser.getUser(Long.parseLong(isPreviliged[i]));
-            String previlige = user.getPrivilege();
-            if (previlige.equals("Admin")) {
-                user.setPrivilege("local");
+        String[] isPrivileged = req.getParameterValues("isPrivileged");
+        if (isPrivileged.length != 0) {
+            System.out.println("Privileged " + isPrivileged.toString());
+            for (int i = 0; i < isPrivileged.length; i++) {
+                SessionData user = manageUser.getUser(Long.parseLong(isPrivileged[i]));
+                String privileged = user.getPrivilege();
+                if (privileged.equals("Admin")) {
+                    user.setPrivilege("local");
+                    LOGGER.info("Set privilege to: local");
+                } else {
+                    user.setPrivilege("Admin");
+                    LOGGER.info("Set privilege to: Admin");
+                }
+                manageUser.updateUser(user);
             }
-            else {
-                user.setPrivilege("Admin");
-            }
-            manageUser.updateUser(user);
         }
+        LOGGER.info("No parameters in request");
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/App/AdminConsole.jsp");
         dispatcher.forward(req, resp);
-
-
 
 
     }

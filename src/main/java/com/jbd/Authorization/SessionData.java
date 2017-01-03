@@ -26,8 +26,7 @@ public class SessionData implements Serializable {
     private String username;
     private String usermail;
     private String privilege;
-    //private Privilege privilege;
-    @Transient
+   @Transient
     private LocalDateTime loginTime;
     @Transient
     private String code = null;
@@ -107,12 +106,8 @@ public class SessionData implements Serializable {
             }
             else
                 this.privilege = privilege;
+        }
 
-            LOGGER.info("Login successful");
-        }
-        else {
-            LOGGER.error("Login Failed!");
-        }
 
     }
 

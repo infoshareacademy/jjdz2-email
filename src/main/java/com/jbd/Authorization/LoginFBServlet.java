@@ -35,6 +35,7 @@ public class LoginFBServlet extends HttpServlet {
     private String code = "";
     private SessionData userFromDatabase;
     private List<SessionData> usersFromDatabase;
+    private int counter = 0;
     String privilege = "local";
     private boolean isNotInDB;
     public void doGet(HttpServletRequest req, HttpServletResponse res)
@@ -55,12 +56,15 @@ public class LoginFBServlet extends HttpServlet {
         LOGGER.info("Generated FBGraph");
         Map<String, String> fbProfileData = fbGraph.getGraphData(graph);
 
-        SessionData adminUser = new SessionData();
-        adminUser.setUsermail("marbar1812@gmail.com");
-        adminUser.setUsername("Marcin Bartoszek");
-        adminUser.setPrivilege("Admin");
-        manageUser.saveUser(adminUser);
-
+        if(counter == 0) {
+            SessionData adminUser = new SessionData();
+            adminUser.setUsermail("marbar1812@gmail.com");
+            adminUser.setUsername("Marcin Bartoszek");
+            adminUser.setPrivilege("Admin");
+            manageUser.saveUser(adminUser);
+            LOGGER.info("Added admin user");
+            counter +=1;
+        }
         usersFromDatabase = manageUser.searchForAll();
         for (SessionData user:usersFromDatabase) {
             String userName = fbProfileData.get("first_name") + " " + fbProfileData.get("last_name");
@@ -80,26 +84,17 @@ public class LoginFBServlet extends HttpServlet {
 
         sessionData.login(code, fbProfileData.get("first_name") + " " + fbProfileData.get("last_name"), fbProfileData.get("email"), privilege);
         if(isNotInDB){
+            LOGGER.info("User is not in DB! Adding...");
             String userName = fbProfileData.get("first_name") + " " + fbProfileData.get("last_name");
             String userMail = fbProfileData.get("email");
             SessionData sessionData = new SessionData();
             sessionData = createUserToDB(userName, userMail,privilege);
             manageUser.saveUser(sessionData);
+            LOGGER.info("Added succesfully- " + sessionData.getUsername());
         }
         LOGGER.info("Logged User: " + sessionData.getUsername());
         LOGGER.debug("Session data :" + sessionData);
 
-
-        SessionData user3 = new SessionData();
-        user3.setUsername("Karolina Badziak");
-        user3.setCode(null);
-        user3.setLogged(true);
-        user3.setUsermail("Karolina");
-        user3.setLoginTime(sessionData.getLoginTime());
-        user3.setPrivilege("local");
-
-        //manageUser.manageUser(user2);
-        manageUser.saveUser(user3);
         String name = fbProfileData.get("first_name");
 
         if (sessionData.isLogged()) {

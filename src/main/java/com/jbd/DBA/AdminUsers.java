@@ -31,8 +31,6 @@ public class AdminUsers extends HttpServlet {
 
         List<SessionData> userList = new ArrayList<>();
         userList = manageUser.searchForAll();
-        System.out.println(userList);
-
 
         req.setAttribute("userList", userList);
         RequestDispatcher dispatcher = req.getRequestDispatcher("/App/AdminConsole.jsp");

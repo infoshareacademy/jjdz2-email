@@ -7,28 +7,25 @@
 <body>
 <script type="text/javascript" src="LogoutFB.js">
 </script>
-<h1>Witaj!</h1>
-<p>Dodaj lub usuń listę administratorów</p>
+<h1>Welcome</h1>
+<p>Add new admins or edit existing one</p>
 <p>Welcome! ${sessionData.username} </p>
 <button onclick="Logout()">Logout From FB</button>
 
 </body>
 <div>
     <form method="post" action="search">
-        <input type="submit" value="Search">
-        keywords: <input type="text" name="keywords"> <br/>
+        <button onclick="location.href=search">SearchButton</button>
     </form>
-    <p>Chceck box to make </p>
+    <p>Add new admin or edit exisitng one </p>
     <form method="post" action="update">
         <ul>
             <c:forEach items="${userList}" var="user">
-                <li> ${user.id} . ${user.username} - ${user.privilege}<input type="checkbox" name="isPreviliged"
+                <li> ${user.id} . ${user.username} - ${user.privilege}<input type="checkbox" name="isPrivileged"
                                                                              value=${user.id}></li>
             </c:forEach>
             <input type="submit" value="Update">
-            keywords: <input type="text" name="keywords"> <br/>
         </ul
     </form>
-    <p>${userList}</p>
 </div>
 </html>
