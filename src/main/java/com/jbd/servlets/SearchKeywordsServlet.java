@@ -1,5 +1,8 @@
 package com.jbd.servlets;
 
+import com.jbd.DBA.Form;
+import com.jbd.DBA.Form_Details;
+import com.jbd.DBA.ManageUser;
 import com.jbd.KeywordsFinder.Keywords;
 import com.jbd.KeywordsFinder.KeywordsQuestionsMap;
 import org.slf4j.Logger;
@@ -8,6 +11,7 @@ import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +19,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.jbd.KeywordsFinder.KeywordsQuestionsMap.QUESTION;
 
@@ -23,11 +30,15 @@ public class SearchKeywordsServlet extends HttpServlet {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SearchKeywordsServlet.class);
     private static final Marker MARKER = MarkerFactory.getMarker("SearchKeywordsServlet");
+    private int counter = 1;
 
     @EJB
     Keywords keywords;
     @EJB
     KeywordsQuestionsMap keywordsQuestionsMap;
+    @Inject
+    ManageUser manageUser;
+
 
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws IOException {
 
@@ -50,7 +61,6 @@ public class SearchKeywordsServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse response) {
-
         System.out.println("q0: "+ req.getParameter("q0"));
         System.out.println("q1: "+ req.getParameter("q1"));
         System.out.println("q2: "+ req.getParameter("q2"));
@@ -79,6 +89,31 @@ public class SearchKeywordsServlet extends HttpServlet {
         req.setAttribute("questions", keywordsQuestionsMap.getQuestionsMap());
         LOGGER.info(MARKER, "Set JSP attribute \"questions\" with keywords questionnaire.");
 
+        if(req.getParameter("q0") != null && req.getParameter("q1") != null &&req.getParameter("q2")!= null &&req.getParameter("q2") != null) {
+       //For save to DB
+        System.out.println("QUESTION NAME----------- " + keywords.getQuestionName());
+        Form form = new Form();
+        String name = "Question Form "+ counter;
+        form.setName(name);
+        form.setCreationTime(LocalDateTime.now());
+        manageUser.saveForm(form);
+        counter++;
+
+            //Connecting details with form
+            Form forConnectingWithDetails = new Form();
+            forConnectingWithDetails = manageUser.getFormByName(name);
+            System.out.println(forConnectingWithDetails);
+            List<String> questions = keywords.getQuestionName();
+
+            for (int i = 0; i < keywords.getQuestionName().size(); i++) {
+                Form_Details form_details = new Form_Details();
+                form_details.setQuestion(questions.get(i));
+                form_details.setResponse(req.getParameter("q" + i));
+                form_details.setForm(forConnectingWithDetails);
+                manageUser.saveFormDetails(form_details);
+
+            }
+        }
         RequestDispatcher dispatcher = req.getRequestDispatcher("/keywords.jsp");
         LOGGER.info(MARKER, "Dispatcher to keywords.jsp");
         try {
