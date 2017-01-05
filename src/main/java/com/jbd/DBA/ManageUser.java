@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.enterprise.context.SessionScoped;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
@@ -50,6 +51,32 @@ public class ManageUser implements Serializable {
         entityManager.merge(user);
         LOGGER.info("Updated user: " + user.toString());
     }
+
+    @Transactional
+    public void saveForm(Form nameForm){
+        entityManager.persist(nameForm);
+    }
+
+    public Form getFormByName(String name){
+        TypedQuery<Form> query = entityManager.createNamedQuery("Form.findByName", Form.class);
+        query.setParameter("name",name);
+        Form form = query.getSingleResult();
+        LOGGER.info("Pobralem dane na temat użytkownika: " + form.getName());
+        return form;
+    }
+
+    @Transactional
+    public void saveFormDetails(Form_Details form_details){
+        entityManager.persist(form_details);
+    }
+
+    public Form_Details getFormDetails(Long id){
+        Form_Details form_details = entityManager.find(Form_Details.class, id);
+        return form_details;
+    }
+
+
+
 
 
 }
