@@ -55,23 +55,26 @@ public class ManageUser implements Serializable {
     @Transactional
     public void saveForm(Form nameForm){
         entityManager.persist(nameForm);
+        LOGGER.info("Save form to DB successfully!");
     }
 
     public Form getFormByName(String name){
         TypedQuery<Form> query = entityManager.createNamedQuery("Form.findByName", Form.class);
         query.setParameter("name",name);
         Form form = query.getSingleResult();
-        LOGGER.info("Pobralem dane na temat użytkownika: " + form.getName());
+        LOGGER.info("Found user by name: " + form.getName());
         return form;
     }
 
     @Transactional
     public void saveFormDetails(Form_Details form_details){
         entityManager.persist(form_details);
+        LOGGER.info("Save form_details to DB successfully!");
     }
 
     public Form_Details getFormDetails(Long id){
         Form_Details form_details = entityManager.find(Form_Details.class, id);
+        LOGGER.info("Collected data form_details");
         return form_details;
     }
 

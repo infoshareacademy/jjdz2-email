@@ -61,11 +61,11 @@ public class SearchKeywordsServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse response) {
-        System.out.println("q0: "+ req.getParameter("q0"));
-        System.out.println("q1: "+ req.getParameter("q1"));
-        System.out.println("q2: "+ req.getParameter("q2"));
-        System.out.println("q3: "+ req.getParameter("q3"));
-        System.out.println("qqqqqq5!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!: "+ req.getParameter("qq5"));
+        System.out.println("q0: " + req.getParameter("q0"));
+        System.out.println("q1: " + req.getParameter("q1"));
+        System.out.println("q2: " + req.getParameter("q2"));
+        System.out.println("q3: " + req.getParameter("q3"));
+        System.out.println("qqqqqq5!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!: " + req.getParameter("qq5"));
 
         for (int questionIndex = 0;
              questionIndex < keywordsQuestionsMap.getQuestionsMap().size(); questionIndex++) {
@@ -79,7 +79,7 @@ public class SearchKeywordsServlet extends HttpServlet {
             LOGGER.info(MARKER, "Noted user response: " + answer);
         }
 
-        if(keywords.createKeywordsSet().size()<1) {
+        if (keywords.createKeywordsSet().size() < 1) {
             req.setAttribute("keywordsMsg", "No keywords found.");
         } else {
             req.setAttribute("keywordsMsg", "Keyword matching your criteria:");
@@ -89,31 +89,32 @@ public class SearchKeywordsServlet extends HttpServlet {
         req.setAttribute("questions", keywordsQuestionsMap.getQuestionsMap());
         LOGGER.info(MARKER, "Set JSP attribute \"questions\" with keywords questionnaire.");
 
-        if(req.getParameter("q0") != null && req.getParameter("q1") != null &&req.getParameter("q2")!= null &&req.getParameter("q2") != null) {
-       //For save to DB
-        System.out.println("QUESTION NAME----------- " + keywords.getQuestionName());
-        Form form = new Form();
-        String name = "Question Form "+ counter;
-        form.setName(name);
-        form.setCreationTime(LocalDateTime.now());
-        manageUser.saveForm(form);
-        counter++;
+        if (req.getParameter("q0") != null && req.getParameter("q1") != null && req.getParameter("q2") != null && req.getParameter("q2") != null) {
+            //For save to DB
+            Form form = new Form();
+            String name = "Question Form " + counter;
+            form.setName(name);
+            form.setCreationTime(LocalDateTime.now());
+            LOGGER.info("Created new form: " + form.getName());
+            manageUser.saveForm(form);
+            counter++;
 
             //Connecting details with form
             Form forConnectingWithDetails = new Form();
             forConnectingWithDetails = manageUser.getFormByName(name);
-            System.out.println(forConnectingWithDetails);
             List<String> questions = keywords.getQuestionName();
 
-            for (int i = 0; i < keywords.getQuestionName().size(); i++) {
+            for (int i = 0; i < questions.size(); i++) {
                 Form_Details form_details = new Form_Details();
                 form_details.setQuestion(questions.get(i));
                 form_details.setResponse(req.getParameter("q" + i));
                 form_details.setForm(forConnectingWithDetails);
+                LOGGER.info("Created new form_details:");
                 manageUser.saveFormDetails(form_details);
 
             }
         }
+
         RequestDispatcher dispatcher = req.getRequestDispatcher("/keywords.jsp");
         LOGGER.info(MARKER, "Dispatcher to keywords.jsp");
         try {
