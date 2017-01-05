@@ -33,67 +33,46 @@ public class FiveDaysNoAnswer {
         dataList.add(data5);
         dataList.add(data6);
         dataList.add(data7);
-        System.out.println("     tu się sortuje data:  ");
-
-        System.out.println("Lista przed sortowaniem: "+dataList);
 
         Collections.sort(dataList);
-
         afterSortList.addAll(dataList);
-
-        System.out.println("Lista po sortowaniu w nowej liście: "+afterSortList);
     }
 
     public List<Date> noWeekends(){
 
-        System.out.println("tutaj parsuje się java.time LocalDateTime na  java util.Date ale z listy do listy");
-
         ArrayList<LocalDateTime> a;
         a = afterSortList;
-        System.out.println("przed parsowaniem" + a);
         List<Date> result =
                 a.stream()
                         .map(d -> Date.from(d.atZone(ZoneId.systemDefault()).toInstant()))   // to jest parser z LocalDateTime do Date
                         .collect(Collectors.toList());
         sortedAndInDate = result;
-        System.out.println("po parsowaniu" + result);
-
         return result;
 
     }
-    public void bezWeekendów(){
-        System.out.println("tutaj wypisuje na podstawie dat z listy jakich dni tygodnia one dotyczą i usuwa weekendy");
+    public void withoutWeekends(){
         sortedAndInDate.removeIf(date -> date.getDay() == 0 || date.getDay() == 6);
-        sortedAndInDate.forEach((v) -> {
-                    System.out.println(v.toString());
-                }
+        sortedAndInDate.forEach((v) -> {}
         );
     }
     public void checkIfWasAnswer (){
-
-        LocalDateTime now = LocalDateTime.now();
 
         LocalDateTime fiveDaysAgo = LocalDateTime.now().minusDays(5);
         System.out.println(fiveDaysAgo);
         afterSortList.removeIf(lol -> lol.isAfter(fiveDaysAgo));
         afterSortList.forEach((v) -> {
-                    System.out.println(v.toString());
                 }
         );
     }
     public void chceckIfContentBetween (){
         afterSortList.size();
-        if (afterSortList.size()<5){
-            System.out.println("                       5cio dniowe ktyterium zostało spełnone               ");
+        if (afterSortList.size()<5)
+        {
+            boolean ifTrue = true;
+            System.out.println("if true means that there was no answer for 5 working days  :  "+ifTrue);
         }
-
-
     }
-
 }
-
-
-
 
 
 
