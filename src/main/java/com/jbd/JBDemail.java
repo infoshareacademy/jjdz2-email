@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class JBDemail {
+
     private static final Logger LOGGER = LogManager.getLogger(JBDemail.class);
 
     public static void main(String[] args) {
