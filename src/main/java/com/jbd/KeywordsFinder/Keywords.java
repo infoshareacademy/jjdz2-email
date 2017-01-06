@@ -35,12 +35,14 @@ public class Keywords {
         LOGGER.info(KEYWORDS_MARKER, "Noted user response: " + answerID);
     }
 
+
     public List<String> getQuestionName(){
         JsonReader jsonReader = new JsonReader();
         List<String> questions = new ArrayList<>();
         questions.addAll(jsonReader.readAnswerJsonArray("questions"));
         return questions;
     }
+
 
     public Set<String> createKeywordsSet() {
 
@@ -84,4 +86,5 @@ public class Keywords {
     public static ArrayList<String> getAnswersIDs() {
         return answersIDs;
     }
+
 }
