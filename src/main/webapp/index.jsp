@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setBundle basename="messages" var="msg" />
 <html>
 <head>
     <title>JBD Email Search Engine</title>
@@ -12,30 +14,32 @@
     <jsp:directive.include file="header.jsp"/>
     <div id="container">
         <div class="jumbotron">
-            <h1>Welcome to the world of <i>JBD Email Search Engine!</i></h1>
+
+            <h1><fmt:message bundle="${msg}" key="title" /></h1>
             <br /><br />
-            <p>This search engine is here to help you search email messages in your email files.
+            <p><fmt:message bundle="${msg}" key="searchEngine" />
                 <br>
-                Prepare your <i>.eml</i> or <i>.mbox</i> file and select one of below options in order to find what you are looking for.
+                <fmt:message bundle="${msg}" key="prepare" /><i>.eml</i> or <i>.mbox</i> <fmt:message bundle="${msg}" key="searchEngineContinue" />
             </p>
         </div>
             <div class="underJumbotron">
                 <div class="row">
                     <div class="col-md-6" id="searchEmailsSection">
-                        If you already know what you are looking for you can start searching...<br>
+                        <fmt:message bundle="${msg}" key="lookFor" /><br>
                         <p><form action="emails.jsp">
-                            <input class="btn btn-warning" type="submit" value="Search emails" name="searchEmails">
+                            <input class="btn btn-warning" type="submit" value="<fmt:message bundle="${msg}" key="searchEmails" />" name="searchEmails">
                         </form></p>
                     </div>
                     <div class="col-md-6">
-                        ... or you can get help with defining keywords for your search query.<br>
+                        <fmt:message bundle="${msg}" key="orLookFor" /><br>
                         <p><form action="keywords">
-                            <input class="btn btn-warning" type="submit" value="Search keywords" name="searchKeywords">
+                            <input class="btn btn-warning" type="submit" value="<fmt:message bundle="${msg}" key="searchKeywords" />" name="searchKeywords">
                         </form></p>
                     </div>
                 </div>
             </div>
         <jsp:directive.include file="footer.jsp"/>
+            <a href="?locale=pl">english</a> . <a href="?locale=en">polish</a>
     </div>
 </body>
 </html>
