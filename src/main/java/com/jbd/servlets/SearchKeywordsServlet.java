@@ -115,7 +115,7 @@ public class SearchKeywordsServlet extends HttpServlet {
             }
         }
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/keywords.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("keywords.jsp");
         LOGGER.info(MARKER, "Dispatcher to keywords.jsp");
         try {
             dispatcher.forward(req, response);

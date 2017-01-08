@@ -17,7 +17,6 @@
         <h1>Welcome</h1>
         <p>Add new admins or edit existing one</p>
         <p>Welcome! ${sessionData.username} </p>
-        <button onclick="Logout()">Logout From FB</button>
     </div>
 
     <div class="underJumbotron">
@@ -34,6 +33,11 @@
                 <input class="btn btn-warning" type="submit" value="Update">
             </ul
         </form>
+        <p>
+        <form action="index.jsp">
+            <input class="btn btn-warning" type="submit" value="Go to main page"name="goBackToKeywordsFinder">
+        </form>
+        </p>
         <p>
         <form action="index.jsp">
             <input class="btn btn-warning" type="submit" value="Go to main page"name="goBackToKeywordsFinder">

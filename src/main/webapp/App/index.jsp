@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <fmt:setBundle basename="messages" var="msg"/>
 <html>
 <head>
@@ -45,12 +46,14 @@
                 </p>
             </div>
             <div class="col-md-6">
-                Pzejdź do zarządzania Użytkownikami<br>
+                <c:if test="${sessionData.privilege == 'Admin'}">
+                <fmt:message bundle="${msg}" key="manage"/><br>
                 <p>
                 <form action="AdminConsole.jsp">
                     <input class="btn btn-warning" type="submit" value="Admin" key="searchKeywords"
                            name="searchKeywords">
                 </form>
+                </c:if>
                 </p>
             </div>
         </div>

@@ -7,7 +7,7 @@
     </div>
     <div class="col-md-3" id="language">
         <a href="?locale=pl">english</a> . <a href="?locale=en">polish</a>
-        <button class="btn btn-warning" onclick="Logout()">Logout From FB</button>
+        <button class="btn btn-primary btn-xs" onclick="Logout()">Logout From FB</button>
     </div>
     <div class="col-md-3" id="headerDateTime">
             Today is <%java.text.DateFormat df = new java.text.SimpleDateFormat("dd-MM-yyyy"); %>
