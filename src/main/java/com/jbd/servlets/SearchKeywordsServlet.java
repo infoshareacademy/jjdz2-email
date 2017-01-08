@@ -13,9 +13,7 @@ import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
 import javax.ejb.EJB;
-
 import javax.inject.Inject;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,10 +21,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
-
 
 import static com.jbd.KeywordsFinder.KeywordsQuestionsMap.QUESTION;
 
@@ -43,6 +40,7 @@ public class SearchKeywordsServlet extends HttpServlet {
     KeywordsQuestionsMap keywordsQuestionsMap;
     @Inject
     ManageUser manageUser;
+
 
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws IOException {
 
@@ -88,9 +86,7 @@ public class SearchKeywordsServlet extends HttpServlet {
         req.setAttribute("questions", keywordsQuestionsMap.getQuestionsMap());
         LOGGER.info(MARKER, "Set JSP attribute \"questions\" with keywords questionnaire.");
 
-
-        if (req.getParameter("q0") != null && req.getParameter("q1") != null
-                && req.getParameter("q2") != null && req.getParameter("q2") != null) {
+        if (req.getParameter("q0") != null && req.getParameter("q1") != null && req.getParameter("q2") != null && req.getParameter("q2") != null) {
             //For save to DB
             Form form = new Form();
             String name = "Question Form " + counter;
@@ -112,10 +108,11 @@ public class SearchKeywordsServlet extends HttpServlet {
                 form_details.setForm(forConnectingWithDetails);
                 LOGGER.info("Created new form_details:");
                 manageUser.saveFormDetails(form_details);
+
             }
         }
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/keywords.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("keywords.jsp");
         LOGGER.info(MARKER, "Dispatcher to keywords.jsp");
         try {
             dispatcher.forward(req, response);
