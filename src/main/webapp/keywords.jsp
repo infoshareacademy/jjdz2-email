@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <link href="resources/css.css" rel="stylesheet" type="text/css">
-    <script src="js/bootstrap.min.js"></script>
+    <script src="resources/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 <jsp:directive.include file="header.jsp"/>

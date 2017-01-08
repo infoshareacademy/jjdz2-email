@@ -1,8 +1,10 @@
 package com.jbd.servlets;
 
+
 import com.jbd.DBA.Form;
 import com.jbd.DBA.Form_Details;
 import com.jbd.DBA.ManageUser;
+
 import com.jbd.KeywordsFinder.Keywords;
 import com.jbd.KeywordsFinder.KeywordsQuestionsMap;
 import org.slf4j.Logger;
@@ -61,11 +63,6 @@ public class SearchKeywordsServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse response) {
-        System.out.println("q0: " + req.getParameter("q0"));
-        System.out.println("q1: " + req.getParameter("q1"));
-        System.out.println("q2: " + req.getParameter("q2"));
-        System.out.println("q3: " + req.getParameter("q3"));
-        System.out.println("qqqqqq5!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!: " + req.getParameter("qq5"));
 
         for (int questionIndex = 0;
              questionIndex < keywordsQuestionsMap.getQuestionsMap().size(); questionIndex++) {
@@ -79,7 +76,7 @@ public class SearchKeywordsServlet extends HttpServlet {
             LOGGER.info(MARKER, "Noted user response: " + answer);
         }
 
-        if (keywords.createKeywordsSet().size() < 1) {
+        if(keywords.createKeywordsSet().size()<1) {
             req.setAttribute("keywordsMsg", "No keywords found.");
         } else {
             req.setAttribute("keywordsMsg", "Keyword matching your criteria:");
@@ -129,5 +126,4 @@ public class SearchKeywordsServlet extends HttpServlet {
         keywords.getKeywordsSet().clear();
         LOGGER.debug(MARKER, "Cleared keywords set. Size: " + keywords.getKeywordsSet().size());
     }
-
 }
