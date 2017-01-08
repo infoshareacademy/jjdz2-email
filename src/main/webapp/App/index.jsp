@@ -4,13 +4,13 @@
 <html>
 <head>
     <title>JBD Email Search Engine</title>
-    <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../resources/bootstrap/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <link href="resources/css.css" rel="stylesheet" type="text/css">
+    <link href="../resources/css.css" rel="stylesheet" type="text/css">
     <script src="js/bootstrap.min.js"></script>
 </head>
 <body>
-    <jsp:directive.include file="header.jsp"/>
+    <jsp:directive.include file="../header.jsp"/>
     <div id="container">
         <div class="jumbotron">
 
@@ -31,19 +31,19 @@
                     </div>
                     <div class="col-md-6">
                         <fmt:message bundle="${msg}" key="orLookFor" /><br>
-                        <p><form action="keywords">
+                        <p><form action="../keywords">
                             <input class="btn btn-warning" type="submit" value="<fmt:message bundle="${msg}" key="searchKeywords" />" name="searchKeywords">
                         </form></p>
                     </div>
                     <div class="col-md-12">
                         Pzejdź do zarządzania Użytkownikami<br>
-                        <p><form action="/jbdee/App/AdminConsole.jsp">
+                        <p><form action="AdminConsole.jsp">
                         <input class="btn btn-warning" type="submit" value="Admin" key="searchKeywords" name="searchKeywords">
                     </form></p>
                     </div>
                 </div>
             </div>
-        <jsp:directive.include file="footer.jsp"/>
+        <jsp:directive.include file="../footer.jsp"/>
 
     </div>
 </body>

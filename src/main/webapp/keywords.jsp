@@ -46,7 +46,7 @@
 
             <div class="backToEmails">
                 <fmt:message bundle="${msg}" key="justSearching"/><br>
-                <form action="emails.jsp">
+                <form action="App/emails.jsp">
                     <input class="btn btn-warning" type="submit" value="<fmt:message bundle="${msg}" key="goTo"/>" name="searchEmails">
                 </form>
             </div>
