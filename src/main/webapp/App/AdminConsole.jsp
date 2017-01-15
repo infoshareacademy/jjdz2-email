@@ -35,7 +35,7 @@
         </form>
         <p>
         <form action="index.jsp">
-            <input class="btn btn-warning" type="submit" value="Go to main page"name="goBackToKeywordsFinder">
+
         </form>
         </p>
         <p>
