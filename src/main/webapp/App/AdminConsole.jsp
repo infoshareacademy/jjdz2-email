@@ -21,7 +21,7 @@
 
     <div class="underJumbotron">
         <form method="post" action="search">
-            <button class="btn btn-warning" onclick="location.href=search">SearchButton</button>
+            <button class="btn btn-warning" onclick="location.href=search">Search</button>
         </form>
         <p>Add new admin or edit exisitng one </p>
         <form method="post" action="update">
