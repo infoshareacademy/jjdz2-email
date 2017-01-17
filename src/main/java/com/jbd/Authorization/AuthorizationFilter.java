@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
-@WebFilter(urlPatterns = {"/App/*"})
+@WebFilter(urlPatterns = {"/App/sadad*"})
 public class AuthorizationFilter implements Filter {
     private static final Logger LOGGER = LogManager.getLogger(AuthorizationFilter.class);
 
