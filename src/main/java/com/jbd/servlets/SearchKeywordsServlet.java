@@ -1,9 +1,9 @@
 package com.jbd.servlets;
 
 
-import com.jbd.DBA.Form;
-import com.jbd.DBA.Form_Details;
-import com.jbd.DBA.ManageUser;
+import com.jbd.dba.Form;
+import com.jbd.dba.Form_Details;
+import com.jbd.dba.ManageUser;
 
 import com.jbd.KeywordsFinder.Keywords;
 import com.jbd.KeywordsFinder.KeywordsQuestionsMap;
@@ -22,7 +22,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.jbd.KeywordsFinder.KeywordsQuestionsMap.QUESTION;

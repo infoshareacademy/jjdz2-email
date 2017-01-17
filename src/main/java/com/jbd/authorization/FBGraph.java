@@ -1,4 +1,4 @@
-package com.jbd.Authorization;
+package com.jbd.authorization;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -6,9 +6,10 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -17,7 +18,8 @@ import javax.inject.Inject;
 
 @Stateless
 public class FBGraph {
-    private static final Logger LOGGER = LogManager.getLogger(FBGraph.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(FBGraph.class);
+    private static final Marker FB_GRAPH = MarkerFactory.getMarker("FB_Graph");
     @Inject
     LoginFBServlet loginFBServlet;
 
@@ -62,7 +64,7 @@ public class FBGraph {
         Map<String, String> fbProfile = new HashMap<String, String>();
         try {
             JSONObject json = new JSONObject(fbGraph);
-            LOGGER.debug("JSON created " + json.toString());
+            LOGGER.debug(FB_GRAPH,"JSON created " + json.toString());
             fbProfile.put("id", json.getString("id"));
             fbProfile.put("first_name", json.getString("first_name"));
             fbProfile.put("last_name", json.getString("last_name"));

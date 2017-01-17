@@ -1,4 +1,4 @@
-package com.jbd.Authorization;
+package com.jbd.authorization;
 
 import javax.inject.Inject;
 import javax.servlet.*;
@@ -10,8 +10,9 @@ import java.util.Locale;
 
 @WebFilter(urlPatterns = "/*")
 public class LocaleFilter implements Filter {
+
     @Inject
-    SessionData sessionData ;
+    SessionData sessionData;
 
     @Override
     public void doFilter(ServletRequest servletRequest,

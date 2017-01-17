@@ -1,10 +1,11 @@
-package com.jbd.Authorization;
+package com.jbd.authorization;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
 import javax.inject.Inject;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +18,8 @@ import java.io.IOException;
 
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
-    private static final Logger LOGGER = LogManager.getLogger(LogoutServlet.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(LogoutServlet.class);
+    private static final Marker KEYWORDS_MARKER = MarkerFactory.getMarker("Keywords");
     @Inject
     SessionData sessionData;
 
@@ -31,10 +33,10 @@ public class LogoutServlet extends HttpServlet {
             session.invalidate();
             fbConnection.clearAccessToken();
             System.out.println(sessionData.toString());
-            LOGGER.info("User has been logout");
+            LOGGER.info(KEYWORDS_MARKER,"User has been logout");
         }
         else
-            LOGGER.info("No active session!");
+            LOGGER.info(KEYWORDS_MARKER,"No active session!");
 
         response.sendRedirect("/jbdee/App/Bye.jsp");
 

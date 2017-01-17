@@ -23,30 +23,30 @@
             <form method="POST" action="keywords">
                 <p>
                     <fmt:message bundle="${msg}" key="q1"/>
-                    <label><input type="radio" name="q0" value="yes">Yes</label>
-                    <label><input type="radio" name="q0" value="no">No</label><br/>
+                    <label><input type="radio" name="q0" value="yes"><fmt:message bundle="${msg}" key="yes"/></label>
+                    <label><input type="radio" name="q0" value="no"><fmt:message bundle="${msg}" key="no"/></label><br/>
                 </p>
                 <p>
                     <fmt:message bundle="${msg}" key="q2"/>
-                    <label><input type="radio" name="q1" value="yes">Yes</label>
-                    <label><input type="radio" name="q1" value="no">No</label><br/>
+                    <label><input type="radio" name="q1" value="yes"><fmt:message bundle="${msg}" key="yes"/></label>
+                    <label><input type="radio" name="q1" value="no"><fmt:message bundle="${msg}" key="no"/></label><br/>
                 </p>
                 <p>
                     <fmt:message bundle="${msg}" key="q3"/>
-                    <label><input type="radio" name="q2" value="yes">Yes</label>
-                    <label><input type="radio" name="q2" value="no">No</label><br/>
+                    <label><input type="radio" name="q2" value="yes"><fmt:message bundle="${msg}" key="yes"/></label>
+                    <label><input type="radio" name="q2" value="no"><fmt:message bundle="${msg}" key="no"/></label><br/>
                 </p>
                 <p>
                     <fmt:message bundle="${msg}" key="q4"/>
-                    <label><input type="radio" name="q3" value="yes">Yes</label>
-                    <label><input type="radio" name="q3" value="no">No</label><br/>
+                    <label><input type="radio" name="q3" value="yes"><fmt:message bundle="${msg}" key="yes"/></label>
+                    <label><input type="radio" name="q3" value="no"><fmt:message bundle="${msg}" key="no"/></label><br/>
                 </p>
                 <input class="btn btn-warning" type="submit" value="<fmt:message bundle="${msg}" key="searchKeywords"/>">
             </form>
 
             <div class="backToEmails">
                 <fmt:message bundle="${msg}" key="justSearching"/><br>
-                <form action="App/emails.jsp">
+                <form action="emails.jsp">
                     <input class="btn btn-warning" type="submit" value="<fmt:message bundle="${msg}" key="goTo"/>" name="searchEmails">
                 </form>
             </div>

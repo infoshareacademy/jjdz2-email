@@ -33,6 +33,7 @@ public class Keywords {
     public void gatherAnswers(String answerID) {
         answersIDs.add(answerID);
         LOGGER.info(KEYWORDS_MARKER, "Noted user response: " + answerID);
+
     }
 
     public List<String> getQuestionName(){

@@ -30,7 +30,7 @@
             <div class="col-md-6" id="searchEmailsSection">
                 <fmt:message bundle="${msg}" key="lookFor"/><br>
                 <p>
-                <form action="emails.jsp">
+                <form action="../emails.jsp">
                     <input class="btn btn-warning" type="submit"
                            value="<fmt:message bundle="${msg}" key="searchEmails" />" name="searchEmails">
                 </form>

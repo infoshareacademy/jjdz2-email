@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@page import="com.jbd.Authorization.FBConnection"%>
+<%@page import="com.jbd.authorization.FBConnection"%>
 <%
     FBConnection fbConnection = new FBConnection();
 %>

@@ -1,6 +1,6 @@
-package com.jbd.DBA;
+package com.jbd.dba;
 
-import com.jbd.Authorization.SessionData;
+import com.jbd.authorization.SessionData;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
