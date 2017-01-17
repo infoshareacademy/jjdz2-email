@@ -89,4 +89,8 @@ public class Keywords {
         answersIDs.clear();
     }
 
+
+    public static ArrayList<String> getAnswersIDs() {
+        return answersIDs;
+    }
 }

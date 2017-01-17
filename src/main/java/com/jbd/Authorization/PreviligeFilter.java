@@ -32,7 +32,7 @@ public class PreviligeFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         if(sessionData.getPrivilege().equals("local")){
             LOGGER.info("User is not previliged to access this page - user previlige:  " + sessionData.getPrivilege() +", require Admin");
-            ((HttpServletResponse) servletResponse).sendRedirect("/jbdee/App/form.jsp");
+            ((HttpServletResponse) servletResponse).sendRedirect("/jbdee/App/index.jsp");
             return;
         }
 

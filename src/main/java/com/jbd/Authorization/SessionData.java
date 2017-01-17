@@ -7,7 +7,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-
+import java.util.Locale;
 
 
 @SessionScoped
@@ -30,6 +30,8 @@ public class SessionData implements Serializable {
     private LocalDateTime loginTime;
     @Transient
     private String code = null;
+    @Transient
+    private Locale locale;
 
     public static Logger getLOGGER() {
         return LOGGER;
@@ -89,6 +91,14 @@ public class SessionData implements Serializable {
 
     public void setPrivilege(String privilege) {
         this.privilege = privilege;
+    }
+
+    public Locale getLocale() {
+        return locale;
+    }
+
+    public void setLocale(Locale locale) {
+        this.locale = locale;
     }
 
     public void login(String code, String username, String usermail, String privilege) {

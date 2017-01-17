@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-@WebServlet(urlPatterns = "emails")
+@WebServlet(urlPatterns = "/App/emails")
 public class SearchEmailsServlet extends HttpServlet {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SearchEmailsServlet.class);
@@ -84,13 +84,7 @@ public class SearchEmailsServlet extends HttpServlet {
             LOGGER.info(MARKER, "Set JSP attribute \"displayNumbers\".");
         }
 
-        req.setAttribute("emailFile", emailPath);
-        req.setAttribute("emails", finalEmailsSet.emailsSeparatedWithComma(searchCriteria.getEmail()));
-        req.setAttribute("startDate", searchCriteria.dateToDisplayInFrontEnd(searchCriteria.getStartDate()));
-        req.setAttribute("endDate", searchCriteria.dateToDisplayInFrontEnd(searchCriteria.getEndDate()));
-        req.setAttribute("keywords", finalEmailsSet.emailsSeparatedWithComma(searchCriteria.getKeywords()));
-
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/emails.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/App/emails.jsp");
         LOGGER.info(MARKER, "Dispatcher to emails.jsp");
         try {
             dispatcher.forward(req, response);

@@ -1,10 +1,8 @@
 package com.jbd.servlets;
 
-
 import com.jbd.DBA.Form;
 import com.jbd.DBA.Form_Details;
 import com.jbd.DBA.ManageUser;
-
 import com.jbd.KeywordsFinder.Keywords;
 import com.jbd.KeywordsFinder.KeywordsQuestionsMap;
 import org.slf4j.Logger;
@@ -13,9 +11,7 @@ import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
 import javax.ejb.EJB;
-
 import javax.inject.Inject;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,8 +19,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
