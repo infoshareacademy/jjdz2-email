@@ -36,7 +36,7 @@ public class LogoutServlet extends HttpServlet {
         else
             LOGGER.info("No active session!");
 
-        response.sendRedirect("/jbdee/App/Bye.jsp");
+        response.sendRedirect("/jbdee/App/index.jsp");
 
     }
 }
