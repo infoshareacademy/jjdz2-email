@@ -99,7 +99,7 @@ public class LoginFBServlet extends HttpServlet {
 
         if (sessionData.isLogged()) {
             req.setAttribute("name", name);
-            res.sendRedirect("/jbdee/App/index.jsp");
+            res.sendRedirect("/jbdee/index.jsp");
         }
 
 

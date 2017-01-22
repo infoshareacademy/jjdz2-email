@@ -46,6 +46,12 @@
                 <p><form action="keywords">
                     <input class="btn btn-warning" type="submit" value="Go to Keywords Finder" name="goBackToKeywordsFinder">
                 </form></p>
+                <p>
+                <form action="index.jsp">
+                    <input class="btn btn-warning" type="submit" value="Go to main page" name="goBackToKeywordsFinder">
+                </form>
+                </p>
+
             </div>
             <div class="col-md-8"><div>
                 <span class="emailsFoundMsg">${emailsFound}</span> <br/>

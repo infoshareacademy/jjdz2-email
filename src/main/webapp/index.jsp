@@ -5,15 +5,15 @@
 <html>
 <head>
     <title>JBD Email Search Engine</title>
-    <link rel="stylesheet" href="../resources/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <link href="../resources/css.css" rel="stylesheet" type="text/css">
+    <link href="resources/css.css" rel="stylesheet" type="text/css">
     <script src="js/bootstrap.min.js"></script>
 </head>
 <body>
-<jsp:directive.include file="../header.jsp"/>
+<jsp:directive.include file="header.jsp"/>
 <div id="container">
-    <script type="text/javascript" src="LogoutFB.js">
+    <script type="text/javascript" src="App/LogoutFB.js">
     </script>
     <div class="jumbotron">
 
@@ -39,26 +39,24 @@
             <div class="col-md-6">
                 <fmt:message bundle="${msg}" key="orLookFor"/><br>
                 <p>
-                <form action="../keywords">
+                <form action="keywords">
                     <input class="btn btn-warning" type="submit"
                            value="<fmt:message bundle="${msg}" key="searchKeywords" />" name="searchKeywords">
                 </form>
                 </p>
             </div>
             <div class="col-md-6">
-                <c:if test="${sessionData.privilege == 'Admin'}">
                 <fmt:message bundle="${msg}" key="manage"/><br>
                 <p>
-                <form action="AdminConsole.jsp">
+                <form action="App/AdminConsole.jsp">
                     <input class="btn btn-warning" type="submit" value="Admin" key="searchKeywords"
                            name="searchKeywords">
                 </form>
-                </c:if>
                 </p>
             </div>
         </div>
     </div>
-    <jsp:directive.include file="../footer.jsp"/>
+    <jsp:directive.include file="footer.jsp"/>
 
 </div>
 </body>

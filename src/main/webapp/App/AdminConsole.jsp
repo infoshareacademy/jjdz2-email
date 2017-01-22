@@ -21,7 +21,7 @@
 
     <div class="underJumbotron">
         <form method="post" action="search">
-            <button class="btn btn-warning" onclick="location.href=search">SearchButton</button>
+            <button class="btn btn-warning" onclick="location.href=search">Search</button>
         </form>
         <p>Add new admin or edit exisitng one </p>
         <form method="post" action="update">
@@ -34,13 +34,12 @@
             </ul
         </form>
         <p>
-        <form action="index.jsp">
-            <input class="btn btn-warning" type="submit" value="Go to main page"name="goBackToKeywordsFinder">
+        <form action="../index.jsp">
         </form>
         </p>
         <p>
-        <form action="index.jsp">
-            <input class="btn btn-warning" type="submit" value="Go to main page"name="goBackToKeywordsFinder">
+        <form action="../index.jsp">
+            <input class="btn btn-warning" type="submit" value="Go to main page" name="goBackToKeywordsFinder">
         </form>
         </p>
     </div>
