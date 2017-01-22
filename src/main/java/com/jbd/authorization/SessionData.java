@@ -1,7 +1,10 @@
-package com.jbd.Authorization;
+package com.jbd.authorization;
 
-import org.apache.logging.log4j.LogManager;
+
 import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
 import javax.enterprise.context.SessionScoped;
 import javax.persistence.*;
@@ -15,8 +18,8 @@ import java.util.Locale;
 @Table(name = "User")
 @NamedQuery(name = "SessionData.findAll", query = "select p FROM SessionData p")
 public class SessionData implements Serializable {
-    private static final Logger LOGGER = LogManager.getLogger(SessionData.class);
-
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(SessionData.class);
+    private static final Marker MARKER = MarkerFactory.getMarker("SessionData");
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,9 +36,6 @@ public class SessionData implements Serializable {
     @Transient
     private Locale locale;
 
-    public static Logger getLOGGER() {
-        return LOGGER;
-    }
 
     public Long getId() {
         return id;
@@ -102,31 +102,29 @@ public class SessionData implements Serializable {
     }
 
     public void login(String code, String username, String usermail, String privilege) {
-        if(!code.equals("")){
+        if (!code.equals("")) {
             this.isLogged = true;
             this.username = username;
             this.usermail = usermail;
             this.code = code;
             this.loginTime = LocalDateTime.now();
-            if(privilege.equals(null)){
+            if (privilege.equals(null)) {
                 this.privilege = "local";
-            }
-            else if(privilege.equals("local")){
+            } else if (privilege.equals("local")) {
                 this.privilege = privilege;
-            }
-            else
+            } else
                 this.privilege = privilege;
         }
 
 
     }
 
-    public void logout(){
+    public void logout() {
         this.isLogged = false;
         this.username = "";
         this.usermail = "";
         this.code = null;
-        LOGGER.info("Logout Successful");
+        LOGGER.info(MARKER,"Logout Successful");
 
     }
 

@@ -13,6 +13,8 @@
 <body>
 <jsp:directive.include file="header.jsp"/>
 <div id="container">
+    <script type="text/javascript" src="App/LogoutFB.js">
+    </script>
     <div class="jumbotron">
         <h2 id="jumbotron"><fmt:message bundle="${msg}" key="keywordsFinder"/></h2>
         <h3><fmt:message bundle="${msg}" key="help"/></h3>
@@ -41,13 +43,15 @@
                     <label><input type="radio" name="q3" value="yes" ${checkedq3yes}>Yes</label>
                     <label><input type="radio" name="q3" value="no" ${checkedq3no}>No</label><br/>
                 </p>
-                <input class="btn btn-warning" type="submit" value="<fmt:message bundle="${msg}" key="searchKeywords"/>">
+                <input class="btn btn-warning" type="submit"
+                       value="<fmt:message bundle="${msg}" key="searchKeywords"/>">
             </form>
 
             <div class="backToEmails">
                 <fmt:message bundle="${msg}" key="justSearching"/><br>
                 <form action="emails.jsp">
-                    <input class="btn btn-warning" type="submit" value="<fmt:message bundle="${msg}" key="goTo"/>" name="searchEmails">
+                    <input class="btn btn-warning" type="submit" value="<fmt:message bundle="${msg}" key="goTo"/>"
+                           name="searchEmails">
                 </form>
             </div>
         </div>
