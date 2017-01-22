@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-@WebServlet(urlPatterns = "App/emails")
+@WebServlet(urlPatterns = "emails")
 public class SearchEmailsServlet extends HttpServlet {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SearchEmailsServlet.class);
@@ -65,9 +65,9 @@ public class SearchEmailsServlet extends HttpServlet {
             }
         }
         Set<Email> emailSet = finalEmailsSet.createUniqueEmailsSet(emails);
-        if(emailSet.size() > 0) {
+        if (emailSet.size() > 0) {
             req.setAttribute("emailsFound", "Emails matching your criteria:");
-        } else if(0 == emailSet.size() && !("".equals(emailPath))) {
+        } else if (0 == emailSet.size() && !("".equals(emailPath))) {
             req.setAttribute("emailsFound", "No emails matching your criteria.");
         }
         req.setAttribute("finalEmailSet", emailSet);
@@ -75,7 +75,7 @@ public class SearchEmailsServlet extends HttpServlet {
 
         Map<String, List<String>> resultMap = displayPhoneNumbers.searchPhoneNumbers(emails);
         if ("yes".equals(req.getParameter("phoneNumbers"))) {
-            if(resultMap.size() == 0) {
+            if (resultMap.size() == 0) {
                 req.setAttribute("phoneNumbersFound", "No phone numbers found.");
             } else {
                 req.setAttribute("phoneNumbersFound", "Phone numbers found in your email file:");
@@ -84,7 +84,13 @@ public class SearchEmailsServlet extends HttpServlet {
             LOGGER.info(MARKER, "Set JSP attribute \"displayNumbers\".");
         }
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("emails.jsp");
+        req.setAttribute("emailFile", emailPath);
+        req.setAttribute("emails", finalEmailsSet.emailsSeparatedWithComma(searchCriteria.getEmail()));
+        req.setAttribute("startDate", searchCriteria.dateToDisplayInFrontEnd(searchCriteria.getStartDate()));
+        req.setAttribute("endDate", searchCriteria.dateToDisplayInFrontEnd(searchCriteria.getEndDate()));
+        req.setAttribute("keywords", finalEmailsSet.emailsSeparatedWithComma(searchCriteria.getKeywords()));
+
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/emails.jsp");
         LOGGER.info(MARKER, "Dispatcher to emails.jsp");
         try {
             dispatcher.forward(req, response);

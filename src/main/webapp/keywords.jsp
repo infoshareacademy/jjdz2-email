@@ -23,23 +23,23 @@
             <form method="POST" action="keywords">
                 <p>
                     <fmt:message bundle="${msg}" key="q1"/>
-                    <label><input type="radio" name="q0" value="yes">Yes</label>
-                    <label><input type="radio" name="q0" value="no">No</label><br/>
+                    <label><input type="radio" name="q0" value="yes" ${checkedq0yes}>Yes</label>
+                    <label><input type="radio" name="q0" value="no" ${checkedq0no}>No</label><br/>
                 </p>
                 <p>
                     <fmt:message bundle="${msg}" key="q2"/>
-                    <label><input type="radio" name="q1" value="yes">Yes</label>
-                    <label><input type="radio" name="q1" value="no">No</label><br/>
+                    <label><input type="radio" name="q1" value="yes" ${checkedq1yes}>Yes</label>
+                    <label><input type="radio" name="q1" value="no" ${checkedq1no}>No</label><br/>
                 </p>
                 <p>
                     <fmt:message bundle="${msg}" key="q3"/>
-                    <label><input type="radio" name="q2" value="yes">Yes</label>
-                    <label><input type="radio" name="q2" value="no">No</label><br/>
+                    <label><input type="radio" name="q2" value="yes" ${checkedq2yes}>Yes</label>
+                    <label><input type="radio" name="q2" value="no" ${checkedq2no}>No</label><br/>
                 </p>
                 <p>
                     <fmt:message bundle="${msg}" key="q4"/>
-                    <label><input type="radio" name="q3" value="yes">Yes</label>
-                    <label><input type="radio" name="q3" value="no">No</label><br/>
+                    <label><input type="radio" name="q3" value="yes" ${checkedq3yes}>Yes</label>
+                    <label><input type="radio" name="q3" value="no" ${checkedq3no}>No</label><br/>
                 </p>
                 <input class="btn btn-warning" type="submit" value="<fmt:message bundle="${msg}" key="searchKeywords"/>">
             </form>
