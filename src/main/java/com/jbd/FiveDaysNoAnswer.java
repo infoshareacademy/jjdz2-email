@@ -55,7 +55,7 @@ ifTrue = true;
             System.out.println("if true means that there was no answer for 5 working days  :  " + ifTrue);
         }else{
             ifTrue = false;
-            System.out.println("if false means that there was no answer for 5 working days  :  " + ifTrue);
+            System.out.println("if false means that there was answer for 5 working days  :  " + ifTrue);
         }
     }
 }
