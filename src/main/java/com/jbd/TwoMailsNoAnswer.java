@@ -1,23 +1,54 @@
 package com.jbd;
 
 import java.time.LocalDateTime;
-import java.time.Month;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-public class TwoMailsNoAnswer extends FiveDaysNoAnswer{
+public class TwoMailsNoAnswer extends FiveDaysNoAnswer {
 
-    public LocalDateTime data6 = LocalDateTime.of(2017, Month.JANUARY, 03, 23, 59, 59);
+    String userMail = "Angus.Hardie@malcolmhardie.com";
+    public ArrayList<LocalDateTime> dates = new ArrayList<>();
+    public ArrayList<String> from = new ArrayList<>();
+    public List<String> adresses = new ArrayList<>();
     public LocalDateTime recieverMailDate;
     public LocalDateTime ourOneBeforeLastDate;
 
-    public void dateSort(){
-        super.dateSort();
-        ourOneBeforeLastDate =     dataList.get(dataList.size()-2);
-        recieverMailDate = data6;
-    }
-    public void decideIfTwoAnswers(){
+    void addingAdressesToList(List<Email> eMailKeeper) {
 
-        Boolean checkIf = recieverMailDate.isBefore(ourOneBeforeLastDate );
-        System.out.println("if true we send two emails and get no answer   :   "+checkIf);
+        for (Email email : eMailKeeper) {
+
+            adresses.add(email.getFrom());
+
+        }
+
+
+    }
+
+    void addingDatesToList(List<Email> eMailKeeper) {
+
+        for (Email email : eMailKeeper) {
+
+
+            dates.add(email.getData());
+
+        }
+        Collections.sort(dates);
+
+
+    }
+
+    public void removingUserMailFromList(List<Email> eMailKeeper) {
+        for (Email e : eMailKeeper) {
+            adresses.removeIf(user -> user.contains(userMail));
+
+        }
+
+    }
+
+    public void decideIfTwoAnswers() {
+        //  Boolean checkIf = recieverMailDate.isBefore(ourOneBeforeLastDate);
+        //  System.out.println("if true we send two emails and get no answer   :   " + checkIf);
     }
 }
 
