@@ -1,14 +1,12 @@
 package com.jbd.DBA;
 
 
-import com.jbd.Authorization.PreviligeFilter;
 import com.jbd.Authorization.SessionData;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.enterprise.context.SessionScoped;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;

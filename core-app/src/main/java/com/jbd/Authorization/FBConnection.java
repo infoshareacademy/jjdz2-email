@@ -3,7 +3,6 @@ package com.jbd.Authorization;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.ejb.Stateless;
 import javax.enterprise.context.SessionScoped;
 import java.io.*;
 import java.net.MalformedURLException;

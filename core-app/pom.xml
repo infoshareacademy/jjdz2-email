@@ -17,6 +17,7 @@
         <wildfly.adminUsername>admin</wildfly.adminUsername>
         <wildfly.adminPassword>admin</wildfly.adminPassword>
         <wildfly.add-user>${wildfly.adminUsername}:${wildfly.adminPassword}:group:ManagementRealm:false</wildfly.add-user>
+        <port>8080</port>
 
         <!-- mysql -->
         <version.mysql>5.1.37</version.mysql>
