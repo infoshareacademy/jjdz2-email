@@ -15,33 +15,24 @@ public class RudeWordsInContent {
     String regex = "test";
 
 
-
     public void ifRudeWord(List<Email> eMailKeeper) {
-        ListIterator<String> litr = null;
 
-        for (Email email: eMailKeeper) {
+
+        for (Email email : eMailKeeper) {
             content.add(email.getContent());
         }
 
         Pattern pattern = Pattern.compile(regex);
 
 
-        for (Iterator<String> iter = content.iterator(); iter.hasNext(); ){
+        for (Iterator<String> iter = content.iterator(); iter.hasNext(); ) {
             String var = iter.next();
             Matcher matcher = pattern.matcher(var);
 
             boolean found = matcher.matches();
-            System.out.println("if true that means there were swearings in message   :   "+found);
+            System.out.println("if true that means there were swearings in message   :   " + found);
 
         }
-
-
-
-
-
-
-
-
 
 
     }
