@@ -27,9 +27,6 @@
             <c:set var="Local" scope="session" value="Local User"/>
             <c:set var="Priv" scope="session" value="0"/>
 
-            <c:if test="${salary > 2000}">
-            <p>My salary is: <c:out value="${salary}"/><p>
-            </c:if>
             <ul>
                 <c:forEach items="${userList}" var="user">
                     <c:if test="${user.privilege == 1}">
