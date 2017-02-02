@@ -36,12 +36,12 @@ public class UpdateServlet extends HttpServlet {
             System.out.println("Privileged " + isPrivileged.toString());
             for (int i = 0; i < isPrivileged.length; i++) {
                 SessionData user = manageUser.getUser(Long.parseLong(isPrivileged[i]));
-                String privileged = user.getPrivilege();
-                if (privileged.equals("Admin")) {
-                    user.setPrivilege("local");
+                int privileged = user.getPrivilege();
+                if (privileged == SessionData.ADMIN) {
+                    user.setPrivilege(SessionData.LOCAL_USER);
                     LOGGER.info(MARKER, "Set privilege to: local");
                 } else {
-                    user.setPrivilege("Admin");
+                    user.setPrivilege(SessionData.ADMIN);
                     LOGGER.info(MARKER, "Set privilege to: Admin");
                 }
                 manageUser.updateUser(user);
