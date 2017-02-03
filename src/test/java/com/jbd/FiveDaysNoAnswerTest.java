@@ -2,7 +2,7 @@ package com.jbd;
 
 import org.junit.Test;
 
-import java.text.SimpleDateFormat;
+
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -11,13 +11,10 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 
 public class FiveDaysNoAnswerTest extends FiveDaysNoAnswer {
-    List<FiveDaysNoAnswer> fdnal = Arrays.asList();
     public List<Date> sortedEmailDatesInDate = new ArrayList<>();
-
     public List<LocalDateTime> afterAllList = new ArrayList<>();
     FiveDaysNoAnswer fdna1 = new FiveDaysNoAnswer();
     LocalDateTime sixDaysAgo = LocalDateTime.now().minusDays(6);
-
 
     @Test
     public void shouldReturnTrueIfListIsEmpty() throws Exception {
@@ -34,9 +31,7 @@ public class FiveDaysNoAnswerTest extends FiveDaysNoAnswer {
         if (afterAllList.size() == 0) {
             afterAllList = null;
         }
-
         assertNull(afterAllList);
-
     }
 
     @Test
