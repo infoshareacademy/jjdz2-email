@@ -19,7 +19,6 @@ public class TwoMailsNoAnswer extends FiveDaysNoAnswer {
         for (Email email : eMailKeeper) {
 
             adresses.add(email.getFrom());
-
         }
 
 
@@ -31,7 +30,6 @@ public class TwoMailsNoAnswer extends FiveDaysNoAnswer {
 
 
             dates.add(email.getData());
-
         }
         Collections.sort(dates);
 
@@ -41,14 +39,14 @@ public class TwoMailsNoAnswer extends FiveDaysNoAnswer {
     public void removingUserMailFromList(List<Email> eMailKeeper) {
         for (Email e : eMailKeeper) {
             adresses.removeIf(user -> user.contains(userMail));
-
         }
 
     }
 
-    public void decideIfTwoAnswers() {
-        //  Boolean checkIf = recieverMailDate.isBefore(ourOneBeforeLastDate);
-        //  System.out.println("if true we send two emails and get no answer   :   " + checkIf);
+    public void decideIfTwoAnswers() {// This code waits for else feature
+
+         // Boolean checkIf = recieverMailDate.isBefore(ourOneBeforeLastDate);
+         // System.out.println("if true we send two emails and get no answer   :   " + checkIf);
     }
 }
 

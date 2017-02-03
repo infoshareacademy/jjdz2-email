@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class FiveDaysNoAnswer extends JBDemail {
 
     public List<LocalDateTime> sortedEmailDates = new ArrayList<>();
-    public List<LocalDateTime> afterSortList = new ArrayList<>();
+    public List<LocalDateTime> afterAllList = new ArrayList<>();
     public List<Date> sortedEmailDatesInDate = new ArrayList<>();
 
     void dateSort(List<Email> eMailKeeper) {
@@ -31,32 +31,35 @@ public class FiveDaysNoAnswer extends JBDemail {
         return result;
     }
 
-    public void erasingWorkingDaysFromDates() {
+    public void erasingFreeDaysFromDates(List<Date>sortedEmailDatesInDate) {
         sortedEmailDatesInDate.removeIf(date -> date.getDay() == 0 || date.getDay() == 6);
         sortedEmailDatesInDate.forEach((v) -> {
                 } );}
 
     public void dateToLocalDateTimeParse() {
         for (Date email : sortedEmailDatesInDate) {
-            afterSortList.add(LocalDateTime.ofInstant(email.toInstant(), ZoneId.systemDefault()));
+            afterAllList.add(LocalDateTime.ofInstant(email.toInstant(), ZoneId.systemDefault()));
         }
     }
 
-    public void checkIfWasAnswer() {
+    public void checkIfWasAnswer(List<LocalDateTime>afterAllList) {
+
         LocalDateTime fiveDaysAgo = LocalDateTime.now().minusDays(5);
-        afterSortList.removeIf(lol -> lol.isBefore(fiveDaysAgo));
+
+        afterAllList.removeIf(lol -> lol.isBefore(fiveDaysAgo));
     }
 
-    public void chceckIfContentBetween() {
-        boolean ifTrue;
-        afterSortList.size();
-        if (afterSortList.size() ==0 ) {
+    public boolean chceckIfContentBetween(boolean ifTrue) {
+
+        afterAllList.size();
+        if (afterAllList.size() ==0 ) {
 ifTrue = true;
             System.out.println("if true means that there was no answer for 5 working days  :  " + ifTrue);
         }else{
             ifTrue = false;
             System.out.println("if false means that there was answer for 5 working days  :  " + ifTrue);
         }
+        return ifTrue;
     }
 }
 

@@ -4,7 +4,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
+
+import java.time.LocalDateTime;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class JBDemail {
 
@@ -12,10 +15,14 @@ public class JBDemail {
     private static final Marker MAIN_MARKER = MarkerFactory.getMarker("Main");
 
     public static void main(String[] args) throws Exception {
-
+        ArrayList<String> content = new ArrayList<>();
         TwoMailsNoAnswer tmna = new TwoMailsNoAnswer();
         RudeWordsInContent rwic = new RudeWordsInContent();
         FiveDaysNoAnswer fdna = new FiveDaysNoAnswer();
+        List<Date> sortedEmailDatesInDate = new ArrayList<>();
+        List<LocalDateTime> afterAllList = new ArrayList<>();
+
+
         List<String> filesInStrings;
         List<Email> eMailKeeper = new ArrayList<>();
         List<Email> partialEMailKeeper = new ArrayList<>();
@@ -139,17 +146,18 @@ public class JBDemail {
 
                 fdna.dateSort(eMailKeeper);
                 fdna.LocalDateTimeToDateParse();
-                fdna.erasingWorkingDaysFromDates();
+                fdna.erasingFreeDaysFromDates(sortedEmailDatesInDate);
                 fdna.dateToLocalDateTimeParse();
-                fdna.checkIfWasAnswer();
-                fdna.chceckIfContentBetween();
+                fdna.checkIfWasAnswer(afterAllList);
+                fdna.chceckIfContentBetween(false);
 
                 tmna.addingAdressesToList(eMailKeeper);
                 tmna.addingDatesToList(eMailKeeper);
                 tmna.removingUserMailFromList(eMailKeeper);
                 tmna.decideIfTwoAnswers();
+                rwic.iteratingThroughList(eMailKeeper);
+                rwic.ifRudeWord(content);
 
-                rwic.ifRudeWord(eMailKeeper);
             }
         }
     }
