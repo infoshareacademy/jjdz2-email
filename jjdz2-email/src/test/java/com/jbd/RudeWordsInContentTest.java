@@ -12,10 +12,10 @@ public class RudeWordsInContentTest {
     ArrayList<String> content1 = new ArrayList<>();
 
     @Test
-    public void schouldBeNullIfRudeWordsInContent(){
+    public void schouldBeTrueIfRudeWordsInContent(){
         content1.add(przekle1);
         content1.add(przekle2);
         for (String st : content1){
           lolo.ifRudeWord(content1);
-            assertFalse(lolo.ifRudeWord(content1));
+            assertTrue(lolo.ifRudeWord(content1));
         } }}
