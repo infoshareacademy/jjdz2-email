@@ -42,29 +42,29 @@ public class JBDemail {
         System.out.println("Hello, this is JBDemail!\n" +
                 "Set path to your emails files and answer questions.");
 
-        LOGGER.info(MAIN_MARKER, "Program started.");
+        LOGGER.info(MAIN_MARKER,"Program started.");
 
         while (quit == 0) {
             if (answer == 0) {
-                LOGGER.info(MAIN_MARKER, "Search questions not set.");
+                LOGGER.info(MAIN_MARKER,"Search questions not set.");
                 System.out.println("----------\n" +
                         "Search questions not set\n" +
                         "----------");
             }
             if (path == 0) {
-                LOGGER.info(MAIN_MARKER, "Files path not set.");
+                LOGGER.info(MAIN_MARKER,"Files path not set.");
                 System.out.println("----------\n" +
                         "Files path not set - emails not parsed\n" +
                         "----------");
             }
             if (path == 0) {
-                LOGGER.info(MAIN_MARKER, "Displaying basic options for user.");
+                LOGGER.info(MAIN_MARKER,"Displaying basic options for user.");
                 System.out.println("Type:\n" +
                         "1 - to answer search questions\n" +
                         "2 - to set path to files\n" +
                         "q - to quit");
             } else if (answer == 0) {
-                LOGGER.info(MAIN_MARKER, "Displaying limited options for user.");
+                LOGGER.info(MAIN_MARKER,"Displaying limited options for user.");
                 System.out.println("Type:\n" +
                         "1 - to answer search questions again\n" +
                         "2 - to set path to files again\n" +
@@ -75,7 +75,7 @@ public class JBDemail {
                         "10 - to check if Some of emails were cut wierdly\n" +
                         "q - to quit");
             } else {
-                LOGGER.info(MAIN_MARKER, "Displaying full options for user.");
+                LOGGER.info(MAIN_MARKER,"Displaying full options for user.");
                 System.out.println("Type:\n" +
                         "1 - to answer search questions again\n" +
                         "2 - to set path to files again\n" +
@@ -91,59 +91,59 @@ public class JBDemail {
             }
 
             input = scanner.nextLine();
-            LOGGER.info(MAIN_MARKER, "Scanned user input.");
+            LOGGER.info(MAIN_MARKER,"Scanned user input.");
 
             if ("1".equals(input)) {
-                LOGGER.info(MAIN_MARKER, "User picked option 1.");
+                LOGGER.info(MAIN_MARKER,"User picked option 1.");
                 questionForm.searchCriteriaForm();
                 answer = 1;
             }
             if ("2".equals(input)) {
-                LOGGER.info(MAIN_MARKER, "User picked option 2.");
+                LOGGER.info(MAIN_MARKER,"User picked option 2.");
                 filesInStrings = pG.createFileListFromPath(pG.askUserAboutInputPath());
-                LOGGER.info(MAIN_MARKER, "Found: " + pG.getFileList().size() + " files.");
+                LOGGER.info(MAIN_MARKER,"Found: " + pG.getFileList().size() + " files.");
                 eMailKeeper = fP.parseEmails(filesInStrings);
-                LOGGER.info(MAIN_MARKER, "Total emails parsed: " + eMailKeeper.size());
+                LOGGER.info(MAIN_MARKER,"Total emails parsed: " + eMailKeeper.size());
                 partialEMailKeeper = eMailKeeper;
                 path = 1;
             }
             if ("q".equals(input)) {
-                LOGGER.info(MAIN_MARKER, "User picked option q. Program exit.");
+                LOGGER.info(MAIN_MARKER,"User picked option q. Program exit.");
                 quit = 1;
             }
             if ("3".equals(input) && answer != 0) {
-                LOGGER.info(MAIN_MARKER, "User picked option 3.");
+                LOGGER.info(MAIN_MARKER,"User picked option 3.");
                 eMailToLookFor.addAll((SearchCriteria.getEmail()));
                 partialEMailKeeper = cV.searchEmailByName(eMailToLookFor, partialEMailKeeper);
             }
             if ("4".equals(input) && answer != 0) {
-                LOGGER.info(MAIN_MARKER, "User picked option 4.");
+                LOGGER.info(MAIN_MARKER,"User picked option 4.");
                 String dateOfEmailToLookFor = SearchCriteria.getStartDate();
                 String endDateOfEmailToLookFor = SearchCriteria.getEndDate();
                 partialEMailKeeper = cV.searchEmailByDate(dateOfEmailToLookFor, endDateOfEmailToLookFor, partialEMailKeeper);
             }
             if ("5".equals(input) && answer != 0) {
-                LOGGER.info(MAIN_MARKER, "User picked option 5.");
+                LOGGER.info(MAIN_MARKER,"User picked option 5.");
                 partialEMailKeeper = cV.searchEmailByTitleWithKeyWords(SearchCriteria.getKeywords(), partialEMailKeeper);
             }
             if ("6".equals(input) && path != 0) {
-                LOGGER.info(MAIN_MARKER, "User picked option 6.");
+                LOGGER.info(MAIN_MARKER,"User picked option 6.");
                 System.out.println(displayPhoneNumbers.searchPhoneNumbers(partialEMailKeeper));
             }
             if ("7".equals(input) && path != 0) {
-                LOGGER.info(MAIN_MARKER, "User picked option 7."); // wyświetla sparsowane emaile
+                LOGGER.info(MAIN_MARKER,"User picked option 7."); // wyświetla sparsowane emaile
                 printEmails(eMailKeeper);
             }
             if ("8".equals(input) && path != 0) {
-                LOGGER.info(MAIN_MARKER, "User picked option 8."); // wybiera przefiltrowane emaile
+                LOGGER.info(MAIN_MARKER,"User picked option 8."); // wybiera przefiltrowane emaile
                 printEmails(partialEMailKeeper);
             }
             if ("9".equals(input) && path != 0) {
-                LOGGER.info(MAIN_MARKER, "User picked option 9.");
+                LOGGER.info(MAIN_MARKER,"User picked option 9.");
                 System.out.println(partialEMailKeeper.size());
             }
             if ("10".equals(input) && path != 0) {
-
+                LOGGER.info(MAIN_MARKER,"User picked option 10.");
                 fdna.dateSort(eMailKeeper);
                 fdna.LocalDateTimeToDateParse();
                 fdna.erasingFreeDaysFromDates(sortedEmailDatesInDate);
@@ -155,6 +155,7 @@ public class JBDemail {
                 tmna.addingDatesToList(eMailKeeper);
                 tmna.removingUserMailFromList(eMailKeeper);
                 tmna.decideIfTwoAnswers();
+
                 rwic.iteratingThroughList(eMailKeeper);
                 rwic.ifRudeWord(content);
 
