@@ -1,5 +1,6 @@
 .idea
-jjdz2-email.iml
+report-api.iml
+reports-api.iml
 target
 src/main/mail.iml
 logs
