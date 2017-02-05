@@ -1,4 +1,9 @@
 package com.jbd;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -6,6 +11,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RudeWordsInContent {
+    private static final Logger LOGGER = LoggerFactory.getLogger(RudeWordsInContent.class);
+    private static final Marker RUDEWORDSINCONTENT_MARKER = MarkerFactory.getMarker("SearchCriteria");
     public boolean found;
 
     ArrayList<String> content = new ArrayList<>();
@@ -25,7 +32,7 @@ public class RudeWordsInContent {
             Matcher matcher = pattern.matcher(var);
             found = matcher.matches();
         }
-        System.out.println("if true that means there were swearings in message   :   " + found);
+        LOGGER.info(RUDEWORDSINCONTENT_MARKER, "if true that means there were swearings in message   :   " + found);
         return found;
     }
 }
