@@ -24,7 +24,7 @@ public class FiveDaysNoAnswerTest extends FiveDaysNoAnswer {
     }
 
     @Test
-    public void schouldRemoveDatesFromListWhenItsBeforeFiveDaysAgo() throws Exception {
+    public void shouldRemoveDatesFromListWhenItsBeforeFiveDaysAgo() throws Exception {
         afterAllList.add(sixDaysAgo);
 
         fdna1.checkIfWasAnswer(afterAllList);
@@ -35,7 +35,7 @@ public class FiveDaysNoAnswerTest extends FiveDaysNoAnswer {
     }
 
     @Test
-    public void schouldRemoveWeekendsFromList() throws Exception {
+    public void shouldRemoveWeekendsFromList() throws Exception {
 
         Date saturday = new Date(777777777);
         Date sunday = new Date(888888888);

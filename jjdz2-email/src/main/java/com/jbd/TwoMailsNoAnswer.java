@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class TwoMailsNoAnswer extends FiveDaysNoAnswer {
+public class TwoMailsNoAnswer{
     private static final Logger LOGGER = LoggerFactory.getLogger(TwoMailsNoAnswer.class);
     private static final Marker TWOMAILSNOANSWER_MARKER = MarkerFactory.getMarker("TwoMailsNoAnswer");
 

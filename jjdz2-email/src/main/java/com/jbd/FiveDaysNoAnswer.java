@@ -33,7 +33,7 @@ public class FiveDaysNoAnswer extends JBDemail {
         a = sortedEmailDates;
         List<Date> result =
                 a.stream()
-                        .map(d -> Date.from(d.atZone(ZoneId.systemDefault()).toInstant()))   // to jest parser z LocalDateTime do Date
+                        .map(d -> Date.from(d.atZone(ZoneId.systemDefault()).toInstant()))
                         .collect(Collectors.toList());
         sortedEmailDatesInDate = result;
         return result;

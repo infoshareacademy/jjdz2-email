@@ -14,9 +14,9 @@ public class JBDemail {
 
     public static void main(String[] args) throws Exception {
         ArrayList<String> content = new ArrayList<>();
-        TwoMailsNoAnswer tmna = new TwoMailsNoAnswer();
-        RudeWordsInContent rwic = new RudeWordsInContent();
-        FiveDaysNoAnswer fdna = new FiveDaysNoAnswer();
+        TwoMailsNoAnswer twoMailsNoAnswer = new TwoMailsNoAnswer();
+        RudeWordsInContent rudeWordsInContent = new RudeWordsInContent();
+        FiveDaysNoAnswer fiveDaysNoAnswer = new FiveDaysNoAnswer();
         List<Date> sortedEmailDatesInDate = new ArrayList<>();
         List<LocalDateTime> afterAllList = new ArrayList<>();
 
@@ -142,20 +142,20 @@ public class JBDemail {
             }
             if ("10".equals(input) && path != 0) {
                 LOGGER.info(MAIN_MARKER,"User picked option 10.");
-                fdna.dateSort(eMailKeeper);
-                fdna.LocalDateTimeToDateParse();
-                fdna.erasingFreeDaysFromDates(sortedEmailDatesInDate);
-                fdna.dateToLocalDateTimeParse();
-                fdna.checkIfWasAnswer(afterAllList);
-                fdna.chceckIfContentBetween(false);
+                fiveDaysNoAnswer.dateSort(eMailKeeper);
+                fiveDaysNoAnswer.LocalDateTimeToDateParse();
+                fiveDaysNoAnswer.erasingFreeDaysFromDates(sortedEmailDatesInDate);
+                fiveDaysNoAnswer.dateToLocalDateTimeParse();
+                fiveDaysNoAnswer.checkIfWasAnswer(afterAllList);
+                fiveDaysNoAnswer.chceckIfContentBetween(false);
 
-                tmna.addingAdressesToList(eMailKeeper);
-                tmna.addingDatesToList(eMailKeeper);
-                tmna.removingUserMailFromList(eMailKeeper);
-                tmna.decideIfTwoAnswers();
+                twoMailsNoAnswer.addingAdressesToList(eMailKeeper);
+                twoMailsNoAnswer.addingDatesToList(eMailKeeper);
+                twoMailsNoAnswer.removingUserMailFromList(eMailKeeper);
+                twoMailsNoAnswer.decideIfTwoAnswers();
 
-                rwic.iteratingThroughList(eMailKeeper);
-                rwic.ifRudeWord(content);
+                rudeWordsInContent.iteratingThroughList(eMailKeeper);
+                rudeWordsInContent.ifRudeWord(content);
             }
         }
     }

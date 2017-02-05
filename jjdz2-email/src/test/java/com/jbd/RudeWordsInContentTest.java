@@ -5,17 +5,17 @@ import static org.junit.Assert.*;
 
 
 public class RudeWordsInContentTest {
-    RudeWordsInContent lolo = new RudeWordsInContent();
+    RudeWordsInContent rudeWordsInContent = new RudeWordsInContent();
 
     public String przekle1 = "rudeWord1";
     String przekle2 = "rudeWord2";
     ArrayList<String> content1 = new ArrayList<>();
 
     @Test
-    public void schouldBeTrueIfRudeWordsInContent(){
+    public void shouldBeTrueIfRudeWordsInContent(){
         content1.add(przekle1);
         content1.add(przekle2);
         for (String st : content1){
-          lolo.ifRudeWord(content1);
-            assertTrue(lolo.ifRudeWord(content1));
+          rudeWordsInContent.ifRudeWord(content1);
+            assertTrue(rudeWordsInContent.ifRudeWord(content1));
         } }}
