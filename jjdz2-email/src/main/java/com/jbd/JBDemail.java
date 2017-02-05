@@ -4,10 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
-
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.regex.Pattern;
 
 public class JBDemail {
 
@@ -131,11 +129,11 @@ public class JBDemail {
                 System.out.println(displayPhoneNumbers.searchPhoneNumbers(partialEMailKeeper));
             }
             if ("7".equals(input) && path != 0) {
-                LOGGER.info(MAIN_MARKER,"User picked option 7."); // wyświetla sparsowane emaile
+                LOGGER.info(MAIN_MARKER,"User picked option 7.");
                 printEmails(eMailKeeper);
             }
             if ("8".equals(input) && path != 0) {
-                LOGGER.info(MAIN_MARKER,"User picked option 8."); // wybiera przefiltrowane emaile
+                LOGGER.info(MAIN_MARKER,"User picked option 8.");
                 printEmails(partialEMailKeeper);
             }
             if ("9".equals(input) && path != 0) {
@@ -158,11 +156,9 @@ public class JBDemail {
 
                 rwic.iteratingThroughList(eMailKeeper);
                 rwic.ifRudeWord(content);
-
             }
         }
     }
-
     public static void printEmails(List<Email> list) {
         for (Email email : list) {
 
