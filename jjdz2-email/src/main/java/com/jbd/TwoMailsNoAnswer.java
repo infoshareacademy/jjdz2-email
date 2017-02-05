@@ -1,11 +1,18 @@
 package com.jbd;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class TwoMailsNoAnswer extends FiveDaysNoAnswer {
+    private static final Logger LOGGER = LoggerFactory.getLogger(TwoMailsNoAnswer.class);
+    private static final Marker TWOMAILSNOANSWER_MARKER = MarkerFactory.getMarker("TwoMailsNoAnswer");
 
     String userMail = "Angus.Hardie@malcolmhardie.com";
     public ArrayList<LocalDateTime> dates = new ArrayList<>();
@@ -44,9 +51,8 @@ public class TwoMailsNoAnswer extends FiveDaysNoAnswer {
     }
 
     public void decideIfTwoAnswers() {// This code waits for else feature
-
          // Boolean checkIf = recieverMailDate.isBefore(ourOneBeforeLastDate);
-         // System.out.println("if true we send two emails and get no answer   :   " + checkIf);
+       // LOGGER.info(TWOMAILSNOANSWER_MARKER, "if true we send two emails and get no answer   :   " + checkIf);
     }
 }
 

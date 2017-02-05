@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 
 public class RudeWordsInContent {
     private static final Logger LOGGER = LoggerFactory.getLogger(RudeWordsInContent.class);
-    private static final Marker RUDEWORDSINCONTENT_MARKER = MarkerFactory.getMarker("SearchCriteria");
+    private static final Marker RUDEWORDSINCONTENT_MARKER = MarkerFactory.getMarker("RudeWordsInContent");
     public boolean found;
 
     ArrayList<String> content = new ArrayList<>();
