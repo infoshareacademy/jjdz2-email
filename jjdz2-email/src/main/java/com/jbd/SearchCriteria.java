@@ -13,7 +13,7 @@ import java.util.List;
 public class SearchCriteria {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SearchCriteria.class);
-    private static final Marker SEARCHCRITERIA_MARKER = MarkerFactory.getMarker("SearchCriteria");
+    private static final Marker MARKER = MarkerFactory.getMarker("SearchCriteria");
 
     private static String email;
     private static String startDate;
@@ -33,7 +33,7 @@ public class SearchCriteria {
         searchCriteriaValidator.validateEmail(email);
         SearchCriteria.email = email;
         emailAdresses.addAll(searchCriteriaCommaParser(email));
-        LOGGER.info(SEARCHCRITERIA_MARKER, "Element: " + email + " added to the emails list.");
+        LOGGER.info(MARKER, "Element: " + email + " added to the emails list.");
     }
 
     public static String getStartDate() {
@@ -46,7 +46,7 @@ public class SearchCriteria {
         } else {
             startDate = startDate + TIME;
         }
-        LOGGER.info(SEARCHCRITERIA_MARKER, "Start date has been set: " + startDate);
+        LOGGER.info(MARKER, "Start date has been set: " + startDate);
         SearchCriteria.startDate = startDate;
         searchCriteriaValidator.validateStartDate(startDate);
     }
@@ -62,36 +62,36 @@ public class SearchCriteria {
             endDate = endDate + TIME;
         }
         SearchCriteria.endDate = endDate;
-        LOGGER.info(SEARCHCRITERIA_MARKER, "End date has been set: " + endDate);
+        LOGGER.info(MARKER, "End date has been set: " + endDate);
         searchCriteriaValidator.validateEndDate(endDate);
     }
 
     public static List<String> getKeywords() {
-        LOGGER.info(SEARCHCRITERIA_MARKER, "Keywords passed parsing method");
+        LOGGER.info(MARKER, "Keywords passed parsing method");
         List<String> keywordsParsed = searchCriteriaCommaParser(keywords);
         return keywordsParsed;
     }
 
     public static void setKeywords(String keywords) {
         SearchCriteria.keywords = keywords;
-        LOGGER.info(SEARCHCRITERIA_MARKER, "Keywords has been set: " + keywords);
+        LOGGER.info(MARKER, "Keywords has been set: " + keywords);
     }
 
     private static List<String> searchCriteriaCommaParser(String stringToParse) {
         List<String> parsedList = new ArrayList<>();
 
         stringToParse = stringToParse.replaceAll(", ", ",");
-        LOGGER.info(SEARCHCRITERIA_MARKER, "Parsing: replaced all \", \" with single comma.");
+        LOGGER.info(MARKER, "Parsing: replaced all \", \" with single comma.");
         stringToParse = stringToParse.replaceAll(" ,", ",");
-        LOGGER.info(SEARCHCRITERIA_MARKER, "Parsing: replaced all \" ,\" with single comma.");
+        LOGGER.info(MARKER, "Parsing: replaced all \" ,\" with single comma.");
 
         String splitBy = ",";
         String[] keywordsParsing = stringToParse.split(splitBy);
-        LOGGER.info(SEARCHCRITERIA_MARKER, "Parsing: input string: " + stringToParse + " parsed by comma: [" + splitBy + "]");
+        LOGGER.info(MARKER, "Parsing: input string: " + stringToParse + " parsed by comma: [" + splitBy + "]");
 
         for (String stringElement : keywordsParsing) {
             parsedList.add(stringElement);
-            LOGGER.info(SEARCHCRITERIA_MARKER, "Parsing: parsed element added to the list: " + stringElement);
+            LOGGER.info(MARKER, "Parsing: parsed element added to the list: " + stringElement);
         }
         return parsedList;
     }
