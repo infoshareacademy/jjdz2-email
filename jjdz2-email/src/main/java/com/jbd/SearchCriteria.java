@@ -1,12 +1,11 @@
 package com.jbd;
 
-import javax.ejb.Stateless;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
+import javax.ejb.Stateless;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +19,7 @@ public class SearchCriteria {
     private static String startDate;
     private static String endDate;
     private static String keywords;
-    private static final String TIME = "00:00";
+    private static final String TIME = " 00:00";
     private static ArrayList<String> emailAdresses = new ArrayList<>();
 
     private static SearchCriteriaValidator searchCriteriaValidator = new SearchCriteriaValidator();
@@ -38,12 +37,14 @@ public class SearchCriteria {
     }
 
     public static String getStartDate() {
-        return startDate + " " + TIME;
+        return startDate;
     }
 
     public static void setStartDate(String startDate) {
         if ("".equals(startDate)) {
-            startDate = "1111-01-01";
+            startDate = SearchCriteriaValidator.DEFAULT_STARTDATE;
+        } else {
+            startDate = startDate + TIME;
         }
         LOGGER.info(SEARCHCRITERIA_MARKER, "Start date has been set: " + startDate);
         SearchCriteria.startDate = startDate;
@@ -51,12 +52,14 @@ public class SearchCriteria {
     }
 
     public static String getEndDate() {
-        return endDate + " " + TIME;
+        return endDate;
     }
 
     public static void setEndDate(String endDate) {
         if ("".equals(endDate)) {
-            endDate = "9999-12-12";
+            endDate = SearchCriteriaValidator.DEFAULT_ENDDATE;
+        } else {
+            endDate = endDate + TIME;
         }
         SearchCriteria.endDate = endDate;
         LOGGER.info(SEARCHCRITERIA_MARKER, "End date has been set: " + endDate);
@@ -96,7 +99,7 @@ public class SearchCriteria {
     public String dateToDisplayInFrontEnd(String date) {
         String dateParsed = "";
 
-        if(!(SearchCriteriaValidator.DEFAULT_STARTDATE.equalsIgnoreCase(date) ||
+        if (!(SearchCriteriaValidator.DEFAULT_STARTDATE.equalsIgnoreCase(date) ||
                 SearchCriteriaValidator.DEFAULT_ENDDATE.equalsIgnoreCase(date))) {
             dateParsed = date.substring(0, 10);
         }

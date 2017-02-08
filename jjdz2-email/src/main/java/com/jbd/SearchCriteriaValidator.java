@@ -34,23 +34,23 @@ public class SearchCriteriaValidator {
 
     public static boolean validateStartDate(String startDate) {
         boolean isStartdateCorrect = datePatternMatching(startDate);
-        LOGGER.info(SEARCHCRITERIAVALIDATOR_MARKER, "Validation of start date: " + startDate + "outcome: " + isStartdateCorrect);
+        LOGGER.info(SEARCHCRITERIAVALIDATOR_MARKER, "Validation of start date: " + startDate + " outcome: " + isStartdateCorrect);
         return isStartdateCorrect;
     }
 
     public static boolean validateEndDate(String endDate) {
         boolean isEnddateCorrect = datePatternMatching(endDate);
-         if (isEnddateCorrect == true) {
-        LocalDate endDateFormatted = LocalDate.parse(endDate, dateFormatter);
-        boolean isEndDateAfterStartDate = endDateFormatted
-                .isAfter(LocalDate.parse(SearchCriteria.getStartDate(), dateFormatter));
-        LOGGER.debug(SEARCHCRITERIAVALIDATOR_MARKER,
-                "End date after start date validation, outcome: " + isEndDateAfterStartDate);
+        if (isEnddateCorrect == true) {
+            LocalDate endDateFormatted = LocalDate.parse(endDate, dateFormatter);
+            boolean isEndDateAfterStartDate = endDateFormatted
+                    .isAfter(LocalDate.parse(SearchCriteria.getStartDate(), dateFormatter));
+            LOGGER.debug(SEARCHCRITERIAVALIDATOR_MARKER,
+                    "End date after start date validation, outcome: " + isEndDateAfterStartDate);
 
-        if (isEndDateAfterStartDate == false) {
-            isEnddateCorrect = false;
+            if (isEndDateAfterStartDate == false) {
+                isEnddateCorrect = false;
+            }
         }
-          }
         LOGGER.info(SEARCHCRITERIAVALIDATOR_MARKER, "Validation of end date: " + endDate + " outcome: " + isEnddateCorrect);
         return isEnddateCorrect;
     }
