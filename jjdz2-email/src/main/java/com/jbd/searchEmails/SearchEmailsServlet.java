@@ -1,4 +1,4 @@
-package com.jbd.servlets;
+package com.jbd.searchEmails;
 
 import com.jbd.*;
 import org.slf4j.Logger;
