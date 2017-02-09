@@ -55,7 +55,7 @@ public class FiveDaysNoAnswer extends JBDemail {
 
         LocalDateTime fiveDaysAgo = LocalDateTime.now().minusDays(5);
 
-        afterAllList.removeIf(lol -> lol.isBefore(fiveDaysAgo));
+        afterAllList.removeIf(a -> a.isBefore(fiveDaysAgo));
     }
 
     public boolean chceckIfContentBetween() {
