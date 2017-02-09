@@ -58,8 +58,8 @@ public class FiveDaysNoAnswer extends JBDemail {
         afterAllList.removeIf(lol -> lol.isBefore(fiveDaysAgo));
     }
 
-    public boolean chceckIfContentBetween(boolean ifTrue) {
-
+    public boolean chceckIfContentBetween() {
+        boolean ifTrue;
         afterAllList.size();
         if (afterAllList.size() == 0) {
             ifTrue = true;

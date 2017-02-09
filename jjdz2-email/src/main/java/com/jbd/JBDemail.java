@@ -147,7 +147,7 @@ public class JBDemail {
                 fiveDaysNoAnswer.erasingFreeDaysFromDates(sortedEmailDatesInDate);
                 fiveDaysNoAnswer.dateToLocalDateTimeParse();
                 fiveDaysNoAnswer.checkIfWasAnswer(afterAllList);
-                fiveDaysNoAnswer.chceckIfContentBetween(false);
+                fiveDaysNoAnswer.chceckIfContentBetween();
 
                 twoMailsNoAnswer.addingAdressesToList(eMailKeeper);
                 twoMailsNoAnswer.addingDatesToList(eMailKeeper);

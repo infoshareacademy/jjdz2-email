@@ -19,7 +19,7 @@ public class FiveDaysNoAnswerTest extends FiveDaysNoAnswer {
     @Test
     public void shouldReturnTrueIfListIsEmpty() throws Exception {
 
-        boolean sut = fdna1.chceckIfContentBetween(false);
+        boolean sut = fdna1.chceckIfContentBetween();
         assertThat("List is not empty", sut, is(true));
     }
 
