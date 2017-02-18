@@ -48,7 +48,7 @@ public class SearchCriteria {
         }
         LOGGER.info(MARKER, "Start date has been set: " + startDate);
         SearchCriteria.startDate = startDate;
-        searchCriteriaValidator.validateStartDate(startDate);
+        //searchCriteriaValidator.validateStartDate(startDate);
     }
 
     public static String getEndDate() {
@@ -63,7 +63,7 @@ public class SearchCriteria {
         }
         SearchCriteria.endDate = endDate;
         LOGGER.info(MARKER, "End date has been set: " + endDate);
-        searchCriteriaValidator.validateEndDate(endDate);
+        //  searchCriteriaValidator.validateEndDate(endDate);
     }
 
     public static List<String> getKeywords() {

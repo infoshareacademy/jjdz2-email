@@ -9,7 +9,10 @@ import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
 import javax.ejb.Stateless;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 @Stateless
 public class FinalEmailsSet {
