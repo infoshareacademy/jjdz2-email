@@ -26,7 +26,7 @@
 
         <version.mysql>5.1.37</version.mysql>
         <jdbc.datasource>java:jboss/datasources/MySQLDS</jdbc.datasource>
-        <mysql.connection.url>jdbc:mysql://localhost:3306/restapi??useUnicode=yes&amp;characterEncoding=UTF-8</mysql.connection.url>
+        <mysql.connection.url>jdbc:mysql://localhost:3307/jbdee_rest??useUnicode=yes&amp;characterEncoding=UTF-8</mysql.connection.url>
         <mysql.username>root</mysql.username>
         <mysql.password>root</mysql.password>
     </properties>
