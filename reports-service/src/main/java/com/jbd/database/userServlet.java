@@ -1,5 +1,8 @@
 package com.jbd.database;
 
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,8 +16,12 @@ import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.util.List;
 
+
 @WebServlet("/create")
 public class userServlet extends HttpServlet {
+    @Inject
+    ManageDB manageDB;
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Response user = ClientBuilder.newClient()
@@ -24,7 +31,9 @@ public class userServlet extends HttpServlet {
                 .get();
 
         List<sessionUser> userList = user.readEntity(List.class);
-        System.out.println(userList.get(0));
+
+        //manageDB.saveUser(userList.get(0));
+        System.out.println(userList.get(0).getClass());
 
         System.out.println("Pobralem!");
     }
