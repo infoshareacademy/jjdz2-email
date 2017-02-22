@@ -9,6 +9,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import java.util.List;
 
 @Stateless
 @Path("users")
@@ -29,9 +30,12 @@ public class user  {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createUser(sessionUser user){
-        System.out.println(user.getUsermail());
-        manageDB.saveUser(user);
+    public Response createUser(List<sessionUser> usersList){
+        usersList.stream().forEach(System.out::println);
+        System.out.println(usersList.get(0).getUsername());
+        for(int i =0; i< usersList.size();i++){
+            manageDB.saveUser(usersList.get(i));
+        }
 
         return Response
                 .created(uriInfo
