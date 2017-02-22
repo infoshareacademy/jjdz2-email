@@ -32,8 +32,8 @@ public class userServlet extends HttpServlet {
 
         List<sessionUser> userList = user.readEntity(List.class);
 
-        //manageDB.saveUser(userList.get(0));
-        System.out.println(userList.get(0).getClass());
+
+        System.out.println(userList.get(0));
 
         System.out.println("Pobralem!");
     }

@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Locale;
 
-@Stateless
+@SessionScoped
 @Entity
 @Table(name = "User")
 public class sessionUser implements Serializable {
