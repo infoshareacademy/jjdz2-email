@@ -2,11 +2,16 @@ package com.jbd.authorization;
 
 
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -16,7 +21,11 @@ import java.util.Locale;
 @SessionScoped
 @Entity
 @Table(name = "User")
-@NamedQuery(name = "SessionData.findAll", query = "select p FROM SessionData p")
+@NamedQueries({
+@NamedQuery(name = "SessionData.findAll", query = "select p FROM SessionData p"),
+@NamedQuery(name = "SessionData.findAllWithoutID", query = "select c.username, c.usermail FROM SessionData c")
+
+})//@NamedQuery(name = "SessionData.findAllWithoutID", query = "select p.privilege, p.usermail, p.username FROM SessionData p")
 public class SessionData implements Serializable {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(SessionData.class);
     private static final Marker MARKER = MarkerFactory.getMarker("SessionData");
@@ -31,7 +40,8 @@ public class SessionData implements Serializable {
     private String username;
     private String usermail;
     private int privilege;
-    @Transient
+//    @JsonSerialize(using = LocalDateSerializer.class)
+//    @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDateTime loginTime;
     @Transient
     private String code = null;

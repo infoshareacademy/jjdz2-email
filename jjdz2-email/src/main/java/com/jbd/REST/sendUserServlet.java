@@ -1,5 +1,6 @@
 package com.jbd.REST;
 
+import com.jbd.DBA.ManageUser;
 import com.jbd.authorization.SessionData;
 
 import javax.inject.Inject;
@@ -10,31 +11,47 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
-
+import java.util.ArrayList;
+import java.util.List;
 
 
 @WebServlet(urlPatterns = "/sendUserServlet")
 
 public class sendUserServlet extends HttpServlet {
+
     @Inject
     SessionData sessionData;
+
+    @Inject
+    ManageUser manageUser;
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        SessionData test = new SessionData();
-        test.setUsername("Karol");
-        test.setUsermail("Kowalski@wp.pl");
-        test.setPrivilege(1);
+        List<SessionData> usersListFromDB = new ArrayList<>();
+        usersListFromDB = manageUser.searchForAll();
+        System.out.println("Users from DB " + usersListFromDB);
+
+//        SessionData test = new SessionData();
+//        test.setUsername("Karol");
+//        test.setUsermail("Kowalski@wp.pl");
+//        test.setPrivilege(1);
 
         Response user = ClientBuilder.newClient()
                 .target("http://localhost:8081/reporting/reportApi/users")
                 .request(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
-                .post(Entity.json(test));
+                .post(Entity.json(usersListFromDB));
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("costam");
+        List<SessionData> usersListFromDB = new ArrayList<>();
+        usersListFromDB = manageUser.searchForAllWithoutID();
+        System.out.println("Users from DB " + usersListFromDB);
+//        usersListFromDB.stream()
+//                    .map()
     }
 }

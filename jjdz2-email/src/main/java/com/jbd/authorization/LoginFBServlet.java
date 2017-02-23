@@ -6,6 +6,7 @@ import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @WebServlet("/LoginFBServlet")
 public class LoginFBServlet extends HttpServlet {
@@ -93,6 +98,20 @@ public class LoginFBServlet extends HttpServlet {
             manageUser.saveUser(sessionData);
             LOGGER.info(MARKER, "Added succesfully- " + sessionData.getUsername());
         }
+
+       //For Rest Application
+        SessionData testSessionUser = new SessionData();
+        String userName = fbProfileData.get("first_name") + " " + fbProfileData.get("last_name");
+        String userMail = fbProfileData.get("email");
+        testSessionUser.setUsername(userName);
+        testSessionUser.setUsermail(userMail);
+        testSessionUser.setLoginTime(LocalDateTime.now());
+
+        System.out.println("Przed Wyslaniem!");
+        sendJsonToReportSystem(testSessionUser);
+        System.out.println("Wyslalem! JSona " + testSessionUser);
+
+
         LOGGER.info(MARKER, "Logged User: " + sessionData.getUsername());
         LOGGER.debug(MARKER, "Session data :" + sessionData);
 
@@ -112,6 +131,14 @@ public class LoginFBServlet extends HttpServlet {
         user.setUsermail(userMail);
         user.setPrivilege(privilege);
         return user;
+    }
+
+    public void sendJsonToReportSystem(SessionData sessionData){
+        Response user = ClientBuilder.newClient()
+                .target("http://localhost:8081/reporting/reportApi/users")
+                .request(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .post(Entity.json(sessionData));
     }
 
 
