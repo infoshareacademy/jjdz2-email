@@ -23,7 +23,7 @@ public class user  {
 
     @Path("name")
     @GET
-    @Produces
+    @Produces(MediaType.APPLICATION_JSON)
     public String name() {
         return "Dzial!";
     }

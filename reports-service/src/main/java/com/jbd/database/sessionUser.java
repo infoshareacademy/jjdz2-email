@@ -25,14 +25,18 @@ public class sessionUser implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Transient
     private boolean isLogged = false;
     private String username;
     private String usermail;
+    @Transient
     private int privilege;
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime loginTime;
+    @Transient
     private String code = null;
+    @Transient
     private Locale locale;
 
 
