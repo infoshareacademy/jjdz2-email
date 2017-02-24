@@ -16,8 +16,9 @@ import java.util.Locale;
 @SessionScoped
 @Entity
 @Table(name = "User")
-public class sessionUser implements Serializable {
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(sessionUser.class);
+@NamedQuery(name = "User.findAll", query = "select p FROM User p")
+public class User implements Serializable {
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(User.class);
     private static final Marker MARKER = MarkerFactory.getMarker("SessionData");
     public static final int ADMIN = 1;
     public static final int LOCAL_USER = 2;

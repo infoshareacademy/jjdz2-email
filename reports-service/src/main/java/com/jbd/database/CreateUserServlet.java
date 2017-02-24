@@ -1,16 +1,12 @@
 package com.jbd.database;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
@@ -18,7 +14,7 @@ import java.util.List;
 
 
 @WebServlet("/create")
-public class userServlet extends HttpServlet {
+public class CreateUserServlet extends HttpServlet {
     @Inject
     ManageDB manageDB;
 
@@ -30,7 +26,7 @@ public class userServlet extends HttpServlet {
                 .accept(MediaType.APPLICATION_JSON)
                 .get();
 
-        List<sessionUser> userList = user.readEntity(List.class);
+        List<User> userList = user.readEntity(List.class);
 
 
         System.out.println(userList.get(0));

@@ -1,7 +1,8 @@
 package com.jbd.database.REST;
 
+import com.jbd.database.ActivityReport;
 import com.jbd.database.ManageDB;
-import com.jbd.database.sessionUser;
+import com.jbd.database.User;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -13,10 +14,13 @@ import java.util.List;
 
 @Stateless
 @Path("users")
-public class user  {
+public class RestUser {
 
     @Inject
     ManageDB manageDB;
+
+    @Inject
+    ActivityReport activityReport;
 
     @Context
     UriInfo uriInfo;
@@ -24,18 +28,15 @@ public class user  {
     @Path("name")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String name() {
-        return "Dzial!";
+    public List<User> users() {
+        System.out.println("Dzialam?");
+        activityReport.generateReport();
+        return null;
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createUser(sessionUser usersList){
-        //usersList.stream().forEach(System.out::println);
-//        System.out.println(usersList.get(0).getUsername());
-//        for(int i =0; i< usersList.size();i++){
-//            manageDB.saveUser(usersList.get(i));
-//        }
+    public Response createUser(User usersList){
         manageDB.saveUser(usersList);
 
         return Response
