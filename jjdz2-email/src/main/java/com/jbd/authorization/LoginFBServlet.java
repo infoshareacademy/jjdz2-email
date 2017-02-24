@@ -65,18 +65,22 @@ public class LoginFBServlet extends HttpServlet {
         LOGGER.info(MARKER, "Generated FBGraph");
         Map<String, String> fbProfileData = fbGraph.getGraphData(graph);
 
+        String userName = fbProfileData.get("first_name") + " " + fbProfileData.get("last_name");
+        String userMail = fbProfileData.get("email");
+
         if (counter == 0) {
             SessionData adminUser = new SessionData();
             adminUser.setUsermail("marbar1812@gmail.com");
             adminUser.setUsername("Marcin Bartoszek");
             adminUser.setPrivilege(SessionData.ADMIN);
+            adminUser.setLoginTime(LocalDateTime.now());
             manageUser.saveUser(adminUser);
             LOGGER.info(MARKER, "Added admin user");
             counter += 1;
         }
         usersFromDatabase = manageUser.searchForAll();
         for (SessionData user : usersFromDatabase) {
-            String userName = fbProfileData.get("first_name") + " " + fbProfileData.get("last_name");
+           // String userName = fbProfileData.get("first_name") + " " + fbProfileData.get("last_name");
             if (user.getUsername().equals(userName) && user.getUsermail().equals(fbProfileData.get("email"))) {
                 if (user.getPrivilege() == SessionData.ADMIN) {
                     privilege = SessionData.ADMIN;
@@ -92,8 +96,8 @@ public class LoginFBServlet extends HttpServlet {
         sessionData.login(code, fbProfileData.get("first_name") + " " + fbProfileData.get("last_name"), fbProfileData.get("email"), privilege);
         if (isNotInDB) {
             LOGGER.info(MARKER, "User is not in DB! Adding...");
-            String userName = fbProfileData.get("first_name") + " " + fbProfileData.get("last_name");
-            String userMail = fbProfileData.get("email");
+            //String userName = fbProfileData.get("first_name") + " " + fbProfileData.get("last_name");
+            //String userMail = fbProfileData.get("email");
             SessionData sessionData = new SessionData();
             sessionData = createUserToDB(userName, userMail, privilege);
             manageUser.saveUser(sessionData);
@@ -101,16 +105,11 @@ public class LoginFBServlet extends HttpServlet {
         }
 
        //For Rest Application
-        SessionData testSessionUser = new SessionData();
-        String userName = fbProfileData.get("first_name") + " " + fbProfileData.get("last_name");
-        String userMail = fbProfileData.get("email");
-        testSessionUser.setUsername(userName);
-        testSessionUser.setUsermail(userMail);
-        testSessionUser.setLoginTime(LocalDateTime.now());
+        //String userName = fbProfileData.get("first_name") + " " + fbProfileData.get("last_name");
+       // String userMail = fbProfileData.get("email");
 
-        System.out.println("Przed Wyslaniem!");
-        sendJsonToReportSystem(testSessionUser);
-        System.out.println("Wyslalem! JSona " + testSessionUser);
+        sendJsonToReportSystem(createUserForReport(userName,userMail));
+
 
 
         LOGGER.info(MARKER, "Logged User: " + sessionData.getUsername());
@@ -131,8 +130,18 @@ public class LoginFBServlet extends HttpServlet {
         user.setUsername(userName);
         user.setUsermail(userMail);
         user.setPrivilege(privilege);
+        user.setLoginTime(LocalDateTime.now());
         return user;
     }
+
+    public SessionData createUserForReport(String userName, String userMail) {
+        SessionData user = new SessionData();
+        user.setUsername(userName);
+        user.setUsermail(userMail);
+        user.setLoginTime(LocalDateTime.now());
+        return user;
+    }
+
 
     public void sendJsonToReportSystem(SessionData sessionData){
         Response user = ClientBuilder.newClient()

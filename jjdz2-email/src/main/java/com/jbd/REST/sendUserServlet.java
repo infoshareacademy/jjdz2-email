@@ -34,11 +34,6 @@ public class sendUserServlet extends HttpServlet {
         usersListFromDB = manageUser.searchForAll();
         System.out.println("Users from DB " + usersListFromDB);
 
-//        SessionData test = new SessionData();
-//        test.setUsername("Karol");
-//        test.setUsermail("Kowalski@wp.pl");
-//        test.setPrivilege(1);
-
         Response user = ClientBuilder.newClient()
                 .target("http://localhost:8081/reporting/reportApi/users")
                 .request(MediaType.APPLICATION_JSON)
