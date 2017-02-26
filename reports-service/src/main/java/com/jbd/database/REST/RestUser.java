@@ -25,13 +25,16 @@ public class RestUser {
     @Context
     UriInfo uriInfo;
 
+
+
     @Path("name")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<User> users() {
+    public List<Report> users() {
         System.out.println("Dzialam?");
-        activityReport.generateReport();
-        return null;
+        List<Report> reportList;
+        reportList = activityReport.generateReport();
+        return reportList;
     }
 
     @POST
