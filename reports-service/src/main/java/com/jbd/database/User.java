@@ -11,13 +11,14 @@ import javax.enterprise.context.SessionScoped;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.Locale;
 
 @SessionScoped
 @Entity
 @Table(name = "User")
 @NamedQuery(name = "User.findAll", query = "select p FROM User p")
-public class User implements Serializable {
+public class User implements Serializable, Comparable<User> {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(User.class);
     private static final Marker MARKER = MarkerFactory.getMarker("SessionData");
     public static final int ADMIN = 1;
@@ -119,4 +120,16 @@ public class User implements Serializable {
                 '}';
     }
 
+
+
+
+    @Override
+    public int compareTo(User o) {
+        if(getLoginTime().isEqual(o.getLoginTime()))
+            return 0;
+        else if (getLoginTime().isAfter(o.getLoginTime()))
+            return 1;
+        else
+            return -1;
+    }
 }
