@@ -51,6 +51,9 @@
             <input class="btn btn-warning" type="submit" value="Go to main page" name="goBackToKeywordsFinder">
         </form>
         </p>
+        <form method="get" action="createReport">
+            <button class="btn btn-warning" onclick="location.href=createReport">createReport</button>
+        </form>
     </div>
     <jsp:directive.include file="../footer.jsp"/>
 </div>

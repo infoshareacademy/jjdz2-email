@@ -1,21 +1,19 @@
 package com.jbd.REST;
 
 import com.jbd.DBA.ManageUser;
+import com.jbd.Report;
 import com.jbd.authorization.SessionData;
 
 import javax.ejb.Stateless;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Stateless
-@Path("users")
+@Path("/users")
 
 public class restUsers {
 
@@ -35,4 +33,12 @@ public class restUsers {
         List<SessionData> userList = manageUser.searchForAll();
         return userList;
     }
+
+    @GET
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void createReport(List<Report> reportList){
+        System.out.println(reportList);
+    }
+
+
 }
