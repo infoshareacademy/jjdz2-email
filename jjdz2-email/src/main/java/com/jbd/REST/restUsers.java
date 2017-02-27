@@ -1,6 +1,6 @@
 package com.jbd.REST;
 
-import com.jbd.DBA.ManageUser;
+import com.jbd.database.ManageUser;
 import com.jbd.Report;
 import com.jbd.authorization.SessionData;
 
