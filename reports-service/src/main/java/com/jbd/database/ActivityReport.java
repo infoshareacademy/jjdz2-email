@@ -1,69 +1,28 @@
 package com.jbd.database;
 
-import com.jbd.database.REST.Report;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @RequestScoped
 public class ActivityReport {
-    private List<User> userList = new ArrayList<>();
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(ActivityReport.class);
+    private static final Marker MARKER = MarkerFactory.getMarker("LoginFBServlet");    private List<User> userList = new ArrayList<>();
     private Map<String, Long> userMap;
     List<Report> reportList = new ArrayList<>();
+
     @Inject
     ManageDB manageDB;
 
     public List<Report> generateReport() {
         userList = manageDB.searchForAll();
-//        List<User> resultList = new ArrayList<>();
-//
-//        User s1 = new User();
-//        User s2 = new User();
-//        User s3 = new User();
-//        User s4 = new User();
-//        User s5 = new User();
-//
-//        String time = "2017-02-01 10:30";
-//        String time2 = "2017-02-02 11:30";
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-//        LocalDateTime formatDateTime = LocalDateTime.parse(time, formatter);
-//        LocalDateTime date = LocalDateTime.parse(time2, formatter);
-//
-//        s1.setLoginTime(formatDateTime);
-//        s1.setUsermail("mar@wp.pl");
-//        s1.setUsername("marcin");
-//
-//        s2.setLoginTime(formatDateTime);
-//        s2.setUsermail("mar@wp.pl");
-//        s2.setUsername("marcin");
-//
-//        s3.setLoginTime(date);
-//        s3.setUsermail("mar@wp.pl");
-//        s3.setUsername("marcin");
-//
-//        s4.setLoginTime(formatDateTime);
-//        s4.setUsermail("jul@wp.pl");
-//        s4.setUsername("jula");
-//
-//        s5.setLoginTime(formatDateTime);
-//        s5.setUsermail("mar@wp.pl");
-//        s5.setUsername("marcin");
-//
-//        userList.add(s1);
-//        userList.add(s2);
-//        userList.add(s3);
-//        userList.add(s5);
-//        userList.add(s4);
-//
-//        userList.forEach(System.out::println);
-
 
         Collections.sort(userList);
-        System.out.println("After Sort: ");
+        LOGGER.info(MARKER,"Collection Sorted");
         for (User u : userList
                 ) {
             System.out.println(u);
@@ -73,34 +32,23 @@ public class ActivityReport {
 
         for (int i = 0; i < userList.size(); i++) {
             if (counter == 0) {
-                System.out.println("User List: " + userList);
-                System.out.println("User get " + i + " "+ userList.get(i));
                 reportList.add(new Report(userList.get(i), 1));
+                LOGGER.info(MARKER, "Added first Record to Report");
                 counter++;
             } else {
-                System.out.println("User List: " + userList);
-                System.out.println("User get " + i + " "+ userList.get(i));
                 if (searchUser(userList.get(i))) {
-                    System.out.println("Found user!");
+                    LOGGER.info(MARKER, "Found User! Increasing visit counter and changing Last login time");
                     int number = searchAndReturnUser(userList.get(i));
                     reportList.get(number).getUser().setLoginTime(userList.get(i).getLoginTime());
                     reportList.get(number).setCounter(reportList.get(number).getCounter()+1);
                }
 
                 else {
-                    System.out.println("Not the same!");
+                    LOGGER.info(MARKER, "Did not found user in Report. Creating new one...");
                     reportList.add(new Report(userList.get(i), 1));
                 }
 
             }
-
-        }
-
-
-        System.out.println("Report!");
-        for (Report r : reportList
-                ) {
-            System.out.println(r);
 
         }
 
@@ -110,15 +58,14 @@ public class ActivityReport {
     public Boolean searchUser(User user) {
         Boolean found = false;
         for (Report r : reportList) {
-            System.out.println("Report List: " + reportList);
+            LOGGER.debug(MARKER,"Report List " + reportList);
             if (r.getUser().getLoginTime().getDayOfMonth() == user.getLoginTime().getDayOfMonth() && r.getUser().getUsername().equals(user.getUsername())) {
-                System.out.println("Report date: " +r.getUser().getLoginTime().getDayOfMonth() );
-                System.out.println("User date: " +user.getLoginTime().getDayOfMonth());
-                System.out.println("Report User Name: + " +r.getUser().getUsername() ) ;
-                System.out.println("User Naem: " + user.getUsername());
+                LOGGER.debug("Report date: " +r.getUser().getLoginTime().getDayOfMonth() );
+                LOGGER.debug("User date: " +user.getLoginTime().getDayOfMonth());
+                LOGGER.debug("Report User Name: + " +r.getUser().getUsername() ) ;
+                LOGGER.debug("User Naem: " + user.getUsername());
                 found = true;
                 break;
-
 
             }
 

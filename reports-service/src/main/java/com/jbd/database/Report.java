@@ -1,4 +1,4 @@
-package com.jbd.database.REST;
+package com.jbd.database;
 
 
 import com.jbd.database.User;
@@ -37,14 +37,3 @@ public class Report {
     }
 }
 
-//
-//    SELECT DAYOFMONTH(loginTime), COUNT(username) FROM User WHERE username = 'Marcin Bartoszek' GROUP BY DAYOFMONTH(loginTime);
-//
-//
-//        SELECT DATE_FORMAT(loginTime, '%Y %m %d'), COUNT(username) FROM User WHERE username = 'Marcin Bartoszek' GROUP BY
-//        DATE_FORMAT(loginTime, '%Y %m %d');
-//
-//        INSERT INTO User values ('1', '2017-02-01', 'mb@wp.pl', 'marcin');
-//        INSERT INTO User values ('2', '2017-02-01', 'mb@wp.pl', 'marcin');
-//        INSERT INTO User values ('3', '2017-02-02', 'mb@wp.pl', 'marcin');
-//        INSERT INTO User values ('4', '2017-02-01', 'em@wp.pl', 'jula');

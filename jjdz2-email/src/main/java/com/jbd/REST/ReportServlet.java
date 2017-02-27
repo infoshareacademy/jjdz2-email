@@ -2,6 +2,9 @@ package com.jbd.REST;
 
 import com.jbd.Report;
 import com.jbd.authorization.SessionData;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,6 +26,8 @@ import java.util.List;
 
 @WebServlet(urlPatterns = "/App/createReport")
 public class ReportServlet extends HttpServlet {
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(ReportServlet.class);
+    private static final Marker MARKER = MarkerFactory.getMarker("ManageDB");
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
@@ -31,14 +36,12 @@ public class ReportServlet extends HttpServlet {
         System.out.println("doGet!");
 
         Client client = ClientBuilder.newClient();
-
         WebTarget target = client.target("http://localhost:8081/reporting/reportApi/")
                 .path("users")
                 .path("name");
-
         Response response1 = target.request()
                 .get();
-
+        LOGGER.info(MARKER, "Connected to http://localhost:8081/reporting/reportApi/users/name ");
         List<Report> reportList = new ArrayList<>();
 
         Report[] reports = response1.readEntity(Report[].class);
@@ -46,6 +49,7 @@ public class ReportServlet extends HttpServlet {
         for (int i =0; i < reports.length; i++ ){
          reportList.add(reports[i]);
         }
+        LOGGER.info(MARKER, "Created successfully Report List From JSON");
 
         request.setAttribute("reportList", reportList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/App/AdminConsole.jsp");
