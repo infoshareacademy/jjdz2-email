@@ -114,17 +114,29 @@ public class SessionData implements Serializable {
 
     public void login(String code, String username, String usermail, int privilege) {
         if (!code.equals("")) {
+            System.out.println("Login: " + privilege);
             this.isLogged = true;
             this.username = username;
             this.usermail = usermail;
             this.code = code;
             this.loginTime = LocalDateTime.now();
-            if (privilege != ADMIN || privilege != LOCAL_USER) {
+            if(privilege == ADMIN){
+                this.privilege = ADMIN;
+            }
+            else if (privilege == LOCAL_USER)
                 this.privilege = LOCAL_USER;
-            } else if (privilege == LOCAL_USER) {
-                this.privilege = privilege;
-            } else
-                this.privilege = privilege;
+            else
+                this.privilege = LOCAL_USER;
+//            if (privilege != ADMIN || privilege != LOCAL_USER) {
+//                System.out.println("if");
+//                this.privilege = LOCAL_USER;
+//            } else if (privilege == LOCAL_USER) {
+//                System.out.println("Else if");
+//                this.privilege = privilege;
+//            } else
+//                System.out.println("Else");
+//                this.privilege = privilege;
+//            System.out.println("After Login: " +this.privilege);
         }
 
 

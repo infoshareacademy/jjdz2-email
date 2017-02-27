@@ -73,12 +73,17 @@ public class ActivityReport {
 
         for (int i = 0; i < userList.size(); i++) {
             if (counter == 0) {
+                System.out.println("User List: " + userList);
+                System.out.println("User get " + i + " "+ userList.get(i));
                 reportList.add(new Report(userList.get(i), 1));
                 counter++;
             } else {
+                System.out.println("User List: " + userList);
+                System.out.println("User get " + i + " "+ userList.get(i));
                 if (searchUser(userList.get(i))) {
                     System.out.println("Found user!");
                     int number = searchAndReturnUser(userList.get(i));
+                    reportList.get(number).getUser().setLoginTime(userList.get(i).getLoginTime());
                     reportList.get(number).setCounter(reportList.get(number).getCounter()+1);
                }
 
@@ -103,14 +108,22 @@ public class ActivityReport {
     }
 
     public Boolean searchUser(User user) {
+        Boolean found = false;
         for (Report r : reportList) {
+            System.out.println("Report List: " + reportList);
             if (r.getUser().getLoginTime().getDayOfMonth() == user.getLoginTime().getDayOfMonth() && r.getUser().getUsername().equals(user.getUsername())) {
-                return true;
+                System.out.println("Report date: " +r.getUser().getLoginTime().getDayOfMonth() );
+                System.out.println("User date: " +user.getLoginTime().getDayOfMonth());
+                System.out.println("Report User Name: + " +r.getUser().getUsername() ) ;
+                System.out.println("User Naem: " + user.getUsername());
+                found = true;
+                break;
+
 
             }
-            break;
+
         }
-        return false;
+        return found;
     }
 
     public int searchAndReturnUser(User user) {

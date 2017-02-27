@@ -79,6 +79,7 @@ public class LoginFBServlet extends HttpServlet {
         usersFromDatabase = manageUser.searchForAll();
         for (SessionData user : usersFromDatabase) {
             if (user.getUsername().equals(userName) && user.getUsermail().equals(fbProfileData.get("email"))) {
+                System.out.println("User from DB privilege: " + user.getPrivilege());
                 if (user.getPrivilege() == SessionData.ADMIN) {
                     privilege = SessionData.ADMIN;
                 } else
@@ -89,8 +90,9 @@ public class LoginFBServlet extends HttpServlet {
                 privilege = SessionData.LOCAL_USER;
             isNotInDB = true;
         }
-
+        System.out.println("Privilege : " +privilege);
         sessionData.login(code, fbProfileData.get("first_name") + " " + fbProfileData.get("last_name"), fbProfileData.get("email"), privilege);
+        System.out.println("Session Data: " + sessionData.getPrivilege());
         if (isNotInDB) {
             LOGGER.info(MARKER, "User is not in DB! Adding...");
             SessionData sessionData;

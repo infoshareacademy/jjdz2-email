@@ -39,9 +39,13 @@
 
         </div>
         <div class="col-md-9" name="headerText">
+            <c:set var="Counter" scope="request" value="0"></c:set>
             <ul class="list-group">
-                <li class="list-group-item list-group-item-action active">Dzien - Osoba - Ilosc Logowan</li>
                 <c:forEach items="${reportList}" var="report">
+                    <c:if test="${Counter == 0}">
+                        <li class="list-group-item list-group-item-action active">Dzien i ostatnia aktywność - Osoba - Ilosc Logowan</li>
+                        <c:set var="Counter" value="${Counter = Counter + 1}"></c:set>
+                    </c:if>
                     <li class="list-group-item justify-content-between">${report.getUser().getLoginTime()}
                         - ${report.getUser().getUsername()}
                         <span class="badge badge-default badge-pill">${report.getCounter()}</span>
