@@ -5,15 +5,24 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.util.*;
+import java.util.regex.Pattern;
 
 public class JBDemail {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(JBDemail.class);
     private static final Marker MAIN_MARKER = MarkerFactory.getMarker("Main");
 
     public static void main(String[] args) throws Exception {
+        ArrayList<String> content = new ArrayList<>();
+        TwoMailsNoAnswer tmna = new TwoMailsNoAnswer();
+        RudeWordsInContent rwic = new RudeWordsInContent();
+        FiveDaysNoAnswer fdna = new FiveDaysNoAnswer();
+        List<Date> sortedEmailDatesInDate = new ArrayList<>();
+        List<LocalDateTime> afterAllList = new ArrayList<>();
+
+
         List<String> filesInStrings;
         List<Email> eMailKeeper = new ArrayList<>();
         List<Email> partialEMailKeeper = new ArrayList<>();
@@ -28,6 +37,7 @@ public class JBDemail {
         int quit = 0;
         int path = 0;
         int answer = 0;
+
 
         System.out.println("Hello, this is JBDemail!\n" +
                 "Set path to your emails files and answer questions.");
@@ -61,7 +71,8 @@ public class JBDemail {
                         "6 - to look for phone numbers in emails\n" +
                         "7 - to display parsed emails\n" +
                         "8 - to display filtered emails\n" +
-                        "9 - to display number of filtered emails" +
+                        "9 - to display number of filtered emails\n" +
+                        "10 - to check if Some of emails were cut wierdly\n" +
                         "q - to quit");
             } else {
                 LOGGER.info(MAIN_MARKER,"Displaying full options for user.");
@@ -75,6 +86,7 @@ public class JBDemail {
                         "7 - to display parsed emails\n" +
                         "8 - to display filtered emails\n" +
                         "9 - to display number of filtered emails\n" +
+                        "10 - to check if some of emails were cut wierdly\n" +
                         "q - to quit");
             }
 
@@ -89,7 +101,7 @@ public class JBDemail {
             if ("2".equals(input)) {
                 LOGGER.info(MAIN_MARKER,"User picked option 2.");
                 filesInStrings = pG.createFileListFromPath(pG.askUserAboutInputPath());
-                LOGGER.info(MAIN_MARKER, "Found: " + pG.getFileList().size() + " files.");
+                LOGGER.info(MAIN_MARKER,"Found: " + pG.getFileList().size() + " files.");
                 eMailKeeper = fP.parseEmails(filesInStrings);
                 LOGGER.info(MAIN_MARKER,"Total emails parsed: " + eMailKeeper.size());
                 partialEMailKeeper = eMailKeeper;
@@ -119,22 +131,41 @@ public class JBDemail {
                 System.out.println(displayPhoneNumbers.searchPhoneNumbers(partialEMailKeeper));
             }
             if ("7".equals(input) && path != 0) {
-                LOGGER.info(MAIN_MARKER,"User picked option 7.");
+                LOGGER.info(MAIN_MARKER,"User picked option 7."); // wyświetla sparsowane emaile
                 printEmails(eMailKeeper);
             }
             if ("8".equals(input) && path != 0) {
-                LOGGER.info(MAIN_MARKER,"User picked option 8.");
+                LOGGER.info(MAIN_MARKER,"User picked option 8."); // wybiera przefiltrowane emaile
                 printEmails(partialEMailKeeper);
             }
-            if ("9".equals(input) && path != 0){
+            if ("9".equals(input) && path != 0) {
                 LOGGER.info(MAIN_MARKER,"User picked option 9.");
                 System.out.println(partialEMailKeeper.size());
+            }
+            if ("10".equals(input) && path != 0) {
+                LOGGER.info(MAIN_MARKER,"User picked option 10.");
+                fdna.dateSort(eMailKeeper);
+                fdna.LocalDateTimeToDateParse();
+                fdna.erasingFreeDaysFromDates(sortedEmailDatesInDate);
+                fdna.dateToLocalDateTimeParse();
+                fdna.checkIfWasAnswer(afterAllList);
+                fdna.chceckIfContentBetween(false);
+
+                tmna.addingAdressesToList(eMailKeeper);
+                tmna.addingDatesToList(eMailKeeper);
+                tmna.removingUserMailFromList(eMailKeeper);
+                tmna.decideIfTwoAnswers();
+
+                rwic.iteratingThroughList(eMailKeeper);
+                rwic.ifRudeWord(content);
+
             }
         }
     }
 
-    public static void printEmails(List<Email> list){
+    public static void printEmails(List<Email> list) {
         for (Email email : list) {
+
             System.out.println("--------------------");
             System.out.println(email.getData());
             System.out.println(email.toString());
