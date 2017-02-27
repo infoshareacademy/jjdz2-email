@@ -5,12 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Map;
-
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,6 +15,10 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 
 @WebServlet("/LoginFBServlet")
 public class LoginFBServlet extends HttpServlet {
@@ -80,7 +78,6 @@ public class LoginFBServlet extends HttpServlet {
         }
         usersFromDatabase = manageUser.searchForAll();
         for (SessionData user : usersFromDatabase) {
-           // String userName = fbProfileData.get("first_name") + " " + fbProfileData.get("last_name");
             if (user.getUsername().equals(userName) && user.getUsermail().equals(fbProfileData.get("email"))) {
                 if (user.getPrivilege() == SessionData.ADMIN) {
                     privilege = SessionData.ADMIN;
@@ -96,23 +93,16 @@ public class LoginFBServlet extends HttpServlet {
         sessionData.login(code, fbProfileData.get("first_name") + " " + fbProfileData.get("last_name"), fbProfileData.get("email"), privilege);
         if (isNotInDB) {
             LOGGER.info(MARKER, "User is not in DB! Adding...");
-            //String userName = fbProfileData.get("first_name") + " " + fbProfileData.get("last_name");
-            //String userMail = fbProfileData.get("email");
-            SessionData sessionData = new SessionData();
+            SessionData sessionData;
             sessionData = createUserToDB(userName, userMail, privilege);
             manageUser.saveUser(sessionData);
             LOGGER.info(MARKER, "Added succesfully- " + sessionData.getUsername());
         }
 
-       //For Rest Application
-        //String userName = fbProfileData.get("first_name") + " " + fbProfileData.get("last_name");
-       // String userMail = fbProfileData.get("email");
-
         sendJsonToReportSystem(createUserForReport(userName,userMail));
 
 
-
-        LOGGER.info(MARKER, "Logged User: " + sessionData.getUsername());
+        LOGGER.info(MARKER, "Logged User: " + sessionData.getUsername() + " Privilege: " + sessionData.getPrivilege());
         LOGGER.debug(MARKER, "Session data :" + sessionData);
 
         String name = fbProfileData.get("first_name");

@@ -18,48 +18,48 @@ public class ActivityReport {
     ManageDB manageDB;
 
     public List<Report> generateReport() {
-        //userList = manageDB.searchForAll();
-        List<User> resultList = new ArrayList<>();
-
-        User s1 = new User();
-        User s2 = new User();
-        User s3 = new User();
-        User s4 = new User();
-        User s5 = new User();
-
-        String time = "2017-02-01 10:30";
-        String time2 = "2017-02-02 11:30";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime formatDateTime = LocalDateTime.parse(time, formatter);
-        LocalDateTime date = LocalDateTime.parse(time2, formatter);
-
-        s1.setLoginTime(formatDateTime);
-        s1.setUsermail("mar@wp.pl");
-        s1.setUsername("marcin");
-
-        s2.setLoginTime(formatDateTime);
-        s2.setUsermail("mar@wp.pl");
-        s2.setUsername("marcin");
-
-        s3.setLoginTime(date);
-        s3.setUsermail("mar@wp.pl");
-        s3.setUsername("marcin");
-
-        s4.setLoginTime(formatDateTime);
-        s4.setUsermail("jul@wp.pl");
-        s4.setUsername("jula");
-
-        s5.setLoginTime(formatDateTime);
-        s5.setUsermail("mar@wp.pl");
-        s5.setUsername("marcin");
-
-        userList.add(s1);
-        userList.add(s2);
-        userList.add(s3);
-        userList.add(s5);
-        userList.add(s4);
-
-        userList.forEach(System.out::println);
+        userList = manageDB.searchForAll();
+//        List<User> resultList = new ArrayList<>();
+//
+//        User s1 = new User();
+//        User s2 = new User();
+//        User s3 = new User();
+//        User s4 = new User();
+//        User s5 = new User();
+//
+//        String time = "2017-02-01 10:30";
+//        String time2 = "2017-02-02 11:30";
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+//        LocalDateTime formatDateTime = LocalDateTime.parse(time, formatter);
+//        LocalDateTime date = LocalDateTime.parse(time2, formatter);
+//
+//        s1.setLoginTime(formatDateTime);
+//        s1.setUsermail("mar@wp.pl");
+//        s1.setUsername("marcin");
+//
+//        s2.setLoginTime(formatDateTime);
+//        s2.setUsermail("mar@wp.pl");
+//        s2.setUsername("marcin");
+//
+//        s3.setLoginTime(date);
+//        s3.setUsermail("mar@wp.pl");
+//        s3.setUsername("marcin");
+//
+//        s4.setLoginTime(formatDateTime);
+//        s4.setUsermail("jul@wp.pl");
+//        s4.setUsername("jula");
+//
+//        s5.setLoginTime(formatDateTime);
+//        s5.setUsermail("mar@wp.pl");
+//        s5.setUsername("marcin");
+//
+//        userList.add(s1);
+//        userList.add(s2);
+//        userList.add(s3);
+//        userList.add(s5);
+//        userList.add(s4);
+//
+//        userList.forEach(System.out::println);
 
 
         Collections.sort(userList);
