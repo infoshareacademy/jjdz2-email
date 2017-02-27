@@ -1,4 +1,4 @@
-package com.jbd.DBA;
+package com.jbd.database;
 
 import com.jbd.authorization.SessionData;
 import org.slf4j.LoggerFactory;
@@ -11,8 +11,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @SessionScoped
 public class ManageUser implements Serializable {
@@ -86,5 +85,17 @@ public class ManageUser implements Serializable {
         return form_details;
     }
 
+    @Transactional
+    public void saveAddressee(Addressee addressee) {
+        entityManager.persist(addressee);
+        LOGGER.info(MARKER, "Collected data addressee");
+    }
 
+    public List<String> getAllAddressee() {
+        List<String> addresseeList = new ArrayList<>();
+        TypedQuery<String> query = entityManager.createNamedQuery("Addressee.getAll", String.class);
+        addresseeList = query.getResultList();
+        LOGGER.debug(MARKER, "All addressee list: " + addresseeList);
+        return addresseeList;
+    }
 }
