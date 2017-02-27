@@ -13,7 +13,7 @@ import javax.ws.rs.core.UriInfo;
 import java.util.List;
 
 @Stateless
-@Path("users")
+@Path("/users")
 public class RestUser {
 
     @Inject
@@ -26,16 +26,22 @@ public class RestUser {
     UriInfo uriInfo;
 
 
-
-    @Path("name")
     @GET
+    @Path("/name")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Report> users() {
-        System.out.println("Dzialam?");
+    public Response users() {
         List<Report> reportList;
         reportList = activityReport.generateReport();
-        return reportList;
+        return Response.ok(reportList).build();
     }
+
+//
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public List<Report> users() {
+//        List<Report> reportList;
+//        reportList = activityReport.generateReport();
+//        return reportList;
+//    }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
