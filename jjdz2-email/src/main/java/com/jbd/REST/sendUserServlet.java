@@ -42,7 +42,6 @@ public class sendUserServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("costam");
         List<SessionData> usersListFromDB = new ArrayList<>();
         usersListFromDB = manageUser.searchForAllWithoutID();
         System.out.println("Users from DB " + usersListFromDB);

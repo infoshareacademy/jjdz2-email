@@ -28,6 +28,9 @@ public class Report {
         this.counter = counter;
     }
 
+    public Report() {
+    }
+
     @Override
     public String toString() {
         return "Report{" +

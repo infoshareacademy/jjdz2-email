@@ -35,14 +35,6 @@ public class RestUser {
         return Response.ok(reportList).build();
     }
 
-//
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public List<Report> users() {
-//        List<Report> reportList;
-//        reportList = activityReport.generateReport();
-//        return reportList;
-//    }
-
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createUser(User usersList){

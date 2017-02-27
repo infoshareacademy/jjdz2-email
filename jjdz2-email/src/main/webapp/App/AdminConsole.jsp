@@ -18,42 +18,57 @@
         <p>Welcome! ${sessionData.username} </p>
     </div>
     <div class="underJumbotron">
-        <form method="post" action="search">
-            <button class="btn btn-warning" onclick="location.href=search">Search</button>
-        </form>
-        <p>Add new admin or edit exisitng one </p>
-        <form method="post" action="update">
-            <c:set var="Admin" scope="session" value="Admin"/>
-            <c:set var="Local" scope="session" value="Local User"/>
-            <c:set var="Priv" scope="session" value="0"/>
+        <div class="col-md-3">
+            <form method="post" action="search">
+                <button class="btn btn-warning" onclick="location.href=search">Search</button>
+            </form>
 
-            <ul>
-                <c:forEach items="${userList}" var="user">
-                    <c:if test="${user.privilege == 1}">
-                    <li> ${user.id} . ${user.username} - ${Admin}   <input type="checkbox" name="isPrivileged"
-                                                                                 value=${user.id}></li>
-                    </c:if>
-                    <c:if test="${user.privilege == 2}">
-                    <li> ${user.id} . ${user.username} - ${Local}   <input type="checkbox" name="isPrivileged"
-                                                                                        value=${user.id}></li>
-                    </c:if>
+            <p>
+            <form action="../index.jsp">
+            </form>
+            </p>
+            <form method="get" action="createReport">
+                <button class="btn btn-warning" onclick="location.href=createReport">createReport</button>
+            </form>
+            <p>
+            <form action="../index.jsp">
+                <input class="btn btn-warning" type="submit" value="Go to main page" name="goBackToKeywordsFinder">
+            </form>
+            </p>
+
+
+        </div>
+        <div class="col-md-9" name="headerText">
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-action active">Dzien - Osoba - Ilosc Logowan</li>
+                <c:forEach items="${reportList}" var="report">
+                    <li class="list-group-item justify-content-between">${report.getUser().getLoginTime()}
+                        - ${report.getUser().getUsername()}
+                        <span class="badge badge-default badge-pill">${report.getCounter()}</span>
+                    </li>
                 </c:forEach>
-
             </ul>
-            <input class="btn btn-warning" type="submit" value="Update">
-        </form>
-        <p>
-        <form action="../index.jsp">
-        </form>
-        </p>
-        <p>
-        <form action="../index.jsp">
-            <input class="btn btn-warning" type="submit" value="Go to main page" name="goBackToKeywordsFinder">
-        </form>
-        </p>
-        <form method="get" action="createReport">
-            <button class="btn btn-warning" onclick="location.href=createReport">createReport</button>
-        </form>
+            <form method="post" action="update">
+                <c:set var="Admin" scope="session" value="Admin"/>
+                <c:set var="Local" scope="session" value="Local User"/>
+                <c:set var="Priv" scope="session" value="0"/>
+
+                <ul>
+                    <c:forEach items="${userList}" var="user">
+                        <c:if test="${user.privilege == 1}">
+                            <li> ${user.id} . ${user.username} - ${Admin} <input type="checkbox" name="isPrivileged"
+                                                                                 value=${user.id}></li>
+                        </c:if>
+                        <c:if test="${user.privilege == 2}">
+                            <li> ${user.id} . ${user.username} - ${Local} <input type="checkbox" name="isPrivileged"
+                                                                                 value=${user.id}></li>
+                        </c:if>
+                    </c:forEach>
+
+                </ul>
+                <input class="btn btn-warning" type="submit" value="Update">
+            </form>
+        </div>
     </div>
     <jsp:directive.include file="../footer.jsp"/>
 </div>

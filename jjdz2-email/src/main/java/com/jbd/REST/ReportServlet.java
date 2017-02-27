@@ -3,6 +3,7 @@ package com.jbd.REST;
 import com.jbd.Report;
 import com.jbd.authorization.SessionData;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +16,8 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -36,13 +39,19 @@ public class ReportServlet extends HttpServlet {
         Response response1 = target.request()
                 .get();
 
-        List<Report> reports = response1.readEntity(List.class);
-        System.out.println(reports);
-        System.out.println(reports.getClass());
-        System.out.println("After get!");
+        List<Report> reportList = new ArrayList<>();
+
+        Report[] reports = response1.readEntity(Report[].class);
+
+        for (int i =0; i < reports.length; i++ ){
+         reportList.add(reports[i]);
+        }
+
+        request.setAttribute("reportList", reportList);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/App/AdminConsole.jsp");
+        dispatcher.forward(request,response);
 
 
-        System.out.println("Pobralem!");
     }
 }
 
