@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setBundle basename="messages" var="msg"/>
 <html>
 <head>
     <title>JBD Email Search Engine</title>
@@ -45,7 +47,7 @@
             <ul class="list-group">
                 <c:forEach items="${reportList}" var="report">
                     <c:if test="${Counter == 0}">
-                        <li class="list-group-item list-group-item-action active">Dzien i ostatnia aktywność - Osoba - Ilosc Logowan</li>
+                        <li class="list-group-item list-group-item-action active"><fmt:message bundle="${msg}" key="reportHeading"/></li>
                         <c:set var="Counter" value="${Counter = Counter + 1}"></c:set>
                     </c:if>
                     <li class="list-group-item justify-content-between">${report.getUser().getLoginTime()}
