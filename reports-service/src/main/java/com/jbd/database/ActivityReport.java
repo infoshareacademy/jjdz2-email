@@ -23,11 +23,7 @@ public class ActivityReport {
 
         Collections.sort(userList);
         LOGGER.info(MARKER,"Collection Sorted");
-        for (User u : userList
-                ) {
-            System.out.println(u);
 
-        }
         int counter = 0;
 
         for (int i = 0; i < userList.size(); i++) {
@@ -63,7 +59,7 @@ public class ActivityReport {
                 LOGGER.debug("Report date: " +r.getUser().getLoginTime().getDayOfMonth() );
                 LOGGER.debug("User date: " +user.getLoginTime().getDayOfMonth());
                 LOGGER.debug("Report User Name: + " +r.getUser().getUsername() ) ;
-                LOGGER.debug("User Naem: " + user.getUsername());
+                LOGGER.debug("User Name: " + user.getUsername());
                 found = true;
                 break;
 

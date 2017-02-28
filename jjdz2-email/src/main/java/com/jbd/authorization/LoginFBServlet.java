@@ -79,7 +79,6 @@ public class LoginFBServlet extends HttpServlet {
         usersFromDatabase = manageUser.searchForAll();
         for (SessionData user : usersFromDatabase) {
             if (user.getUsername().equals(userName) && user.getUsermail().equals(fbProfileData.get("email"))) {
-                System.out.println("User from DB privilege: " + user.getPrivilege());
                 if (user.getPrivilege() == SessionData.ADMIN) {
                     privilege = SessionData.ADMIN;
                 } else
@@ -90,9 +89,9 @@ public class LoginFBServlet extends HttpServlet {
                 privilege = SessionData.LOCAL_USER;
             isNotInDB = true;
         }
-        System.out.println("Privilege : " +privilege);
+
         sessionData.login(code, fbProfileData.get("first_name") + " " + fbProfileData.get("last_name"), fbProfileData.get("email"), privilege);
-        System.out.println("Session Data: " + sessionData.getPrivilege());
+
         if (isNotInDB) {
             LOGGER.info(MARKER, "User is not in DB! Adding...");
             SessionData sessionData;
@@ -101,7 +100,7 @@ public class LoginFBServlet extends HttpServlet {
             LOGGER.info(MARKER, "Added succesfully- " + sessionData.getUsername());
         }
 
-        sendJsonToReportSystem(createUserForReport(userName,userMail));
+        sendJsonToReportSystem(createUserForReport(userName, userMail));
 
 
         LOGGER.info(MARKER, "Logged User: " + sessionData.getUsername() + " Privilege: " + sessionData.getPrivilege());
@@ -135,7 +134,7 @@ public class LoginFBServlet extends HttpServlet {
     }
 
 
-    public void sendJsonToReportSystem(SessionData sessionData){
+    public void sendJsonToReportSystem(SessionData sessionData) {
         Response user = ClientBuilder.newClient()
                 .target("http://localhost:8081/reporting/reportApi/users")
                 .request(MediaType.APPLICATION_JSON)

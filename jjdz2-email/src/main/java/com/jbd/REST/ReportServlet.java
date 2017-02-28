@@ -27,13 +27,12 @@ import java.util.List;
 @WebServlet(urlPatterns = "/App/createReport")
 public class ReportServlet extends HttpServlet {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(ReportServlet.class);
-    private static final Marker MARKER = MarkerFactory.getMarker("ManageDB");
+    private static final Marker MARKER = MarkerFactory.getMarker("ReportServlet");
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("doGet!");
 
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target("http://localhost:8081/reporting/reportApi/")

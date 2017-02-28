@@ -24,7 +24,7 @@ import java.util.Locale;
 @NamedQuery(name = "SessionData.findAll", query = "select p FROM SessionData p"),
 @NamedQuery(name = "SessionData.findAllWithoutID", query = "select c.username, c.usermail FROM SessionData c")
 
-})//@NamedQuery(name = "SessionData.findAllWithoutID", query = "select p.privilege, p.usermail, p.username FROM SessionData p")
+})
 public class SessionData implements Serializable {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(SessionData.class);
     private static final Marker MARKER = MarkerFactory.getMarker("SessionData");
@@ -127,16 +127,6 @@ public class SessionData implements Serializable {
                 this.privilege = LOCAL_USER;
             else
                 this.privilege = LOCAL_USER;
-//            if (privilege != ADMIN || privilege != LOCAL_USER) {
-//                System.out.println("if");
-//                this.privilege = LOCAL_USER;
-//            } else if (privilege == LOCAL_USER) {
-//                System.out.println("Else if");
-//                this.privilege = privilege;
-//            } else
-//                System.out.println("Else");
-//                this.privilege = privilege;
-//            System.out.println("After Login: " +this.privilege);
         }
 
 

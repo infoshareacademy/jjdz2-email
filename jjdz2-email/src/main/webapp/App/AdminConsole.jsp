@@ -24,7 +24,7 @@
     <div class="underJumbotron">
         <div class="col-md-3">
             <form method="post" action="search">
-                <button class="btn btn-warning" onclick="location.href=search">Search</button>
+                <button class="btn btn-warning" onclick="location.href=search"><fmt:message bundle="${msg}" key="search"/></button>
             </form>
 
             <p>
@@ -32,7 +32,7 @@
             </form>
             </p>
             <form method="get" action="createReport">
-                <button class="btn btn-warning" onclick="location.href=createReport">createReport</button>
+                <button class="btn btn-warning" onclick="location.href=createReport"><fmt:message bundle="${msg}" key="createReport"/></button>
             </form>
             <p>
             <form action="../index.jsp">
