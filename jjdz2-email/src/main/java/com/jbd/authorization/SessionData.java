@@ -114,7 +114,6 @@ public class SessionData implements Serializable {
 
     public void login(String code, String username, String usermail, int privilege) {
         if (!code.equals("")) {
-            System.out.println("Login: " + privilege);
             this.isLogged = true;
             this.username = username;
             this.usermail = usermail;
