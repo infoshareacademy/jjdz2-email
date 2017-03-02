@@ -1,5 +1,7 @@
-package com.jbd;
+package com.jbd.cutEmails;
 
+import com.jbd.Email;
+import com.jbd.JBDemail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -19,10 +21,8 @@ public class FiveDaysNoAnswer extends JBDemail {
     public List<LocalDateTime> afterAllList = new ArrayList<>();
     public List<Date> sortedEmailDatesInDate = new ArrayList<>();
 
-    void dateSort(List<Email> eMailKeeper) {
-
+    public void dateSort(List<Email> eMailKeeper) {
         for (Email email : eMailKeeper) {
-
             sortedEmailDates.add(email.getData());
         }
         Collections.sort(sortedEmailDates);
@@ -52,9 +52,7 @@ public class FiveDaysNoAnswer extends JBDemail {
     }
 
     public void checkIfWasAnswer(List<LocalDateTime> afterAllList) {
-
         LocalDateTime fiveDaysAgo = LocalDateTime.now().minusDays(5);
-
         afterAllList.removeIf(a -> a.isBefore(fiveDaysAgo));
     }
 

@@ -1,5 +1,8 @@
 package com.jbd;
 
+import com.jbd.cutEmails.FiveDaysNoAnswer;
+import com.jbd.cutEmails.RudeWordsInContent;
+import com.jbd.cutEmails.TwoMailsNoAnswer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -35,7 +38,6 @@ public class JBDemail {
         int quit = 0;
         int path = 0;
         int answer = 0;
-
 
         System.out.println("Hello, this is JBDemail!\n" +
                 "Set path to your emails files and answer questions.");

@@ -1,8 +1,8 @@
 package com.jbd;
+import com.jbd.cutEmails.RudeWordsInContent;
 import org.junit.Test;
 import java.util.ArrayList;
 import static org.junit.Assert.*;
-
 
 public class RudeWordsInContentTest {
     RudeWordsInContent rudeWordsInContent = new RudeWordsInContent();
@@ -18,4 +18,7 @@ public class RudeWordsInContentTest {
         for (String st : content1){
           rudeWordsInContent.ifRudeWord(content1);
             assertTrue(rudeWordsInContent.ifRudeWord(content1));
-        } }}
+        }
+    }
+}
+

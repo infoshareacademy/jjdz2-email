@@ -1,7 +1,7 @@
 package com.jbd;
 
+import com.jbd.cutEmails.FiveDaysNoAnswer;
 import org.junit.Test;
-
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -18,7 +18,6 @@ public class FiveDaysNoAnswerTest extends FiveDaysNoAnswer {
 
     @Test
     public void shouldReturnTrueIfListIsEmpty() throws Exception {
-
         boolean sut = fdna1.chceckIfContentBetween();
         assertThat("List is not empty", sut, is(true));
     }
@@ -26,7 +25,6 @@ public class FiveDaysNoAnswerTest extends FiveDaysNoAnswer {
     @Test
     public void shouldRemoveDatesFromListWhenItsBeforeFiveDaysAgo() throws Exception {
         afterAllList.add(sixDaysAgo);
-
         fdna1.checkIfWasAnswer(afterAllList);
         if (afterAllList.size() == 0) {
             afterAllList = null;
@@ -36,7 +34,6 @@ public class FiveDaysNoAnswerTest extends FiveDaysNoAnswer {
 
     @Test
     public void shouldRemoveWeekendsFromList() throws Exception {
-
         Date saturday = new Date(777777777);
         Date sunday = new Date(888888888);
         sortedEmailDatesInDate.add(saturday);
@@ -46,7 +43,5 @@ public class FiveDaysNoAnswerTest extends FiveDaysNoAnswer {
             sortedEmailDatesInDate = null;
         }
         assertNull(sortedEmailDatesInDate);
-
     }
-
 }
