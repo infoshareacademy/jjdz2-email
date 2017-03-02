@@ -1,6 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setBundle basename="messages" var="msg"/>
 <html>
 <head>
@@ -18,20 +18,59 @@
     <div class="jumbotron">
         <h2 id="jumbotron"><fmt:message bundle="${msg}" key="Weirdcutemailstitle"/></h2>
         <h3><fmt:message bundle="${msg}" key="passyouremail"/></h3>
-    </div></div>
+    </div>
+
+    <div class="searchKeywords">
+        <div class="col-md-4">
+            <form method="POST" action="keywords">
+                <p>
+                    <fmt:message bundle="${msg}" key="q1"/>
+                    <label><input type="radio" name="q0" value="yes" ${checkedq0yes}>Yes</label>
+                    <label><input type="radio" name="q0" value="no" ${checkedq0no}>No</label><br/>
+                </p>
+                <p>
+                    <fmt:message bundle="${msg}" key="q2"/>
+                    <label><input type="radio" name="q1" value="yes" ${checkedq1yes}>Yes</label>
+                    <label><input type="radio" name="q1" value="no" ${checkedq1no}>No</label><br/>
+                </p>
+                <p>
+                    <fmt:message bundle="${msg}" key="q3"/>
+                    <label><input type="radio" name="q2" value="yes" ${checkedq2yes}>Yes</label>
+                    <label><input type="radio" name="q2" value="no" ${checkedq2no}>No</label><br/>
+                </p>
+                <p>
+                    <fmt:message bundle="${msg}" key="q4"/>
+                    <label><input type="radio" name="q3" value="yes" ${checkedq3yes}>Yes</label>
+                    <label><input type="radio" name="q3" value="no" ${checkedq3no}>No</label><br/>
+                </p>
+                <input class="btn btn-warning" type="submit"
+                       value="<fmt:message bundle="${msg}" key="searchEmail"/>">
+            </form>
+
+            <div class="backToEmails">
+                <fmt:message bundle="${msg}" key="justSearching"/><br>
+                <form action="emails.jsp">
+                    <input class="btn btn-warning" type="submit" value="<fmt:message bundle="${msg}" key="goTo"/>"
+                           name="searchEmails">
+                </form>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <span class="keywordsMsg">${keywordsMsg}</span> <br/>
+            <div class="keywordsList">
+                <ol>
+                    <c:forEach items="${keywordsList}" var="keyword">
+                        <li> ${keyword} </li>
+                    </c:forEach>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <br>
 
 
-<input type="<strong>email</strong>" placeholder="Enter your email">
-
-<form action="${pageContext.request.contextPath}/myservlet">
-    <input type="submit" name="button1" value="Button 1" />
-    <input type="submit" name="button2" value="Button 2" />
-    <input type="submit" name="button3" value="Button 3" />
-</form>
-
-</form>
-
-
+</div>
 <jsp:directive.include file="footer.jsp"/>
 </body>
 </html>
