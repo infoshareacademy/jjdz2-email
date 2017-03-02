@@ -24,7 +24,7 @@ import java.util.List;
 
 import static com.jbd.searchKeywords.KeywordsQuestionsMap.QUESTION;
 
-@WebServlet(urlPatterns = "keywords")
+@WebServlet(urlPatterns = "C:\\Users\\dzefrej0\\IdeaProjects\\jjdz2-email\\jjdz2-email\\src\\main\\webapp\\weirdcutemails.jsp")
 public class MyServlet extends HttpServlet {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MyServlet.class);
@@ -37,6 +37,9 @@ public class MyServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws IOException {
         System.out.println(req.getRemoteHost());
+        req.setAttribute("weirdmailskurw0", weirdMessagesServlet.stringi());
+
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/weirdcutemails.jsp");
 
     }
 
