@@ -1,6 +1,7 @@
 package com.jbd.searchEmails;
 
 import com.jbd.*;
+import com.jbd.MailHolder;
 import com.jbd.database.Addressee;
 import com.jbd.database.ManageUser;
 import org.slf4j.Logger;
@@ -51,6 +52,8 @@ public class SearchEmailsServlet extends HttpServlet {
     DisplayPhoneNumbers displayPhoneNumbers;
     @EJB
     PhoneNumbers phoneNumbers;
+    @Inject
+    MailHolder mailHolder;
 
     @Inject
     ManageUser manageUser;
@@ -146,6 +149,8 @@ public class SearchEmailsServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
+
+        mailHolder.setMails(emails);
 
         req.setAttribute("phoneNumbersFound", message);
         req.setAttribute("finalEmailSet", emailSet);

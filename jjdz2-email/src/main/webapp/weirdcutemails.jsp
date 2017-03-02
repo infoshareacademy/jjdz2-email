@@ -58,6 +58,26 @@
     <br>
 
 
+    <div class="col-md-12">
+    <form method="get" action="weirdcutemails">
+        <div>
+            <input class="btn btn-warning" type="submit"
+                value="<fmt:message bundle="${msg}" key="view" />" name="weridcutemails">
+            <br>
+            <br>
+            <div class="col-md-12">
+            <ol>
+                <c:forEach items="${displayMails}" var="mails">
+                    <li> ${mails.from} || ${mails.data} || ${mails.subject}
+                 </c:forEach>
+            </ol>
+            </div>
+        </div>
+    </form>
+    </div>
+
+
+
 </div>
 <jsp:directive.include file="footer.jsp"/>
 </body>
