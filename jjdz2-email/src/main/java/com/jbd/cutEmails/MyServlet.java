@@ -17,11 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-import java.util.Set;
 
 @WebServlet(urlPatterns = "weirdcutemails")
 public class MyServlet extends HttpServlet {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(MyServlet.class);
     private static final Marker MARKER = MarkerFactory.getMarker("SearchKeywordsServlet");
     private int questionnaireCounter = 1;
@@ -29,20 +27,13 @@ public class MyServlet extends HttpServlet {
 
     @EJB
     WeirdMessagesServlet weirdMessagesServlet;
+
     @Inject
     MailHolder mailHolder;
 
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws IOException {
         recivedEamils = mailHolder.getMails();
-
-        System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-
         req.setAttribute("displayMails", recivedEamils);
         LOGGER.info(MARKER, "Displaying: " + recivedEamils.size() + " records.");
 
@@ -56,8 +47,6 @@ public class MyServlet extends HttpServlet {
             LOGGER.debug(MARKER, "Caught IOException " + e);
             e.printStackTrace();
         }
-
-
 
         //System.out.println(req.getRemoteHost());
         //req.setAttribute("weirdmailskurw0", weirdMessagesServlet.stringi());

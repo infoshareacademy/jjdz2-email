@@ -52,9 +52,9 @@ public class SearchEmailsServlet extends HttpServlet {
     DisplayPhoneNumbers displayPhoneNumbers;
     @EJB
     PhoneNumbers phoneNumbers;
+
     @Inject
     MailHolder mailHolder;
-
     @Inject
     ManageUser manageUser;
 
