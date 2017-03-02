@@ -1,17 +1,14 @@
 package com.jbd.database;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
-import org.slf4j.LoggerFactory;
-import org.slf4j.Marker;
-import org.slf4j.MarkerFactory;
 
 import javax.enterprise.context.SessionScoped;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Comparator;
 import java.util.Locale;
 
 @SessionScoped
@@ -19,10 +16,6 @@ import java.util.Locale;
 @Table(name = "User")
 @NamedQuery(name = "User.findAll", query = "select p FROM User p")
 public class User implements Serializable, Comparable<User> {
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(User.class);
-    private static final Marker MARKER = MarkerFactory.getMarker("SessionData");
-    public static final int ADMIN = 1;
-    public static final int LOCAL_USER = 2;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -121,11 +114,9 @@ public class User implements Serializable, Comparable<User> {
     }
 
 
-
-
     @Override
     public int compareTo(User o) {
-        if(getLoginTime().isEqual(o.getLoginTime()))
+        if (getLoginTime().isEqual(o.getLoginTime()))
             return 0;
         else if (getLoginTime().isAfter(o.getLoginTime()))
             return 1;

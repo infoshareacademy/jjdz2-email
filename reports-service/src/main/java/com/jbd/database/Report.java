@@ -1,8 +1,5 @@
 package com.jbd.database;
 
-
-import com.jbd.database.User;
-
 public class Report {
     private User user;
     private int counter;

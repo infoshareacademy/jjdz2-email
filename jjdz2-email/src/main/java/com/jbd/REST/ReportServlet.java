@@ -28,9 +28,6 @@ import java.util.List;
 public class ReportServlet extends HttpServlet {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(ReportServlet.class);
     private static final Marker MARKER = MarkerFactory.getMarker("ReportServlet");
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

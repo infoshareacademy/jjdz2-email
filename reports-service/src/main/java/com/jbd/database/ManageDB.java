@@ -13,8 +13,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hibernate.internal.FilterImpl.MARKER;
-
 @SessionScoped
 public class ManageDB implements Serializable {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(ManageDB.class);

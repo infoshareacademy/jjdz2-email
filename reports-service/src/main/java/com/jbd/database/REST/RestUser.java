@@ -4,7 +4,6 @@ import com.jbd.database.ActivityReport;
 import com.jbd.database.ManageDB;
 import com.jbd.database.Report;
 import com.jbd.database.User;
-import com.sun.org.apache.bcel.internal.generic.LOOKUPSWITCH;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
