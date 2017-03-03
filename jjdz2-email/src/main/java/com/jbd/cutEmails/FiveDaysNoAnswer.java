@@ -7,11 +7,12 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
+import javax.ejb.Stateless;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
-
+@Stateless
 public class FiveDaysNoAnswer extends JBDemail {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FiveDaysNoAnswer.class);
@@ -65,8 +66,21 @@ public class FiveDaysNoAnswer extends JBDemail {
         } else {
             ifTrue = false;
             LOGGER.info(FIVEDAYSNOANSWER_MARKER, "if false means that there was answer for 5 working days  :  " + ifTrue);
+            LOGGER.info(FIVEDAYSNOANSWER_MARKER, "Mails with no answet 4 5 days :  :  " + afterAllList);
+
+
         }
         return ifTrue;
+    }
+    public List<LocalDateTime> fdnaList (){
+if(afterAllList.isEmpty()){
+    System.out.println("lista jest pusta, nie ma żadnych wiadomości na które nie było odpowiedzi przez 5 dni roboczych");
+}
+        else{
+    System.out.println("lista adresów z którymi został przerwany kontakt :  ");
+    System.out.println(afterAllList);
+        }
+        return afterAllList;
     }
 }
 

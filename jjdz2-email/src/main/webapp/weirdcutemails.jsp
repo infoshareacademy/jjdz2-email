@@ -19,6 +19,8 @@
         <h2 id="jumbotron"><fmt:message bundle="${msg}" key="Weirdcutemailstitle"/></h2>
         <h3><fmt:message bundle="${msg}" key="passyouremail"/></h3>
     </div>
+
+
     <div class="searchKeywords">
         <div class="col-md-4">
             <div class="backToEmails">
@@ -29,27 +31,41 @@
                 </form>
             </div>
         </div>
+        <div class="col-md-8">
+            <span class="keywordsMsg">${keywordsMsg}</span> <br/>
+            <div class="keywordsList">
+                <ol>
+                    <c:forEach items="${keywordsList}" var="keyword">
+                        <li> ${keyword} </li>
+                    </c:forEach>
+                </ol>
             </div>
+        </div>
+    </div>
     <br>
+
+
     <div class="col-md-12">
+
         <form method="get" action="weirdcutemails">
             <div>
                 <input class="btn btn-warning" type="submit"
-                       value="<fmt:message bundle="${msg}" key="view" />" name="weirdcutemails">
+                       value="<fmt:message bundle="${msg}" key="view1" />" name="weirdcutemails">
                 <br>
                 <br>
+
+
+
                 <div class="col-md-12">
                     <ol>
-                        <%--displayMAils łąćży sie z displayMails w MyServlet--%>
-                        <c:forEach items="${displayMails}" var="mails">
+                        <c:forEach items="${fdnaMaile}" var="mails">
                         <li> ${mails.from} || ${mails.data} || ${mails.subject}
                             </c:forEach>
                     </ol>
                     <input class="btn btn-warning" type="submit"
-                           value="<fmt:message bundle="${msg}" key="view1" />" name="weirdcutemails">
+                           value="<fmt:message bundle="${msg}" key="view2" />" name="weirdcutemails">
                     <br>
                     <br>
-
                 </div>
             </div>
         </form>

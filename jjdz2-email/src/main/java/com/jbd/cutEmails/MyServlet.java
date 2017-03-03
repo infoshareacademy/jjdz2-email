@@ -17,11 +17,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.List;
 import java.util.Set;
 
 @WebServlet(urlPatterns = "weirdcutemails")
 public class MyServlet extends HttpServlet {
+
+    public LocalDateTime data6 = LocalDateTime.of(2015, Month.DECEMBER, 05, 23, 59, 59);
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MyServlet.class);
     private static final Marker MARKER = MarkerFactory.getMarker("SearchKeywordsServlet");
@@ -33,19 +36,18 @@ public class MyServlet extends HttpServlet {
 
     @Inject
     MailHolder mailHolder;
-
+@EJB
+FiveDaysNoAnswer fiveDaysNoAnswer;
 
 
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws IOException {
+       // fdnaMails.add(data6);
+        fdnaMails = fiveDaysNoAnswer.fdnaList();
         recivedEamils = mailHolder.getMails();
         System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+
         req.setAttribute("displayMails", recivedEamils);
+        req.setAttribute("displayFdna", fdnaMails);
         LOGGER.info(MARKER, "Displaying: " + recivedEamils.size() + " records.");
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/weirdcutemails.jsp");
