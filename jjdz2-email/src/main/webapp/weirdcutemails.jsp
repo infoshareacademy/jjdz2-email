@@ -31,7 +31,7 @@
 
 
                 <fmt:message bundle="${msg}" key="pssemailandpressbutton"/><br>
-                <form action="weirdcutemails.jsp">
+                <form id="emailForm" method="post" action="emails" enctype="multipart/form-data">
                     <input class="btn btn-warning" type="submit" value="<fmt:message bundle="${msg}" key="goTo"/>"
                            name="searchEmails">
                 </form>
@@ -59,21 +59,38 @@
 
 
     <div class="col-md-12">
-    <form method="get" action="weirdcutemails">
-        <div>
-            <input class="btn btn-warning" type="submit"
-                value="<fmt:message bundle="${msg}" key="view" />" name="weridcutemails">
-            <br>
-            <br>
-            <div class="col-md-12">
-            <ol>
-                <c:forEach items="${displayMails}" var="mails">
-                    <li> ${mails.from} || ${mails.data} || ${mails.subject}
-                 </c:forEach>
-            </ol>
+        <form method="get" action="weirdcutemails">
+            <div>
+                <input class="btn btn-warning" type="submit"
+                       value="<fmt:message bundle="${msg}" key="view" />" name="weirdcutemails">
+                <br>
+                <br>
+                <div class="col-md-12">
+                    <ol>
+                        <%--displayMAils łąćży sie z displayMails w MyServlet--%>
+                        <c:forEach items="${displayMails}" var="mails">
+                        <li> ${mails.from} || ${mails.data} || ${mails.subject}
+                            </c:forEach>
+                    </ol>
+
+
+
+                    <input class="btn btn-warning" type="submit"
+                           value="<fmt:message bundle="${msg}" key="view" />" name="weirdcutemails">
+                    <br>
+                    <br>
+                    <div class="col-md-12">
+                        <ol>
+
+                            <%--displayMAils łąćży sie z displayMails w MyServlet--%>
+
+                            <c:forEach items="${fdnaMaile}" var="mails">
+                            </c:forEach>
+                        </ol>
+                    </div>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
     </div>
 
 

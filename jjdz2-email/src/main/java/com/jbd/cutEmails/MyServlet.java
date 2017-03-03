@@ -16,24 +16,38 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @WebServlet(urlPatterns = "weirdcutemails")
 public class MyServlet extends HttpServlet {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(MyServlet.class);
     private static final Marker MARKER = MarkerFactory.getMarker("SearchKeywordsServlet");
     private int questionnaireCounter = 1;
     private List<Email> recivedEamils;
 
-    @EJB
-    WeirdMessagesServlet weirdMessagesServlet;
+    private List<LocalDateTime> fdnaMails;
+
 
     @Inject
     MailHolder mailHolder;
+    @Inject
+    Fdna fdna;
 
-    @Override
+
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws IOException {
         recivedEamils = mailHolder.getMails();
+        fdnaMails = fdna.getEhe();
+        System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+        System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+        System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+        System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+        System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+        System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+        System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+        req.setAttribute("fdnaMaile", fdnaMails);
         req.setAttribute("displayMails", recivedEamils);
         LOGGER.info(MARKER, "Displaying: " + recivedEamils.size() + " records.");
 
@@ -48,9 +62,8 @@ public class MyServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        //System.out.println(req.getRemoteHost());
-        //req.setAttribute("weirdmailskurw0", weirdMessagesServlet.stringi());
-        //RequestDispatcher dispatcher = req.getRequestDispatcher("/weirdcutemails.jsp");
+
+
     }
 
     @Override
