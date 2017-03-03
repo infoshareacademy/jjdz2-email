@@ -33,13 +33,11 @@ public class MyServlet extends HttpServlet {
 
     @Inject
     MailHolder mailHolder;
-    @Inject
-    Fdna fdna;
+
 
 
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws IOException {
         recivedEamils = mailHolder.getMails();
-        fdnaMails = fdna.getEhe();
         System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
         System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
         System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
@@ -47,7 +45,6 @@ public class MyServlet extends HttpServlet {
         System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
         System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
         System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        req.setAttribute("fdnaMaile", fdnaMails);
         req.setAttribute("displayMails", recivedEamils);
         LOGGER.info(MARKER, "Displaying: " + recivedEamils.size() + " records.");
 
