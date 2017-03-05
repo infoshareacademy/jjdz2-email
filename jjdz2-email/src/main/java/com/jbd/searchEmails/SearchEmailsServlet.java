@@ -1,12 +1,15 @@
-package com.jbd.servlets;
+package com.jbd.searchEmails;
 
 import com.jbd.*;
+import com.jbd.database.Addressee;
+import com.jbd.database.ManageUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -18,6 +21,7 @@ import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -33,6 +37,7 @@ public class SearchEmailsServlet extends HttpServlet {
     private static final Marker MARKER = MarkerFactory.getMarker("SearchEmailsServlet");
 
     private static final String FILE_UPLOAD_PATH = "src/main/resources/temporary";
+    public static final int MINIMUM_EMAIL_ADDRESS_LENGTH = 3;
 
     @EJB
     SearchCriteria searchCriteria;
@@ -44,10 +49,19 @@ public class SearchEmailsServlet extends HttpServlet {
     FinalEmailsSet finalEmailsSet;
     @EJB
     DisplayPhoneNumbers displayPhoneNumbers;
+    @EJB
+    PhoneNumbers phoneNumbers;
+
+    @Inject
+    ManageUser manageUser;
 
     protected void doPost(HttpServletRequest req, HttpServletResponse response) {
 
         List<Email> emails = new ArrayList<>();
+        String message = "";
+        File file = null;
+        String fileName = "";
+        Set<Email> emailSet = null;
 
         searchCriteria.setEmail(req.getParameter("email"));
         LOGGER.info(MARKER, "Set value for email field.");
@@ -56,8 +70,8 @@ public class SearchEmailsServlet extends HttpServlet {
         searchCriteria.setEndDate(req.getParameter("endDate"));
         LOGGER.info(MARKER, "Set value for end date field.");
         searchCriteria.setKeywords(req.getParameter("keywords"));
-
         LOGGER.info(MARKER, "Set value for keywords field.");
+
         new File(FILE_UPLOAD_PATH).mkdir();
         File uploads = new File(FILE_UPLOAD_PATH);
 
@@ -73,9 +87,9 @@ public class SearchEmailsServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+        fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         LOGGER.info(MARKER, "Name of the uploaded file has been saved: " + fileName);
-        File file = null;
+
         try {
             file = new File(uploads, fileName);
             try (InputStream fileContent = filePart.getInputStream();) {
@@ -89,7 +103,7 @@ public class SearchEmailsServlet extends HttpServlet {
 
         String emailPath = FILE_UPLOAD_PATH + "/" + fileName;
         LOGGER.info(MARKER, "Set value for emailPath.");
-        if (("".equals(emailPath))) {
+        if (("".equals(fileName))) {
             req.setAttribute("emailsFound",
                     "          <span class=\"glyphicon glyphicon-exclamation-sign\" id=\"noPathMsg\"></span>\n" +
                             "          No path to email file given.\n" +
@@ -101,27 +115,40 @@ public class SearchEmailsServlet extends HttpServlet {
                 LOGGER.debug(MARKER, "Wrong path has been given by user.");
                 e.printStackTrace();
             }
-        }
-        Set<Email> emailSet = finalEmailsSet.createUniqueEmailsSet(emails);
-        if (emailSet.size() > 0) {
-            req.setAttribute("emailsFound", "Emails matching your criteria:");
-        } else if (0 == emailSet.size() && !("".equals(emailPath))) {
-            req.setAttribute("emailsFound", "No emails matching your criteria.");
-        }
-        req.setAttribute("finalEmailSet", emailSet);
-        LOGGER.info(MARKER, "Set JSP attribute \"finalEmailSet\".");
 
-        Map<String, List<String>> resultMap = displayPhoneNumbers.searchPhoneNumbers(emails);
-        if ("yes".equals(req.getParameter("phoneNumbers"))) {
-            if (resultMap.size() == 0) {
-                req.setAttribute("phoneNumbersFound", "No phone numbers found.");
-            } else {
-                req.setAttribute("phoneNumbersFound", "Phone numbers found in your email file:");
+
+            emailSet = finalEmailsSet.createUniqueEmailsSet(emails);
+            if (emailSet.size() > 0) {
+                req.setAttribute("emailsFound", "Emails matching your criteria: ");
+            } else if (0 == emailSet.size() && !("".equals(emailPath))) {
+                req.setAttribute("emailsFound", "No emails matching your criteria.");
             }
-            req.setAttribute("displayNumbers", resultMap);
-            LOGGER.info(MARKER, "Set JSP attribute \"displayNumbers\".");
+            LOGGER.info(MARKER, "Set JSP attribute \"finalEmailSet\".");
+
+            Map<String, List<String>> resultMap = displayPhoneNumbers.searchPhoneNumbers(emails);
+            message = phoneNumbers.setPhoneNumbersMessage(req.getParameter("phoneNumbers"), resultMap, req);
         }
 
+        for (String s : searchCriteria.getEmail()) {
+            if(s.length() >= MINIMUM_EMAIL_ADDRESS_LENGTH) {
+                Addressee addr = new Addressee();
+                addr.setAddressee(s);
+                manageUser.saveAddressee(addr);
+            }
+        }
+
+        if (req.getCharacterEncoding() == null) {
+            try {
+                req.setCharacterEncoding("UTF-8");
+                LOGGER.info(MARKER,"Encoding Set.");
+            } catch (UnsupportedEncodingException e) {
+                LOGGER.error(MARKER,"Encoding fail.");
+                e.printStackTrace();
+            }
+        }
+
+        req.setAttribute("phoneNumbersFound", message);
+        req.setAttribute("finalEmailSet", emailSet);
         req.setAttribute("emailFile", emailPath);
         req.setAttribute("emails", finalEmailsSet.emailsSeparatedWithComma(searchCriteria.getEmail()));
         req.setAttribute("startDate", searchCriteria.dateToDisplayInFrontEnd(searchCriteria.getStartDate()));
