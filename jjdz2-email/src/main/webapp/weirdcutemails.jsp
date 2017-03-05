@@ -19,35 +19,9 @@
         <h2 id="jumbotron"><fmt:message bundle="${msg}" key="Weirdcutemailstitle"/></h2>
         <h3><fmt:message bundle="${msg}" key="passyouremail"/></h3>
     </div>
-
-
-    <%--<div class="searchKeywords">--%>
-    <%--<div class="col-md-4">--%>
-    <%--<div class="backToEmails">--%>
-    <%--<h3> <fmt:message bundle="${msg}" key="pssemailandpressbutton"/></h3>--%>
-    <%--<form id="emailForm55" method="post" action="emails" enctype="multipart/form-data">--%>
-
-
-    <%--<input class="btn btn-warning" type="submit" value="<fmt:message bundle="${msg}" key="goTo"/>"--%>
-    <%--name="searchEmails">--%>
-    <%--</form>--%>
-    <%--</div>--%>
-    <%--</div>--%>
-    <%--<div class="col-md-8">--%>
-    <%--<span class="keywordsMsg">${keywordsMsg}</span> <br/>--%>
-    <%--<div class="keywordsList">--%>
-    <%--<ol>--%>
-    <%--<c:forEach items="${keywordsList}" var="keyword">--%>
-    <%--<li> ${keyword} </li>--%>
-    <%--</c:forEach>--%>
-
-    <%--</ol>--%>
-    <%--</div>--%>
-    <%--</div>--%>
-    <%--</div>--%>
     <br>
     <div class="col-md-12">
-        <h2>Wynik</h2>
+        <h4>Wybierz opcję</h4>
         <c:forEach items="${displayMails}" var="mails">
             <li> ${mails.from} || ${mails.data} || ${mails.subject}</li>
         </c:forEach>
