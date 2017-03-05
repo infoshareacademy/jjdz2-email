@@ -16,10 +16,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLDecoder;
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @WebServlet(urlPatterns = "weirdcutemails")
 public class MyServlet extends HttpServlet {
@@ -29,25 +31,44 @@ public class MyServlet extends HttpServlet {
     private static final Logger LOGGER = LoggerFactory.getLogger(MyServlet.class);
     private static final Marker MARKER = MarkerFactory.getMarker("SearchKeywordsServlet");
     private int questionnaireCounter = 1;
-    private List<Email> recivedEamils;
+    private List<Email> recivedEamils = new ArrayList<>();
 
-    private List<LocalDateTime> fdnaMails;
-
-
+    private List<Email> fdnaMails = new ArrayList<>();
+@EJB
+RudeWordsInContent rudeWordsInContent;
+    @EJB
+    FiveDaysNoAnswer fiveDaysNoAnswer;
     @Inject
     MailHolder mailHolder;
-@EJB
-FiveDaysNoAnswer fiveDaysNoAnswer;
 
 
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws IOException {
-       // fdnaMails.add(data6);
-        fdnaMails = fiveDaysNoAnswer.fdnaList();
+        List<Email> emails = new ArrayList<>();
         recivedEamils = mailHolder.getMails();
-        System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
 
-        req.setAttribute("displayMails", recivedEamils);
-        req.setAttribute("displayFdna", fdnaMails);
+        Map<String,String> parsedQueryString = splitQuery(req.getQueryString());
+        List<Email> outputEmails = new ArrayList<>();
+
+        switch (parsedQueryString.get("type")){
+            case "rudewords":{
+                for (Email email : recivedEamils)
+                {
+                    if(rudeWordsInContent.ifRudeWord(email.getContent())){
+                        outputEmails.add(email);
+                    }
+                }
+            }
+            case "fivedays":{
+                for (Email email : recivedEamils){
+                    if(fiveDaysNoAnswer.checkIfWasAnswer(email.getData())){
+                        outputEmails.add(email);
+                    }
+                }
+            }
+        }
+
+        req.setAttribute("displayMails", outputEmails);
+
         LOGGER.info(MARKER, "Displaying: " + recivedEamils.size() + " records.");
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/weirdcutemails.jsp");
@@ -60,9 +81,16 @@ FiveDaysNoAnswer fiveDaysNoAnswer;
             LOGGER.debug(MARKER, "Caught IOException " + e);
             e.printStackTrace();
         }
+    }
 
-
-
+    public static Map<String, String> splitQuery(String query) throws UnsupportedEncodingException {
+        Map<String, String> query_pairs = new LinkedHashMap<String, String>();
+        String[] pairs = query.split("&");
+        for (String pair : pairs) {
+            int idx = pair.indexOf("=");
+            query_pairs.put(URLDecoder.decode(pair.substring(0, idx), "UTF-8"), URLDecoder.decode(pair.substring(idx + 1), "UTF-8"));
+        }
+        return query_pairs;
     }
 
     @Override

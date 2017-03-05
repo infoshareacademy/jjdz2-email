@@ -21,59 +21,69 @@
     </div>
 
 
-    <div class="searchKeywords">
-        <div class="col-md-4">
-            <div class="backToEmails">
-                <fmt:message bundle="${msg}" key="pssemailandpressbutton"/><br>
-                <form id="emailForm" method="post" action="emails" enctype="multipart/form-data">
-                    <input class="btn btn-warning" type="submit" value="<fmt:message bundle="${msg}" key="goTo"/>"
-                           name="searchEmails">
-                </form>
-            </div>
-        </div>
-        <div class="col-md-8">
-            <span class="keywordsMsg">${keywordsMsg}</span> <br/>
-            <div class="keywordsList">
-                <ol>
-                    <c:forEach items="${keywordsList}" var="keyword">
-                        <li> ${keyword} </li>
-                    </c:forEach>
-                </ol>
-            </div>
-        </div>
-    </div>
+    <%--<div class="searchKeywords">--%>
+    <%--<div class="col-md-4">--%>
+    <%--<div class="backToEmails">--%>
+    <%--<h3> <fmt:message bundle="${msg}" key="pssemailandpressbutton"/></h3>--%>
+    <%--<form id="emailForm55" method="post" action="emails" enctype="multipart/form-data">--%>
+
+
+    <%--<input class="btn btn-warning" type="submit" value="<fmt:message bundle="${msg}" key="goTo"/>"--%>
+    <%--name="searchEmails">--%>
+    <%--</form>--%>
+    <%--</div>--%>
+    <%--</div>--%>
+    <%--<div class="col-md-8">--%>
+    <%--<span class="keywordsMsg">${keywordsMsg}</span> <br/>--%>
+    <%--<div class="keywordsList">--%>
+    <%--<ol>--%>
+    <%--<c:forEach items="${keywordsList}" var="keyword">--%>
+    <%--<li> ${keyword} </li>--%>
+    <%--</c:forEach>--%>
+
+    <%--</ol>--%>
+    <%--</div>--%>
+    <%--</div>--%>
+    <%--</div>--%>
     <br>
-
-
     <div class="col-md-12">
-
-        <form method="get" action="weirdcutemails">
-            <div>
-                <input class="btn btn-warning" type="submit"
-                       value="<fmt:message bundle="${msg}" key="view1" />" name="weirdcutemails">
-                <br>
-                <br>
-
-
-
-                <div class="col-md-12">
-                    <ol>
-                        <c:forEach items="${fdnaMaile}" var="mails">
-                        <li> ${mails.from} || ${mails.data} || ${mails.subject}
-                            </c:forEach>
-                    </ol>
-                    <input class="btn btn-warning" type="submit"
-                           value="<fmt:message bundle="${msg}" key="view2" />" name="weirdcutemails">
-                    <br>
-                    <br>
-                </div>
-            </div>
+        <h2>Wynik</h2>
+        <c:forEach items="${displayMails}" var="mails">
+            <li> ${mails.from} || ${mails.data} || ${mails.subject}</li>
+        </c:forEach>
+    </div>
+    <div class="col-md-12">
+        <form method="get" action="weirdcutemails" enctype="multipart/form-data">
+            <input type="hidden" name="type" value="fivedays" />
+            <input class="btn btn-warning" type="submit"
+                   value="<fmt:message bundle="${msg}" key="view1" />" name="weirdcutemails">
+            <br>
+            <br>
         </form>
     </div>
-
-
-
+    <div class="col-md-12">
+        <form method="get" action="weirdcutemails" enctype="multipart/form-data">
+            <input type="hidden" name="type" value="rudewords" />
+            <input class="btn btn-warning" type="submit"
+                   value="<fmt:message bundle="${msg}" key="view2" />" name="weirdcutemails">
+        </form>
+    </div>
+    <br>
+    <br>
 </div>
+
+
+<%--List of users:--%>
+<%--<br />--%>
+<%--<table>--%>
+<%--<c:forEach items="${userList}" var="user">--%>
+<%--<tr>--%>
+<%--<td>${user.userName}</user>--%>
+<%--</tr>--%>
+<%--</c:forEach>--%>
+<%--</table>--%>
+
+
 <jsp:directive.include file="footer.jsp"/>
 </body>
 </html>
